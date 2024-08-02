@@ -1,27 +1,124 @@
-# NuvemconnectWeb
+# NuvemconnectWeb - Configurando o ambiente de desenvolvimento
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.3.
+## 1. Instalar o Node.js [Node.js](https://nodejs.org/)
 
-## Development server
+## 2. Instalar o Yarn [Yarn](https://yarnpkg.com/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 3. Instalar o Angular CLI globalmente
 
-## Code scaffolding
+**Windows** `yarn global add @angular/cli@latest`
+**Linux ou Mac** `sudo yarn global add @angular/cli@latest`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 4. Baixar e instalar o VS Code [Visual Studio Code](https://code.visualstudio.com/)
 
-## Build
+## 5. Baixar e instalar o Git [Git](https://git-scm.com/)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 6. Baixar e instalar o GitHub Desktop (opcional) [GitHub Desktop](https://desktop.github.com/)
 
-## Running unit tests
+## 7. Baixar e instalar o Postman [Postman](https://www.postman.com/downloads/)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**Alternativa online** [Postman Online](https://web.postman.co/)
+**Alternativa ao Postman Plugin do VS Code** [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)
 
-## Running end-to-end tests
+## 8. Adicionar o ESLint ao projeto
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+**Windows** `yarn add --dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin`
+**Linux ou Mac** `sudo yarn add --dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin`
 
-## Further help
+### Configurar .eslintrc.json
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```json
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "extends": ["plugin:@angular-eslint/recommended", "plugin:@angular-eslint/template/process-inline-templates"],
+      "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": ["element", "attribute"],
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {}
+    }
+  ]
+}
+```
+
+### Adicionar script no package.json
+
+```json
+"scripts": {
+  "lint": "eslint . --ext .ts,.html"
+}
+```
+
+**Adicionar via CLI** `ng add @angular-eslint/schematics`
+
+### Verificar em angular.json
+
+```json
+"cli": {
+  "schematicCollections": ["@angular-eslint/schematics"]
+}
+```
+
+## 9. Adicionar o Husky ao projeto
+
+**Windows** `yarn add husky --dev`
+**Linux ou Mac** `sudo yarn add husky --dev`
+**Adicionar via CLI** `ng add @angular/husky`
+
+## 10. Adicionar o CommitLint ao projeto
+
+**Windows** `yarn add @commitlint/config-conventional @commitlint/cli --dev`
+**Linux ou Mac** `sudo yarn add @commitlint/config-conventional @commitlint/cli --dev`
+**Adicionar via CLI** `ng add @angular/commitlint`
+
+## 11. Adicionar o Tailwind CSS ao projeto
+
+**Windows** `yarn add tailwindcss postcss autoprefixer --dev`
+**Linux ou Mac** `sudo yarn add tailwindcss postcss autoprefixer --dev`
+**Adicionar via CLI** `ng add @angular/tailwindcss`
+
+## 12. Adicionar o Jasmine ao projeto
+
+**Windows** `yarn add jasmine --dev`
+**Linux ou Mac** `sudo yarn add jasmine --dev`
+**Adicionar via CLI** `ng add @angular/jasmine`
+
+## 13. Adicionar o Karma ao projeto
+
+**Windows** `yarn add karma --dev`
+**Linux ou Mac** `sudo yarn add karma --dev`
+
+**Adicionar via CLI** `ng add @angular/karma`
+
+## 14. Adicionar o Compodoc ao projeto
+
+**Windows** `yarn add compodoc --dev`
+**Linux ou Mac** `sudo yarn add compodoc --dev`
+
+**Adicionar via CLI** `ng add @angular/compodoc`
