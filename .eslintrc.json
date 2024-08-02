@@ -1,13 +1,28 @@
 {
-  "parser": "@typescript-eslint/parser", // Especifica o analisador ESLint
-  "extends": ["prettier", "plugin:prettier/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   "parserOptions": {
-    "ecmaVersion": 2020, // Permite a análise de recursos ECMAScript modernos
-    "sourceType": "module" // Permite o uso de importações
+    "ecmaVersion": 2020,
+    "sourceType": "module"
   },
   "rules": {
-    // Local para especificar regras ESLint.
-    // Pode ser usado para substituir regras especificadas nas configurações estendidas.
-    // Com o tempo e pesquisando você aprende a colocar regras aqui
+    // Possible Errors
+    "no-console": "off",
+    "no-unused-vars": "warn",
+
+    // Best Practices
+    "no-else-return": "error",
+    "no-empty-function": "error",
+    "no-eval": "error",
+
+    // Stylistic Issues
+    "indent": ["error", 2],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "semi": ["error", "always"],
+
+    // ECMAScript 6
+    "arrow-spacing": "error",
+    "no-var": "error",
+    "prefer-const": "error"
   }
 }

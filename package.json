@@ -9,6 +9,7 @@
     "test": "ng test",
     "serve:ssr:nuvemconnect-web": "node dist/nuvemconnect-web/server/server.mjs",
     "lint": "ng lint",
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,ts}": [
