@@ -1,0 +1,10 @@
+echo "Rodando pre-commit lint!"
+npm run lint
+echo "Rodando pre-commit format!"
+npm run format
+echo "Rodando pre-commit build!"
+npm run build
+echo "Rodando pre-commit test!"
+npm run test
+
+echo "Pre-commit finalizado!"
