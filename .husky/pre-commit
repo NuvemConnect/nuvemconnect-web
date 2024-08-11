@@ -31,36 +31,3 @@ if ! npm run commitlint; then
 fi
 
 echo "Pre-commit finalizado com sucesso!"
-#!/bin/sh
-
-echo "Rodando pre-commit lint!"
-if ! npm run lint; then
-  echo "Linting falhou. Abandonando o commit."
-  exit 1
-fi
-
-echo "Rodando pre-commit format!"
-if ! npm run format; then
-  echo "Formatação falhou. Abandonando o commit."
-  exit 1
-fi
-
-echo "Rodando pre-commit build!"
-if ! npm run build; then
-  echo "Build falhou. Abandonando o commit."
-  exit 1
-fi
-
-echo "Rodando pre-commit test!"
-if ! npm run test; then
-  echo "Testes falharam. Abandonando o commit."
-  exit 1
-fi
-
-echo "Rodando Commitlint!"
-if ! npm run commitlint; then
-  echo "Commitlint falhou. Abandonando o commit."
-  exit 1
-fi
-
-echo "Pre-commit finalizado com sucesso!"
