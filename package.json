@@ -9,6 +9,7 @@
     "format": "prettier --write \"src/**/*.html\" \"src/**/*.ts\"",
     "build": "ng build",
     "test": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
+    "commitlint": "commitlint --from=HEAD~1",
     "serve:ssr:nuvemconnect-web": "node dist/nuvemconnect-web/server/server.mjs",
     "prepare": "husky"
   },
