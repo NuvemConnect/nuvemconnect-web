@@ -17,4 +17,4 @@ yarn test || { echo "Testes falharam. Abandonando o commit."; exit 1; }
 echo "Rodando Commitlint!"
 yarn commitlint || { echo "Commitlint falhou. Abandonando o commit."; exit 1; }
 
-echo "Pre-commit finalizado com sucesso!"
+echo "Pre-commit passou!"
