@@ -14,7 +14,12 @@ yarn build || { echo "Build falhou. Abandonando o commit."; exit 1; }
 echo "Rodando pre-commit test!"
 yarn test || { echo "Testes falharam. Abandonando o commit."; exit 1; }
 
+<<<<<<< HEAD
 # echo "Rodando Commitlint!"
 # yarn commitlint || { echo "Commitlint falhou. Abandonando o commit."; exit 1; }
+=======
+echo "Rodando Commitlint!"
+yarn commitlint || { echo "Commitlint falhou. Abandonando o commit."; exit 1; }
+>>>>>>> fa4bff7 (chore: corrigindo duplicação do pre-commit)
 
 echo "Pre-commit passou!"
