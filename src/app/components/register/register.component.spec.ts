@@ -17,7 +17,6 @@ describe('RegisterComponent', () => {
           useValue: {
             snapshot: { params: of({}) }
           }
-
         }
       ]
     }).compileComponents();
