@@ -1,0 +1,127 @@
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10 py-12 justify-items-center">
+  <app-dynamic-sidebar
+    [imageUrl]="'sapiens.svg'"
+    [title]="'NuvemConnect'"
+    [textContent]="
+      'NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.'
+    "
+  >
+  </app-dynamic-sidebar>
+
+  <div class="max-w-sm grid grid-cols-1 bg-white rounded-lg p-8">
+    <h2 class="text-gray-900 text-subtitulo font-bold title-font mb-0 text-center">Comece agora</h2>
+    <p class="leading-relaxed mb-2 text-slate-400 text-subtexto text-center">Crie sua conta</p>
+    <form>
+      <div class="relative mb-4">
+        <label for="name" class="leading-7 text-sm text-gray-600"> Nome </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Digite seu nome"
+          class="w-full bg-slate-100 rounded border border-gray-300 focus:border-primary focus:ring-2 focus:bg-slate-50 focus:ring-primary text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+        />
+      </div>
+
+      <div class="relative mb-4">
+        <label for="email" class="leading-7 text-sm text-gray-600"> Email </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Digite seu email"
+          class="w-full bg-slate-100 rounded border border-gray-300 focus:border-primary focus:ring-2 focus:bg-slate-50 focus:ring-primary text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+        />
+      </div>
+      <div class="relative mb-4">
+        <label for="password" class="leading-7 text-sm text-gray-600"> Senha </label>
+        <div class="relative">
+          <input
+            type="text"
+            id="password"
+            name="password"
+            placeholder="Digite sua senha"
+            class="w-full bg-slate-100 rounded border border-gray-300 focus:border-primary focus:ring-2 focus:bg-slate-50 focus:ring-primary text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+          />
+          <i class="mx-auto my-auto absolute top-2 right-2 cursor-pointer">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3.58631 13.7788C5.36575 15.5478 8.46904 17.9999 11.9997 17.9999C15.5303 17.9999 18.6331 15.5478 20.4125 13.7788C20.8818 13.3123 21.1172 13.0782 21.2667 12.6201C21.3733 12.2933 21.3733 11.7067 21.2667 11.3799C21.1172 10.9218 20.8818 10.6877 20.4125 10.2211C18.633 8.45208 15.5303 6 11.9997 6C8.46904 6 5.36575 8.45208 3.58631 10.2211C3.11665 10.688 2.8818 10.9216 2.73231 11.3799C2.62569 11.7067 2.62569 12.2933 2.73231 12.6201C2.8818 13.0784 3.11665 13.3119 3.58631 13.7788Z"
+                stroke="#4b5563"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M9.99951 12C9.99951 13.1046 10.8949 14 11.9995 14C13.1041 14 13.9995 13.1046 13.9995 12C13.9995 10.8954 13.1041 10 11.9995 10C10.8949 10 9.99951 10.8954 9.99951 12Z"
+                stroke="#4b5563"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </i>
+        </div>
+      </div>
+      <div class="relative mb-4">
+        <label for="confirm-password" class="leading-7 text-sm text-gray-600">
+          Confirmar Senha
+        </label>
+        <div class="flex w-full relative">
+          <input
+            type="text"
+            id="confirm-password"
+            name="confirm-password"
+            placeholder="Confirme sua senha"
+            class="w-full bg-slate-100 rounded border border-gray-300 focus:border-primary focus:ring-2 focus:bg-slate-50 focus:ring-primary text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+          />
+          <i class="mx-auto my-auto absolute top-2 right-2 cursor-pointer">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3.58631 13.7788C5.36575 15.5478 8.46904 17.9999 11.9997 17.9999C15.5303 17.9999 18.6331 15.5478 20.4125 13.7788C20.8818 13.3123 21.1172 13.0782 21.2667 12.6201C21.3733 12.2933 21.3733 11.7067 21.2667 11.3799C21.1172 10.9218 20.8818 10.6877 20.4125 10.2211C18.633 8.45208 15.5303 6 11.9997 6C8.46904 6 5.36575 8.45208 3.58631 10.2211C3.11665 10.688 2.8818 10.9216 2.73231 11.3799C2.62569 11.7067 2.62569 12.2933 2.73231 12.6201C2.8818 13.0784 3.11665 13.3119 3.58631 13.7788Z"
+                stroke="#4b5563"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M9.99951 12C9.99951 13.1046 10.8949 14 11.9995 14C13.1041 14 13.9995 13.1046 13.9995 12C13.9995 10.8954 13.1041 10 11.9995 10C10.8949 10 9.99951 10.8954 9.99951 12Z"
+                stroke="#4b5563"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </i>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1">
+        <button
+          class="text-white bg-primary border-0 rounded-lg py-2 px-8 focus:outline-none hover:bg-sky-600 font-bold text-lg"
+        >
+          Registrar
+        </button>
+      </div>
+    </form>
+
+    <p class="text-subtexto text-slate-400 mt-3 text-center">
+      Tem uma conta?
+      <a [routerLink]="['/login']" class="text-indigo-500 hover:text-indigo-700 hover:underline"
+        >Conecte-se</a
+      >
+    </p>
+  </div>
+</div>

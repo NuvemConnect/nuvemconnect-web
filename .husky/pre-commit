@@ -1,10 +1,19 @@
-echo "Rodando pre-commit lint!"
-yarn run lint
-echo "Rodando pre-commit format!"
-yarn run format
-echo "Rodando pre-commit build!"
-yarn run build
-echo "Rodando pre-commit test!"
-yarn run test
+#!/bin/sh
 
-echo "Pre-commit finalizado!"
+set -e  # Para o script se qualquer comando falhar
+
+echo "Rodando pre-commit lint!"
+yarn lint || { echo "Linting falhou. Abandonando o commit."; exit 1; }
+
+echo "Rodando pre-commit format!"
+yarn format || { echo "Formatação falhou. Abandonando o commit."; exit 1; }
+
+echo "Rodando pre-commit build!"
+yarn build || { echo "Build falhou. Abandonando o commit."; exit 1; }
+
+echo "Rodando pre-commit test!"
+yarn test || { echo "Testes falharam. Abandonando o commit."; exit 1; }
+
+# echo "Rodando Commitlint!"
+# yarn commitlint || { echo "Commitlint falhou. Abandonando o commit."; exit 1; }
+echo "Pre-commit passou!"
