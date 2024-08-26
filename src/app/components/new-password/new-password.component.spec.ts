@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewPasswordComponent } from './new-password.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('NewPasswordComponent', () => {
   let component: NewPasswordComponent;
@@ -8,7 +10,16 @@ describe('NewPasswordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NewPasswordComponent]
+      imports: [NewPasswordComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { params: of({}) }
+            // ou o que mais você precisar
+          }
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(NewPasswordComponent);

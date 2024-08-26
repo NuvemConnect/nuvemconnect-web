@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  imports: [RouterLink],
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent {
   @Input() title!: string;

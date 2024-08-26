@@ -1,63 +1,66 @@
-<div class="grid grid-cols-1 md:grid-cols-2 gap-10 py-12 justify-items-center">
+<div class="flex flex-col md:flex-row w-full justify-around items-center">
   <app-dynamic-sidebar
-    [imageUrl]="'sapiens.svg'"
-    [title]="'NuvemConnect'"
-    [textContent]="
-      'NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.'
-    "
+    class="flex w-full p-8"
+    [imageUrl]="imageUrl"
+    [title]="title"
+    [textContent]="textContent"
   >
   </app-dynamic-sidebar>
 
-  <div class="max-w-sm grid grid-cols-1 bg-white rounded-lg p-8">
-    <h2 class="text-gray-900 text-subtitulo font-bold title-font mb-5 text-center">
-      Insira seu código
-    </h2>
-    <p class="leading-relaxed my-2 text-slate-400 text-subtexto">
-      Enviamos um e-mail com um código de verificação. Por favor, insira o código abaixo.
-    </p>
-    <form [formGroup]="codeForm" (ngSubmit)="onSubmit()">
-      <div class="flex justify-center mb-6 gap-1">
-        <input
-          id="code1"
-          type="text"
-          maxlength="1"
-          formControlName="code1"
-          class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-          (input)="onInputChange($event, 'code2')"
-          (paste)="onPaste($event)"
-        />
-        <input
-          id="code2"
-          type="text"
-          maxlength="1"
-          formControlName="code2"
-          class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-          (input)="onInputChange($event, 'code3')"
-        />
-        <input
-          id="code3"
-          type="text"
-          maxlength="1"
-          formControlName="code3"
-          class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-          (input)="onInputChange($event, 'code4')"
-        />
-        <input
-          id="code4"
-          type="text"
-          maxlength="1"
-          formControlName="code4"
-          class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-        />
-      </div>
-      <div class="mt-6">
-        <button
-          type="submit"
-          class="w-full bg-primary text-white py-2 px-4 rounded-md shadow hover:bg-blue-600 focus:outline-none"
-        >
-          Verificar
-        </button>
-      </div>
-    </form>
+  <div class="flex flex-col mt-10 md:mt-0 justify-center items-center w-full">
+    <div
+      class="flex flex-col justify-center items-center max-w-sm bg-white p-8 rounded-m w-full min-h-96"
+    >
+      <h2 class="text-primary-950 text-subtitulo font-bold text-3xl mb-0 text-center">
+        Insira seu código
+      </h2>
+      <p class="leading-relaxed my-5 text-neutral-400 text-subtext">
+        Enviamos um e-mail com um código de verificação. Por favor, insira o código abaixo.
+      </p>
+      <form class="w-full" [formGroup]="codeForm" (ngSubmit)="onSubmit()">
+        <div class="flex justify-center mb-6 gap-1">
+          <input
+            id="code1"
+            type="text"
+            maxlength="1"
+            formControlName="code1"
+            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            (input)="onInputChange($event, 'code2')"
+            (paste)="onPaste($event)"
+          />
+          <input
+            id="code2"
+            type="text"
+            maxlength="1"
+            formControlName="code2"
+            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            (input)="onInputChange($event, 'code3')"
+          />
+          <input
+            id="code3"
+            type="text"
+            maxlength="1"
+            formControlName="code3"
+            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            (input)="onInputChange($event, 'code4')"
+          />
+          <input
+            id="code4"
+            type="text"
+            maxlength="1"
+            formControlName="code4"
+            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+        <div class="flex justify-center items-center w-full">
+          <button
+            type="submit"
+            class="text-white border-0 rounded-m py-2 px-8 focus:outline-none bg-primary-400 hover:bg-primary-500 font-bold text-lg w-full text-text"
+          >
+            Entrar
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

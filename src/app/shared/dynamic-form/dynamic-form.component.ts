@@ -13,12 +13,11 @@ import { FormFieldConfig, SelectFieldConfig, TextFieldConfig } from '../../inter
   selector: 'app-dynamic-form',
   standalone: true,
   imports: [ReactiveFormsModule, NgIf, NgFor, NgForOf],
-  templateUrl: './dynamic-form.component.html',
-  styleUrl: './dynamic-form.component.css'
+  templateUrl: './dynamic-form.component.html'
 })
 export class DynamicFormComponent {
   @Input() config: FormFieldConfig[] = [];
-  form: FormGroup;
+  form!: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({});
