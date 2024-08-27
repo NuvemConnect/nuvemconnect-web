@@ -1,6 +1,6 @@
 <div class="flex flex-col md:flex-row w-full justify-around items-center">
   <app-dynamic-sidebar
-    class="flex w-full p-8"
+    class="flex w-full min-w-[570px] min-h-[570px]"
     [imageUrl]="imageUrl"
     [title]="title"
     [textContent]="textContent"
@@ -8,9 +8,13 @@
   </app-dynamic-sidebar>
 
   <div class="flex flex-col mt-10 md:mt-0 justify-center items-center w-full">
-    <div class="max-w-sm bg-white p-8 rounded-m w-full">
-      <h2 class="text-primary-950 font-bold text-3xl mb-0 text-center">Comece agora</h2>
-      <p class="leading-relaxed my-5 text-neutral-400 text-subtext text-center">Crie sua conta</p>
+    <div
+      class="flex flex-col relative justify-center items-center max-w-sm bg-white p-8 rounded-m w-full min-h-[570px] shadow-lg"
+    >
+      <h2 class="text-primary-950 text-subtitle font-bold text-3xl mb-0 text-center">
+        Comece agora
+      </h2>
+      <p class="leading-relaxed my-2 text-neutral-400 text-subtext text-center">Crie sua conta</p>
       <form class="w-full">
         <div class="relative mb-4">
           <label for="name" class="leading-7 text-sm text-primary-900 w-full font-semibold">

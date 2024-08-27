@@ -1,15 +1,15 @@
-<header class="flex gap-2 w-full container mx-auto mb-10 md:mb-0">
-  <div class="flex gap-2 mx-auto md:mx-24">
-    <img class="h-8" src="logotipo.svg" alt="logotipo" />
-    <h1 class="text-primary-900 text-2xl font-bold">{{ title }}</h1>
-  </div>
-  <!-- trecho de teste dev -->
-  <div class="flex gap-2 items-center">
-    <a class="bg-primary-200 px-2 rounded-sm" [routerLink]="['/login']">login</a>
-    <a class="bg-primary-200 px-2 rounded-m" [routerLink]="['/register']">register</a>
-    <a class="bg-primary-200 px-2 rounded-m" [routerLink]="['/new-password']">new-password</a>
-    <a class="bg-primary-200 px-2 rounded-m" [routerLink]="['/recovery']">recovery</a>
-    <a class="bg-primary-200 px-2 rounded-m" [routerLink]="['/verify']">verify</a>
-  </div>
-  <!-- trecho de teste dev -->
+<!-- trecho de teste dev -->
+<div class="flex gap-2 items-center justify-center mx-auto max-w-[1152px]">
+  <a class="bg-primary-400 text-white p-2 rounded-sm" [routerLink]="['/login']">login</a>
+  <a class="bg-primary-400 text-white p-2 rounded-sm" [routerLink]="['/register']">register</a>
+  <a class="bg-primary-400 text-white p-2 rounded-sm" [routerLink]="['/new-password']"
+    >new-password</a
+  >
+  <a class="bg-primary-400 text-white p-2 rounded-sm" [routerLink]="['/recovery']">recovery</a>
+  <a class="bg-primary-400 text-white p-2 rounded-sm" [routerLink]="['/verify']">verify</a>
+</div>
+<!-- trecho de teste dev -->
+<header class="flex gap-2 w-full container mx-auto mb-10 md:mb-0 max-w-[1152px]">
+  <img class="h-8" src="logotipo.svg" alt="logotipo" />
+  <h1 class="text-primary-900 text-2xl font-bold">{{ title }}</h1>
 </header>

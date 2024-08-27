@@ -1,6 +1,7 @@
 <div class="flex flex-col md:flex-row w-full justify-around items-center">
   <app-dynamic-sidebar
-    class="flex w-full p-8"
+    c
+    class="flex w-full min-w-[570px] min-h-[570px]"
     [imageUrl]="imageUrl"
     [title]="title"
     [textContent]="textContent"
@@ -9,15 +10,23 @@
 
   <div class="flex flex-col mt-10 md:mt-0 justify-center items-center w-full">
     <div
-      class="flex flex-col justify-center items-center max-w-sm bg-white p-8 rounded-m w-full min-h-96"
+      class="flex flex-col relative justify-center items-center max-w-sm bg-white p-8 rounded-m w-full min-h-[570px] shadow-lg"
     >
-      <h2 class="text-primary-950 text-subtitulo font-bold text-3xl mb-0 text-center">
+      <a [routerLink]="['']" alt="voltar" aria-label="voltar">
+        <img
+          class="absolute top-4 left-4 p-2 bg-neutral-50 hover:bg-neutral-100 rounded-sm"
+          src="botaoVoltar.svg"
+          alt=""
+          srcset=""
+        />
+      </a>
+      <h2 class="text-primary-950 text-subtitle font-bold text-3xl mb-0 text-center">
         Insira seu código
       </h2>
-      <p class="leading-relaxed my-5 text-neutral-400 text-subtext">
+      <p class="leading-relaxed my-2 text-neutral-400 text-subtext text-center">
         Enviamos um e-mail com um código de verificação. Por favor, insira o código abaixo.
       </p>
-      <form class="w-full" [formGroup]="codeForm" (ngSubmit)="onSubmit()">
+      <form class="w-full max-w-sm" [formGroup]="codeForm" (ngSubmit)="onSubmit()">
         <div class="flex justify-center mb-6 gap-1">
           <input
             id="code1"
