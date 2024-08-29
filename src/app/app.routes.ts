@@ -2,8 +2,12 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'home',
+    loadComponent: () => import('./components/home/home.component').then((m) => m.HomeComponent) //, canActivate: [AuthGuard]
+  },
+  {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {
@@ -29,6 +33,13 @@ export const routes: Routes = [
     path: 'new-password',
     loadComponent: () =>
       import('./components/new-password/new-password.component').then((m) => m.NewPasswordComponent)
+  },
+  {
+    path: 'confirm-email',
+    loadComponent: () =>
+      import('./components/confirm-email/confirm-email.component').then(
+        (m) => m.ConfirmEmailComponent
+      )
   },
   { path: '**', redirectTo: '/login' }
 ];
