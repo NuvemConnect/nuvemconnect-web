@@ -1,17 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
-import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
+class MockHttpClient {
+  post() {
+    return of({ token: '12345' });
+  }
+}
 describe('LoginComponent', () => {
   let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginComponent],
+      imports: [LoginComponent], // O componente é standalone, então podemos importá-lo diretamente
       providers: [
+        { provide: HttpClient, useClass: MockHttpClient },
         {
           provide: ActivatedRoute,
           useValue: {
@@ -21,10 +26,7 @@ describe('LoginComponent', () => {
         }
       ]
     }).compileComponents();
-
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = TestBed.createComponent(LoginComponent).componentInstance;
   });
 
   it('should create', () => {

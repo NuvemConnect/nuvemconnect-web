@@ -22,7 +22,6 @@ describe('ConfirmEmailComponent', () => {
       ]
     }).compileComponents();
 
-
     fixture = TestBed.createComponent(ConfirmEmailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
