@@ -1,6 +1,12 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder
+} from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
@@ -31,11 +37,12 @@ export class LoginComponent {
   textContent = `NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.`;
 
   private authService = inject(AuthService);
+  private fb = inject(FormBuilder);
 
   ngOnInit() {
-    this.form = new FormGroup({
-      email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
+    this.form = this.fb.group({
+      email: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
   }
 
@@ -44,5 +51,12 @@ export class LoginComponent {
     this.authService.login(data).subscribe((response) => {
       console.log(response);
     });
+  }
+
+  onSubmit() {
+    if (this.form.valid) {
+      this.login();
+    }
+    console.log(this.form.value);
   }
 }

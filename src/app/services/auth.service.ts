@@ -11,6 +11,16 @@ export class AuthService {
 
   private httpClient = inject(HttpClient);
 
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+
+    return !!token && !this.isTokenExpired(token);
+  }
+  isTokenExpired(token: string) {
+    const expiry = JSON.parse(atob(token.split('.')[1])).exp;
+    return Math.floor(new Date().getTime() / 1000) >= expiry;
+  }
+
   // Método para fazer login
   login(data: User) {
     data = { email: 'string', senha: 'string' };

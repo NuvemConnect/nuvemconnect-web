@@ -15,12 +15,13 @@
         Comece agora
       </h2>
       <p class="leading-relaxed my-2 text-neutral-400 text-subtext text-center">Crie sua conta</p>
-      <form class="w-full">
+      <form class="w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="relative mb-4">
           <label for="name" class="leading-7 text-sm text-primary-900 w-full font-semibold">
             Nome
           </label>
           <input
+            formControlName="nome"
             type="text"
             id="name"
             name="name"
@@ -34,6 +35,7 @@
             Email
           </label>
           <input
+            formControlName="email"
             type="email"
             id="email"
             name="email"
@@ -47,7 +49,8 @@
           </label>
           <div class="relative">
             <input
-              type="text"
+              formControlName="senha"
+              type="password"
               id="password"
               name="password"
               placeholder="Sua senha"
@@ -89,6 +92,7 @@
           </label>
           <div class="relative">
             <input
+              formControlName="confirmarSenha"
               type="password"
               id="confirmPassword"
               name="confirmPassword"

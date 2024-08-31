@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './shared/header/header.component';
-import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, RouterOutlet } from '@angular/router';
+
+import { HeaderComponent } from './shared/header/header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, RouterModule, ReactiveFormsModule],
+  imports: [RouterOutlet, RouterModule, ReactiveFormsModule, HeaderComponent],
   templateUrl: './app.component.html'
 })
 export class AppComponent {
