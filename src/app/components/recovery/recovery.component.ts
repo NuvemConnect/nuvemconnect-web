@@ -11,7 +11,6 @@ import { HeaderComponent } from '../../shared/header/header.component';
 import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
 import { EmailService } from '../../services/email.service';
 
-
 @Component({
   selector: 'app-recovery',
   standalone: true,

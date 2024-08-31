@@ -7,8 +7,8 @@ import { EmailService } from '../../services/email.service';
 import { AuthService } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 
-class MockHttpClient{
-  post(){
+class MockHttpClient {
+  post() {
     return of({ token: '12345' });
   }
 }

@@ -10,7 +10,6 @@ import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
 import { AuthService } from '../../services/auth.service';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-register',
