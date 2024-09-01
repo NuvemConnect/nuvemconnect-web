@@ -1,49 +1,49 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { jwtDecode } from 'jwt-decode';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { User } from '../interfaces/user';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl = 'http://localhost:3000/auth'; // URL da api
+  private isBrowser: boolean;
 
-  private httpClient = inject(HttpClient);
+  apiUrl = 'http://localhost:3000/'; // URL da api
+
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   isLoggedIn(): boolean {
-    const token = localStorage.getItem('token');
-
-    return !!token && !this.isTokenExpired(token);
+    if (!this.isBrowser) return false;
+    const token = localStorage.getItem('token') || '';
+    console.log(`Token: ${token}`);
+    return !!token && this.isValidToken(token);
   }
-  isTokenExpired(token: string) {
-    const expiry = JSON.parse(atob(token.split('.')[1])).exp;
-    return Math.floor(new Date().getTime() / 1000) >= expiry;
+
+  isValidToken(token: string): boolean {
+    try {
+      const decodedToken = jwtDecode(token);
+      if (decodedToken.exp === undefined) return true;
+      const expiryTime = decodedToken.exp * 1000;
+      return Date.now() < expiryTime;
+    } catch (error) {
+      console.log(`Erro ao decodificar o Token: ${error}`);
+      return false;
+    }
   }
 
   // Método para fazer login
   login(data: User) {
-    data = { email: 'string', senha: 'string' };
-    return this.httpClient.post(`${this.apiUrl}/login`, data);
+    if (data.email === 'lauro@outlook.com.br' && data.senha === '11111111') {
+      localStorage.setItem('currentUser', JSON.stringify({ data }));
+      return true;
+    }
+    return false;
   }
 
-  // Método para fazer logout
   logout() {
-    return this.httpClient.post(`${this.apiUrl}/logout`, {});
-  }
-
-  // Método para verificar token
-  verifyToken() {
-    return this.httpClient.get(`${this.apiUrl}/verify`);
-  }
-
-  // Método para registrar usuário
-  register(data: User) {
-    return this.httpClient.post(`${this.apiUrl}/register`, data);
-  }
-
-  // Método para recuperar senha
-  recovery(data: User) {
-    return this.httpClient.post(`${this.apiUrl}/recovery`, data);
+    return localStorage.removeItem('currentUser');
   }
 }

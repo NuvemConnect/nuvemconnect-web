@@ -22,6 +22,7 @@
             Email
           </label>
           <input
+            formControlName="email"
             type="email"
             id="email"
             name="email"
@@ -35,6 +36,7 @@
           </label>
           <div class="relative">
             <input
+              formControlName="senha"
               type="password"
               id="password"
               name="password"
@@ -77,9 +79,10 @@
 
         <div class="flex justify-center items-center w-full">
           <button
+            [disabled]="!form.valid"
             (click)="login()"
-            type="button"
-            class="text-white border-0 rounded-m py-2 px-8 focus:outline-none bg-primary-400 hover:bg-primary-500 font-bold text-lg w-full text-text"
+            type="submit"
+            class="text-white border-0 rounded-m py-2 px-8 focus:outline-none bg-primary-400 hover:bg-primary-500 font-bold text-lg w-full text-text disabled:bg-neutral-400 disabled:cursor-not-allowed"
           >
             Entrar
           </button>
