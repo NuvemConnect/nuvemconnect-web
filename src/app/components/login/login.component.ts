@@ -49,15 +49,15 @@ export class LoginComponent {
   login() {
     if (this.form.valid) {
       const data: User = this.form.value;
-      if (data.email == "lauro@outlook.com.br" && data.senha == "11111111") {
-        this.router.navigate(['/home'])
-        return true
+      if (data.email == 'lauro@outlook.com.br' && data.senha == '11111111') {
+        this.router.navigate(['/home']);
+        return true;
       }
       // this.authService.login(data).subscribe((response) => {
       //   console.log(response);
       // });
     }
-      return false
+    return false;
   }
 
   onSubmit() {

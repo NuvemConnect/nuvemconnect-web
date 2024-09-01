@@ -11,7 +11,7 @@ export class AuthService {
 
   apiUrl = 'http://localhost:3000/'; // URL da api
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) platformId: object) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
