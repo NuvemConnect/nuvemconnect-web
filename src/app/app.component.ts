@@ -10,6 +10,4 @@ import { HeaderComponent } from './shared/header/header.component';
   imports: [RouterOutlet, RouterModule, ReactiveFormsModule, HeaderComponent],
   templateUrl: './app.component.html'
 })
-export class AppComponent {
-  title = 'NuvemConnect';
-}
+export class AppComponent {}

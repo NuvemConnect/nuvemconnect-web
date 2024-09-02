@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../shared/header/header.component';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from '../../shared/header/header.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-authentication',
   standalone: true,
   imports: [RouterOutlet, HeaderComponent],
-  templateUrl: './home.component.html'
+  templateUrl: './authentication.component.html'
 })
-export class HomeComponent {
+export class AuthenticationComponent {
   title = 'NuvemConnect';
 }
