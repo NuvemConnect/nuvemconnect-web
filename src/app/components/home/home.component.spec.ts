@@ -20,13 +20,13 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-    it(`should have the 'NuvemConnect' title`, () => {
-      const fixture = TestBed.createComponent(HomeComponent);
-      const component = fixture.componentInstance;
-      expect(component.title).toEqual('NuvemConnect');
-    });
-  
-    it('should render title', () => {
+  it(`should have the 'NuvemConnect' title`, () => {
+    const fixture = TestBed.createComponent(HomeComponent);
+    const component = fixture.componentInstance;
+    expect(component.title).toEqual('NuvemConnect');
+  });
+
+  it('should render title', () => {
     const fixture = TestBed.createComponent(HomeComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
