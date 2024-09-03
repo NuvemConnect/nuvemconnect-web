@@ -30,7 +30,7 @@
         <div class="flex justify-center mb-6 gap-1">
           <input
             id="code1"
-            type="text"
+            type="number"
             maxlength="1"
             formControlName="code1"
             class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -39,7 +39,7 @@
           />
           <input
             id="code2"
-            type="text"
+            type="number"
             maxlength="1"
             formControlName="code2"
             class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -47,7 +47,7 @@
           />
           <input
             id="code3"
-            type="text"
+            type="number"
             maxlength="1"
             formControlName="code3"
             class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -55,7 +55,7 @@
           />
           <input
             id="code4"
-            type="text"
+            type="number"
             maxlength="1"
             formControlName="code4"
             class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -63,8 +63,10 @@
         </div>
         <div class="flex justify-center items-center w-full">
           <button
+            [disabled]="!codeForm.valid"
             type="submit"
-            class="text-white border-0 rounded-m py-2 px-8 focus:outline-none bg-primary-400 hover:bg-primary-500 font-bold text-lg w-full text-text"
+            class="text-white border-0 rounded-m py-2 px-8 focus:outline-none bg-primary-400 hover:bg-primary-500
+            font-bold text-lg w-full text-text disabled:bg-neutral-400 disabled:cursor-not-allowed"
           >
             Verificar
           </button>

@@ -34,13 +34,14 @@ export class LoginComponent {
   imageUrl = `logotipo.svg`;
   title = `NuvemConnect`;
   textContent = `NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.`;
+  showPassword: boolean = false;
 
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
   private router = inject(Router);
   ngOnInit() {
     this.form = this.fb.group({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       senha: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
   }
@@ -58,5 +59,9 @@ export class LoginComponent {
     if (this.form.valid) {
       this.login();
     }
+  }
+
+  toggleVisibilityPassword() {
+    this.showPassword = !this.showPassword;
   }
 }

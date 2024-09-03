@@ -28,6 +28,8 @@ export class RegisterComponent {
   title = `NuvemConnect`;
   textContent = `NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.`;
   form!: FormGroup;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
 
   private router = inject(Router);
   private authService = inject(AuthService);
@@ -57,5 +59,12 @@ export class RegisterComponent {
         console.log('senha não confere');
       }
     }
+  }
+
+  toggleVisibilityConfirmPassword() {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+  toggleVisibilityPassword() {
+    this.showPassword = !this.showPassword;
   }
 }
