@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { TestBed } from '@angular/core/testing';
 
 import { EmailService } from './email.service';

@@ -12,7 +12,6 @@ import { AuthService } from '../../services/auth.service';
 import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { inject } from '@angular/core';
-import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +35,7 @@ export class LoginComponent {
   title = `NuvemConnect`;
   textContent = `NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.`;
 
-  // private authService = inject(AuthService);
+  private authService = inject(AuthService);
   private fb = inject(FormBuilder);
   private router = inject(Router);
   ngOnInit() {
@@ -48,14 +47,9 @@ export class LoginComponent {
 
   login() {
     if (this.form.valid) {
-      const data: User = this.form.value;
-      if (data.email == 'lauro@outlook.com.br' && data.senha == '11111111') {
-        this.router.navigate(['/home']);
-        return true;
-      }
-      // this.authService.login(data).subscribe((response) => {
-      //   console.log(response);
-      // });
+      this.authService.login(this.form.value);
+      console.log(this.form.value);
+      this.router.navigate(['home']);
     }
     return false;
   }

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 import { HomeComponent } from './components/home/home.component';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
 
@@ -15,7 +15,7 @@ export const routes: Routes = [
         title: 'NuvemConnect | Listar'
       }
     ],
-    canActivate: [authGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: '',

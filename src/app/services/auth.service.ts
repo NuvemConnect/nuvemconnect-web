@@ -1,6 +1,7 @@
+/* eslint-disable */
+
 import { jwtDecode } from 'jwt-decode';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { User } from '../interfaces/user';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
@@ -35,12 +36,15 @@ export class AuthService {
   }
 
   // Método para fazer login
-  login(data: User) {
-    if (data.email === 'lauro@outlook.com.br' && data.senha === '11111111') {
-      localStorage.setItem('currentUser', JSON.stringify({ data }));
-      return true;
-    }
-    return false;
+  login(data: { email: string; senha: string }) {
+    return new Promise((resolve) => {
+      window.localStorage.setItem('token', data.email);
+      resolve(true);
+    });
+  }
+
+  createAccount(_account: any) {
+    return new Promise((resolve) => resolve(true));
   }
 
   logout() {

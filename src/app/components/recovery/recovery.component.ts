@@ -37,17 +37,8 @@ export class RecoveryComponent {
       email: new FormControl('', [Validators.required, Validators.email])
     });
   }
-  onSubmit(): void {
+  onSubmit() {
     console.log(this.form.value);
-    if (this.form.valid) {
-      this.emailService.sendEmail(this.form.get('email')?.value).subscribe(
-        () => {
-          this.router.navigate(['/confirm-email']);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
+    this.router.navigate(['verify']);
   }
 }

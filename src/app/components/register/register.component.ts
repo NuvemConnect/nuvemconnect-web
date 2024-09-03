@@ -52,8 +52,10 @@ export class RegisterComponent {
     if (this.form.valid) {
       if (this.senhaIgualConfirmacao()) {
         console.log(this.form.value);
+        this.router.navigate(['login']);
+      } else {
+        console.log('senha não confere');
       }
-      console.log('senha não confere');
     }
   }
 }

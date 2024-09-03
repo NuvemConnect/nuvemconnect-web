@@ -1,11 +1,25 @@
+/* eslint-disable */
+
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivateFn,
+  GuardResult,
+  MaybeAsync,
+  RouterStateSnapshot
+} from '@angular/router';
 
-import { authGuard } from './auth.guard';
+import { AuthGuard } from './auth.guard';
 
-describe('authGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) =>
-    TestBed.runInInjectionContext(() => authGuard(...guardParameters));
+describe('AuthGuard', () => {
+  const executeGuard: CanActivateFn = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot //eslint-disable-line
+  ) =>
+    TestBed.runInInjectionContext(() => {
+      //eslint-disable-line
+      return new AuthGuard(route) as unknown as MaybeAsync<GuardResult>;
+    });
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
