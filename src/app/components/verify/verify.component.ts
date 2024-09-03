@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet, RouterModule } from '@angular/router';
-import { HeaderComponent } from '../header/header.component';
+import { HeaderComponent } from '../../shared/header/header.component';
 import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-verify',
@@ -18,8 +19,14 @@ import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-si
 })
 export class VerifyComponent {
   codeForm!: FormGroup;
+  imageUrl = 'sapiens.svg';
+  title = 'NuvemConnect';
+  textContent =
+    'NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.';
 
-  constructor(private fb: FormBuilder) {
+  private fb = inject(FormBuilder);
+
+  ngOnInit() {
     this.codeForm = this.fb.group({
       code1: [''],
       code2: [''],

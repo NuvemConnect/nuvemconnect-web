@@ -4,8 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-dynamic-sidebar',
   standalone: true,
   imports: [],
-  templateUrl: './dynamic-sidebar.component.html',
-  styleUrl: './dynamic-sidebar.component.css'
+  templateUrl: './dynamic-sidebar.component.html'
 })
 export class DynamicSidebarComponent {
   @Input() imageUrl: string = '';

@@ -3,7 +3,7 @@
 set -e  # Para o script se qualquer comando falhar
 
 echo "Rodando pre-commit lint!"
-yarn lint || { echo "Linting falhou. Abandonando o commit."; exit 1; }
+yarn lint --fix || { echo "Linting falhou. Abandonando o commit."; exit 1; }
 
 echo "Rodando pre-commit format!"
 yarn format || { echo "Formatação falhou. Abandonando o commit."; exit 1; }
@@ -16,4 +16,5 @@ yarn test || { echo "Testes falharam. Abandonando o commit."; exit 1; }
 
 # echo "Rodando Commitlint!"
 # yarn commitlint || { echo "Commitlint falhou. Abandonando o commit."; exit 1; }
+
 echo "Pre-commit passou!"

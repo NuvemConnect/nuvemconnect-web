@@ -1,0 +1,40 @@
+<div class="flex flex-col md:flex-row w-full justify-around items-center">
+  <app-dynamic-sidebar
+    c
+    class="flex w-full min-w-[570px] min-h-[570px]"
+    [imageUrl]="imageUrl"
+    [title]="title"
+    [textContent]="textContent"
+  >
+  </app-dynamic-sidebar>
+
+  <div class="flex flex-col mt-10 md:mt-0 justify-center items-center w-full">
+    <div
+      class="flex flex-col relative justify-center items-center max-w-sm bg-white p-8 rounded-m w-full min-h-[570px] shadow-lg"
+    >
+      <a [routerLink]="['']" alt="voltar" aria-label="voltar">
+        <img
+          class="absolute top-4 left-4 p-2 bg-neutral-50 hover:bg-neutral-100 rounded-sm"
+          src="botaoVoltar.svg"
+          alt="voltar"
+          srcset=""
+        />
+      </a>
+      <h2 class="text-primary-950 text-subtitle font-bold text-3xl mb-0 text-center">
+        Verifique sua conta
+      </h2>
+      <p class="leading-relaxed my-2 text-neutral-400 text-subtext text-center">
+        O link de ativação da conta foi enviado para o endereço de e-mail que você forneceu
+      </p>
+      <iframe
+        src="https://lottie.host/embed/005d7feb-22ce-4430-b9e3-33c55e0a2c0b/iIUVUAlWM6.json"
+      ></iframe>
+      <p class="leading-relaxed my-2 text-neutral-400 text-subtext text-center">
+        Não recebeu o e-mail?
+        <a [routerLink]="['/recovery']" class="text-primary-400 hover:text-primary-500"
+          >envie novamente</a
+        >
+      </p>
+    </div>
+  </div>
+</div>

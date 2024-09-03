@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VerifyComponent } from './verify.component';
+import { ConfirmEmailComponent } from './confirm-email.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
-describe('VerifyComponent', () => {
-  let component: VerifyComponent;
-  let fixture: ComponentFixture<VerifyComponent>;
+describe('ConfirmEmailComponent', () => {
+  let component: ConfirmEmailComponent;
+  let fixture: ComponentFixture<ConfirmEmailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VerifyComponent],
+      imports: [ConfirmEmailComponent],
       providers: [
         {
           provide: ActivatedRoute,
@@ -22,7 +22,7 @@ describe('VerifyComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(VerifyComponent);
+    fixture = TestBed.createComponent(ConfirmEmailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
