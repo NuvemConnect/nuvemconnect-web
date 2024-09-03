@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
 import { inject } from '@angular/core';
@@ -25,6 +25,7 @@ export class VerifyComponent {
     'NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.';
 
   private fb = inject(FormBuilder);
+  private router = inject(Router);
 
   ngOnInit() {
     this.codeForm = this.fb.group({
@@ -64,6 +65,6 @@ export class VerifyComponent {
   onSubmit(): void {
     const code = Object.values(this.codeForm.value).join('');
     console.log('Código de verificação:', code);
-    // colocar a logica aqui
+    this.router.navigate(['/new-password']);
   }
 }
