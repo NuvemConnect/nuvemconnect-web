@@ -38,10 +38,12 @@ export class RecoveryComponent {
     });
   }
   onSubmit() {
-    if(this.form.valid){
+    if (this.form.valid) {
       console.log(this.form.value);
       const url = this.router.serializeUrl(
-        this.router.createUrlTree(['/confirm-email'], { queryParams: { email: this.form.value.email } })
+        this.router.createUrlTree(['/confirm-email'], {
+          queryParams: { email: this.form.value.email }
+        })
       );
       this.router.navigate(['/verify']);
       window.open(url, '_blank');
