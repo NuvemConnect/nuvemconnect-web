@@ -74,15 +74,6 @@ module.exports = {
         poppins: ['Poppins', 'sans-serif'],
         pretendard: ['Pretendard', 'sans-serif']
       },
-      borderRadius: {
-        xs: '0.125rem',
-        s: '0.25rem',
-        sm: '0.5rem',
-        m: '1rem',
-        ml: '2rem',
-        lg: '4rem',
-        xl: '8rem'
-      },
       fontSize: {
         title: '32px',
         subtitle: '24px',

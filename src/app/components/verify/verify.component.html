@@ -1,16 +1,15 @@
 <div class="flex flex-col md:flex-row w-full justify-around items-center">
   <app-dynamic-sidebar
-    c
-    class="flex w-full min-w-[570px] min-h-[570px]"
+    class="flex w-full justify-center"
     [imageUrl]="imageUrl"
     [title]="title"
     [textContent]="textContent"
   >
   </app-dynamic-sidebar>
 
-  <div class="flex flex-col mt-10 md:mt-0 justify-center items-center w-full">
+  <div class="flex justify-center w-full">
     <div
-      class="flex flex-col relative justify-center items-center max-w-sm bg-white p-8 rounded-m w-full min-h-[570px] shadow-lg"
+      class="flex flex-col relative justify-center items-center max-w-sm bg-white p-8 rounded-3xl w-full min-h-[570px] shadow-lg"
     >
       <a [routerLink]="['']" alt="voltar" aria-label="voltar">
         <img
@@ -20,53 +19,63 @@
           srcset=""
         />
       </a>
-      <h2 class="text-primary-950 text-subtitle font-bold text-3xl mb-0 text-center">
-        Insira seu código
-      </h2>
-      <p class="leading-relaxed my-2 text-neutral-400 text-subtext text-center">
+      <h2 class="subtitle">Insira seu código</h2>
+      <p class="secondary-text text-center">
         Enviamos um e-mail com um código de verificação. Por favor, insira o código abaixo.
       </p>
       <form class="w-full max-w-sm" [formGroup]="codeForm" (ngSubmit)="onSubmit()">
         <div class="flex justify-center mb-6 gap-1">
           <input
             id="code1"
-            type="number"
+            type="text"
             maxlength="1"
             formControlName="code1"
-            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
             (input)="onInputChange($event, 'code2')"
             (paste)="onPaste($event)"
           />
           <input
             id="code2"
-            type="number"
+            type="text"
             maxlength="1"
             formControlName="code2"
-            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
             (input)="onInputChange($event, 'code3')"
           />
           <input
             id="code3"
-            type="number"
+            type="text"
             maxlength="1"
             formControlName="code3"
-            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
             (input)="onInputChange($event, 'code4')"
           />
           <input
             id="code4"
-            type="number"
+            type="text"
             maxlength="1"
             formControlName="code4"
-            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
+            (input)="onInputChange($event, 'code5')"
+          />
+          <input
+            id="code5"
+            type="text"
+            maxlength="1"
+            formControlName="code5"
+            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
+            (input)="onInputChange($event, 'code6')"
+          />
+          <input
+            id="code6"
+            type="text"
+            maxlength="1"
+            formControlName="code6"
+            class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
           />
         </div>
         <div class="flex justify-center items-center w-full">
-          <button
-            [disabled]="!codeForm.valid"
-            type="submit"
-            class="text-white border-0 rounded-m py-2 px-8 focus:outline-none bg-primary-400 hover:bg-primary-500 font-bold text-lg w-full text-text disabled:bg-neutral-400 disabled:cursor-not-allowed"
-          >
+          <button [disabled]="!codeForm.valid" type="submit" class="button-primary">
             Verificar
           </button>
         </div>

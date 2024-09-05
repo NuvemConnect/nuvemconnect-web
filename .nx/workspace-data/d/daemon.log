@@ -1,0 +1,11 @@
+[NX Daemon Server] - 2024-09-03T03:54:47.175Z - Started listening on: \\.\pipe\nx\C:\Users\Lauro\AppData\Local\Temp\87cba2eeeb07ae58e4ec\d.sock
+[NX Daemon Server] - 2024-09-03T03:54:47.184Z - [WATCHER]: Subscribed to changes within: b:\projetos\nuvemconnect-web (native)
+[NX Daemon Server] - 2024-09-03T03:54:47.189Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-09-03T03:54:47.194Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-09-03T03:54:47.194Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-09-03T03:54:47.199Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2024-09-03T03:54:47.202Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2024-09-03T03:54:47.203Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 4.
+[NX Daemon Server] - 2024-09-03T03:54:47.203Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-09-03T03:54:47.204Z - [WATCHER]: Stopping the watcher for b:\projetos\nuvemconnect-web (sources)
+[NX Daemon Server] - 2024-09-03T03:54:47.204Z - [WATCHER]: Stopping the watcher for b:\projetos\nuvemconnect-web (outputs)

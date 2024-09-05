@@ -1,39 +1,31 @@
 <div class="flex flex-col md:flex-row w-full justify-around items-center">
   <app-dynamic-sidebar
-    class="flex w-full min-w-[570px] min-h-[570px]"
+    class="flex w-full justify-center"
     [imageUrl]="imageUrl"
     [title]="title"
     [textContent]="textContent"
   >
   </app-dynamic-sidebar>
-  <div class="flex flex-col mt-10 md:mt-0 justify-center items-center w-full">
+  <div class="flex justify-center w-full">
     <div
-      class="flex flex-col relative justify-center items-center max-w-sm bg-white p-8 rounded-m w-full min-h-[570px] shadow-lg"
+      class="flex flex-col relative justify-center items-center max-w-sm bg-white p-8 rounded-3xl w-full min-h-[570px] shadow-lg"
     >
-      <h2 class="text-primary-950 text-subtitle font-bold text-3xl mb-0 text-center">
-        Bem vindo de volta!
-      </h2>
-      <p class="leading-relaxed my-2 text-neutral-400 text-subtext">
-        Insira suas credenciais para acessar sua conta
-      </p>
+      <h2 class="subtitle">Bem vindo de volta!</h2>
+      <p class="secondary-text text-center">Insira suas credenciais para acessar sua conta</p>
       <form class="w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="relative mb-4">
-          <label for="email" class="leading-7 text-sm text-primary-900 w-full font-semibold">
-            Email
-          </label>
+          <label for="email" class="label"> Email </label>
           <input
             formControlName="email"
             type="email"
             id="email"
             name="email"
             placeholder="Seu email"
-            class="bg-slate-100 rounded-m border border-gray-300 focus:border-primary focus:ring-2 focus:bg-slate-50 focus:ring-primary text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out w-full"
+            class="input"
           />
         </div>
         <div class="relative mb-4">
-          <label for="password" class="leading-7 text-sm text-primary-900 w-full font-semibold">
-            Senha
-          </label>
+          <label for="password" class="label"> Senha </label>
           <div class="relative">
             <input
               formControlName="senha"
@@ -41,7 +33,7 @@
               id="password"
               name="password"
               placeholder="Sua senha"
-              class="w-full bg-slate-100 rounded-m border border-gray-300 focus:border-primary focus:ring-2 focus:bg-slate-50 focus:ring-primary text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              class="input"
             />
             <i class="mx-auto my-auto absolute top-2 right-2 cursor-pointer">
               <img
@@ -62,12 +54,7 @@
         </div>
 
         <div class="flex justify-center items-center w-full">
-          <button
-            [disabled]="!form.valid"
-            (click)="login()"
-            type="submit"
-            class="text-white border-0 rounded-m py-2 px-8 focus:outline-none bg-primary-400 hover:bg-primary-500 font-bold text-lg w-full text-text disabled:bg-neutral-400 disabled:cursor-not-allowed"
-          >
+          <button [disabled]="!form.valid" (click)="login()" type="submit" class="button-primary">
             Entrar
           </button>
         </div>
@@ -81,14 +68,12 @@
           >Crie sua conta aqui</a
         >
       </p>
-      <div class="flex justify-around my-5">
-        <span class="inline-block h-0.5 w-16 rounded-m bg-neutral-400 mt-3 mb-6"></span>
+      <div class="flex justify-around my-5 w-full">
+        <span class="inline-block h-0.5 w-16 rounded-3xl bg-neutral-400 mt-3 mb-6"></span>
         <p class="text-subtexto text-slate-400 text-text">Ou faça login com</p>
-        <span class="inline-block h-0.5 w-16 rounded-m bg-neutral-400 mt-3 mb-6"></span>
+        <span class="inline-block h-0.5 w-16 rounded-3xl bg-neutral-400 mt-3 mb-6"></span>
       </div>
-      <button
-        class="flex justify-center text-primary-950 bg-white border-2 border-neutral-500 rounded-m py-2 px-8 focus:outline-none hover:border-neutral-600 hover:bg-neutral-200 font-semibold text-md w-full"
-      >
+      <button class="flex justify-center button-secondary">
         <img src="google.svg" class="mr-1" />
         <span class="my-auto"> Google </span>
       </button>

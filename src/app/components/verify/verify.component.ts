@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
@@ -29,10 +29,12 @@ export class VerifyComponent {
 
   ngOnInit() {
     this.codeForm = this.fb.group({
-      code1: [''],
-      code2: [''],
-      code3: [''],
-      code4: ['']
+      code1: ['', [Validators.required, Validators.pattern('[0-9]')]],
+      code2: ['', [Validators.required, Validators.pattern('[0-9]')]],
+      code3: ['', [Validators.required, Validators.pattern('[0-9]')]],
+      code4: ['', [Validators.required, Validators.pattern('[0-9]')]],
+      code5: ['', [Validators.required, Validators.pattern('[0-9]')]],
+      code6: ['', [Validators.required, Validators.pattern('[0-9]')]]
     });
   }
 
@@ -48,12 +50,14 @@ export class VerifyComponent {
 
   onPaste(event: ClipboardEvent): void {
     event.preventDefault();
-    const pasteData = event.clipboardData?.getData('text').slice(0, 4) || '';
+    const pasteData = event.clipboardData?.getData('text').slice(0, 6) || '';
     this.codeForm.patchValue({
       code1: pasteData[0] || '',
       code2: pasteData[1] || '',
       code3: pasteData[2] || '',
-      code4: pasteData[3] || ''
+      code4: pasteData[3] || '',
+      code5: pasteData[4] || '',
+      code6: pasteData[5] || ''
     });
 
     const lastFilledIndex = pasteData.length - 1;

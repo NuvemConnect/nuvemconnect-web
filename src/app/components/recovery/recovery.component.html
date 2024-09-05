@@ -1,15 +1,15 @@
 <div class="flex flex-col md:flex-row w-full justify-around items-center">
   <app-dynamic-sidebar
-    class="flex w-full min-w-[570px] min-h-[570px]"
+    class="flex w-full justify-center"
     [imageUrl]="imageUrl"
     [title]="title"
     [textContent]="textContent"
   >
   </app-dynamic-sidebar>
 
-  <div class="flex flex-col mt-10 md:mt-0 justify-center items-center w-full">
+  <div class="flex justify-center w-full">
     <div
-      class="flex flex-col relative justify-center items-center max-w-sm bg-white p-8 rounded-m w-full min-h-[570px] shadow-lg"
+      class="flex flex-col relative justify-center items-center max-w-sm bg-white p-8 rounded-3xl w-full min-h-[570px] shadow-lg"
     >
       <a [routerLink]="['']" alt="voltar" aria-label="voltar">
         <img
@@ -19,31 +19,25 @@
           srcset=""
         />
       </a>
-      <h2 class="text-primary-950 text-subtitle font-bold text-3xl mb-0 text-center">
-        Esqueci minha senha
-      </h2>
-      <p class="leading-relaxed my-2 text-neutral-400 text-subtext text-center">
+      <h2 class="subtitle">Esqueci minha senha</h2>
+      <p class="secondary-text text-center">
         Se você esqueceu sua senha, por favor digite seu e-mail abaixo para restaurar a senha.
       </p>
       <form class="w-full max-w-sm" [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="relative mb-4">
-          <label for="email" class="leading-7 text-sm text-gray-600 w-full"> Email </label>
+          <label for="email" class="label"> Email </label>
           <input
             formControlName="email"
             type="email"
             id="email"
             name="email"
             placeholder="Digite seu email"
-            class="bg-slate-100 rounded-m border border-gray-300 focus:border-primary focus:ring-2 focus:bg-slate-50 focus:ring-primary text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out w-full"
+            class="input"
           />
         </div>
 
         <div class="flex justify-center items-center w-full">
-          <button
-            [disabled]="!form.valid"
-            type="submit"
-            class="text-white border-0 rounded-m py-2 px-8 focus:outline-none bg-primary-400 hover:bg-primary-500 font-bold text-lg w-full text-text disabled:bg-neutral-400 disabled:cursor-not-allowed"
-          >
+          <button [disabled]="!form.valid" type="submit" class="button-primary">
             Enviar código
           </button>
         </div>
