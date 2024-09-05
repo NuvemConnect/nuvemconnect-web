@@ -48,6 +48,6 @@ export class AuthService {
   }
 
   logout() {
-    return localStorage.removeItem('currentUser');
+    return localStorage.removeItem('token');
   }
 }
