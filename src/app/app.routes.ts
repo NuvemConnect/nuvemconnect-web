@@ -61,10 +61,8 @@ export const routes: Routes = [
             (m) => m.ConfirmEmailComponent
           ),
         title: 'NuvemConnect | Confirmar'
-      }
-    ]
+      },
+    ],
   },
-  {
-    path: '**', redirectTo: ''
-  }
+  { path: '**', redirectTo: '' }
 ];
