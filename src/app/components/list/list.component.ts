@@ -8,11 +8,10 @@ import { Router } from '@angular/router';
   templateUrl: './list.component.html'
 })
 export class ListComponent {
-
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  logout(){
+  logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
