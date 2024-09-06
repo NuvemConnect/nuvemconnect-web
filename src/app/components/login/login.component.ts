@@ -31,9 +31,6 @@ import { inject } from '@angular/core';
 })
 export class LoginComponent {
   form!: FormGroup;
-  imageUrl = `logotipo.svg`;
-  title = `NuvemConnect`;
-  textContent = `NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.`;
   showPassword: boolean = false;
 
   private authService = inject(AuthService);

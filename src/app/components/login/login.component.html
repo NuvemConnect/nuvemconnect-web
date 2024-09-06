@@ -1,82 +1,76 @@
 <div class="flex flex-col md:flex-row w-full justify-around items-center">
-  <app-dynamic-sidebar
-    class="flex w-full justify-center"
-    [imageUrl]="imageUrl"
-    [title]="title"
-    [textContent]="textContent"
+  <div
+    class="flex flex-col relative justify-center items-center max-w-md bg-white p-8 rounded-3xl w-full min-h-[650px]"
   >
-  </app-dynamic-sidebar>
-  <div class="flex justify-center w-full">
-    <div
-      class="flex flex-col relative justify-center items-center max-w-sm bg-white p-8 rounded-3xl w-full min-h-[570px] shadow-lg"
-    >
-      <h2 class="subtitle">Bem vindo de volta!</h2>
-      <p class="secondary-text text-center">Insira suas credenciais para acessar sua conta</p>
-      <form class="w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="relative mb-4">
-          <label for="email" class="label"> Email </label>
+    <h2 class="subtitle">Bem vindo de volta!</h2>
+    <p class="secondary-text text-center">Insira suas credenciais para acessar sua conta</p>
+    <form class="w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="relative mb-4">
+        <label for="email" class="label"> Email </label>
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Seu email"
+          class="input"
+        />
+        <ng-container>
+          @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
+            <span class="input-error">Campo obrigatório</span>
+          }
+        </ng-container>
+      </div>
+      <div class="relative mb-4">
+        <label for="password" class="label"> Senha </label>
+        <div class="relative">
           <input
-            formControlName="email"
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Seu email"
+            formControlName="senha"
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            name="password"
+            placeholder="Sua senha"
             class="input"
           />
-        </div>
-        <div class="relative mb-4">
-          <label for="password" class="label"> Senha </label>
-          <div class="relative">
-            <input
-              formControlName="senha"
-              [type]="showPassword ? 'text' : 'password'"
-              id="password"
-              name="password"
-              placeholder="Sua senha"
-              class="input"
+          <i class="mx-auto my-auto absolute top-2 right-2 cursor-pointer">
+            <img
+              [src]="showPassword ? 'hide.svg' : 'show.svg'"
+              alt=""
+              srcset=""
+              (click)="toggleVisibilityPassword()"
             />
-            <i class="mx-auto my-auto absolute top-2 right-2 cursor-pointer">
-              <img
-                [src]="showPassword ? 'hide.svg' : 'show.svg'"
-                alt=""
-                srcset=""
-                (click)="toggleVisibilityPassword()"
-              />
-            </i>
-          </div>
+          </i>
         </div>
-        <div
-          class="flex items-center justify-end text-primary-400 hover:text-primary-500 hover:underline"
-        >
-          <a [routerLink]="['/recovery']" class="text-subtexto mb-2 text-text"
-            >Esqueceu sua senha?</a
-          >
-        </div>
-
-        <div class="flex justify-center items-center w-full">
-          <button [disabled]="!form.valid" (click)="login()" type="submit" class="button-primary">
-            Entrar
-          </button>
-        </div>
-      </form>
-
-      <p class="text-slate-400 mt-3 text-center text-text">
-        Não tem uma conta?
-        <a
-          [routerLink]="['/register']"
-          class="text-primary-400 hover:text-primary-500 hover:underline"
-          >Crie sua conta aqui</a
-        >
-      </p>
-      <div class="flex justify-around my-5 w-full">
-        <span class="inline-block h-0.5 w-16 rounded-3xl bg-neutral-400 mt-3 mb-6"></span>
-        <p class="text-subtexto text-slate-400 text-text">Ou faça login com</p>
-        <span class="inline-block h-0.5 w-16 rounded-3xl bg-neutral-400 mt-3 mb-6"></span>
       </div>
-      <button class="flex justify-center button-secondary">
-        <img src="google.svg" class="mr-1" />
-        <span class="my-auto"> Google </span>
-      </button>
+      <div
+        class="flex items-center justify-end text-primary-400 hover:text-primary-500 hover:underline"
+      >
+        <a [routerLink]="['/recovery']" class="text-text mb-2">Esqueceu sua senha?</a>
+      </div>
+
+      <div class="flex justify-center items-center w-full">
+        <button [disabled]="!form.valid" (click)="login()" type="submit" class="button-primary">
+          Entrar
+        </button>
+      </div>
+    </form>
+
+    <p class="secondary-text">
+      Não tem uma conta?
+      <a
+        [routerLink]="['/register']"
+        class="text-primary-400 hover:text-primary-500 hover:underline"
+        >Crie sua conta aqui</a
+      >
+    </p>
+    <div class="flex justify-around my-5 w-full">
+      <span class="inline-block h-[0.5px] w-32 rounded-3xl bg-neutral-400 mt-3 mb-6"></span>
+      <p class="text-subtexto text-slate-400 text-text">Ou</p>
+      <span class="inline-block h-[0.5px] w-32 rounded-3xl bg-neutral-400 mt-3 mb-6"></span>
     </div>
+    <button class="flex justify-center button-secondary">
+      <img src="google.svg" class="mr-1" />
+      <span class="my-auto"> Google </span>
+    </button>
   </div>
 </div>
