@@ -9,7 +9,6 @@ import {
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
-import { EmailService } from '../../services/email.service';
 
 @Component({
   selector: 'app-recovery',
@@ -30,7 +29,6 @@ export class RecoveryComponent {
 
   form!: FormGroup;
   private router = inject(Router);
-  private emailService = inject(EmailService);
   private fb = inject(FormBuilder);
   ngOnInit() {
     this.form = this.fb.group({

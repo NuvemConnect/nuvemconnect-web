@@ -52,9 +52,15 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.form.valid) {
+      const url = this.router.serializeUrl(
+        this.router.createUrlTree(['/confirm-email'], {
+          queryParams: { email: this.form.value.email }
+        })
+      );
       if (this.senhaIgualConfirmacao()) {
         console.log(this.form.value);
-        this.router.navigate(['login']);
+        this.router.navigate(['/login']);
+        window.open(url, '_blank');
       } else {
         console.log('senha não confere');
       }
