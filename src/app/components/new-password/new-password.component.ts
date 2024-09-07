@@ -8,20 +8,13 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 
-import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { EmailService } from '../../services/email.service';
 
 @Component({
   selector: 'app-new-password',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    RouterModule,
-    ReactiveFormsModule,
-    HeaderComponent,
-    DynamicSidebarComponent
-  ],
+  imports: [RouterOutlet, RouterModule, ReactiveFormsModule, HeaderComponent],
   templateUrl: './new-password.component.html'
 })
 export class NewPasswordComponent {

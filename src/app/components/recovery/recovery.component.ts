@@ -8,18 +8,11 @@ import {
 } from '@angular/forms';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
-import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
 
 @Component({
   selector: 'app-recovery',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    HeaderComponent,
-    RouterModule,
-    ReactiveFormsModule,
-    DynamicSidebarComponent
-  ],
+  imports: [RouterOutlet, HeaderComponent, RouterModule, ReactiveFormsModule],
   templateUrl: './recovery.component.html'
 })
 export class RecoveryComponent {

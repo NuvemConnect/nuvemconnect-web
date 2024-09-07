@@ -9,7 +9,6 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { inject } from '@angular/core';
 
@@ -23,8 +22,7 @@ import { inject } from '@angular/core';
     ReactiveFormsModule,
     NgIf,
     NgFor,
-    HeaderComponent,
-    DynamicSidebarComponent
+    HeaderComponent
   ],
   providers: [AuthService],
   templateUrl: './login.component.html'

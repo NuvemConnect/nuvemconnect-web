@@ -2,19 +2,12 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
-import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
 import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-verify',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    HeaderComponent,
-    RouterModule,
-    ReactiveFormsModule,
-    DynamicSidebarComponent
-  ],
+  imports: [RouterOutlet, HeaderComponent, RouterModule, ReactiveFormsModule],
   templateUrl: './verify.component.html'
 })
 export class VerifyComponent {
