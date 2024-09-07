@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DynamicSidebarComponent } from '../dynamic-sidebar/dynamic-sidebar.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, DynamicSidebarComponent],
+  imports: [RouterLink],
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {

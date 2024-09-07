@@ -1,6 +1,12 @@
-<div class="flex flex-col md:flex-row justify-between items-center mx-auto py-2 w-3/4">
-  <app-header class="w-2/4" [title]="title"></app-header>
-  <main class="w-3/4">
+<div class="flex flex-col md:flex-row justify-between items-center mx-auto p-2 w-6/6">
+  <div>
+    <app-header class="w-11/12 md:w-10/12" [title]="title"></app-header>
+    <header class="flex justify-center items-center gap-2 w-11/12 md:w-10/12 md:hidden">
+      <img class="h-8" src="logotipo.svg" alt="logotipo" />
+      <h1 class="text-primary-950 text-2xl font-bold">{{ title }}</h1>
+    </header>
+  </div>
+  <main class="w-11/12 md:w-10/12">
     <router-outlet></router-outlet>
   </main>
 </div>

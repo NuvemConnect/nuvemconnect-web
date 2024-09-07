@@ -1,6 +1,9 @@
-<div class="py-12">
-  <app-header class="" [title]="title"></app-header>
-  <main class="">
+<div class="flex flex-col justify-start items-center mx-auto p-2 h-screen">
+  <header class="flex gap-2 w-11/12 md:w-10/12 bg-red-300 md:bg-blue-300">
+    <img class="h-8" src="logotipo.svg" alt="logotipo" />
+    <h1 class="text-primary-950 text-3xl font-bold">{{ title }}</h1>
+  </header>
+  <main class="w-11/12 md:w-10/12 bg-blue-200 md:bg-red-200">
     <router-outlet></router-outlet>
   </main>
 </div>

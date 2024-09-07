@@ -8,19 +8,12 @@ import {
 } from '@angular/forms';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
-import { DynamicSidebarComponent } from '../../shared/dynamic-sidebar/dynamic-sidebar.component';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    HeaderComponent,
-    RouterModule,
-    ReactiveFormsModule,
-    DynamicSidebarComponent
-  ],
+  imports: [RouterOutlet, HeaderComponent, RouterModule, ReactiveFormsModule],
   templateUrl: './register.component.html'
 })
 export class RegisterComponent {
