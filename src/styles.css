@@ -37,7 +37,13 @@
     @apply text-primary-400 hover:text-primary-500 hover:underline
   }
 .background {
-  @apply max-w-3xl max-h-full rounded-2xl bg-blue-300;
+  @apply max-w-3xl max-h-full rounded-2xl;
+}
+.bg-img{
+  background-image: url('/background.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 }
