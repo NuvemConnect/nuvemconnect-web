@@ -15,11 +15,14 @@
           placeholder="Seu email"
           class="input"
         />
-        <ng-container>
+        <div class="input-error">
           @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
             <span class="input-error">Campo obrigatório</span>
           }
-        </ng-container>
+          @if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
+            <span class="input-error">Insira um e-mail válido</span>
+          }
+        </div>
       </div>
       <div class="relative mb-4">
         <label for="password" class="label"> Senha </label>
@@ -40,6 +43,14 @@
               (click)="toggleVisibilityPassword()"
             />
           </i>
+          <div class="input-error">
+            @if (form.get('senha')?.hasError('required') && form.get('senha')?.touched) {
+              <span class="input-error">Campo obrigatório</span>
+            }
+            @if (form.get('senha')?.hasError('minlength') && form.get('senha')?.touched) {
+              <span class="input-error">Sua senha deve conter no mínimo 8 caracteres</span>
+            }
+          </div>
         </div>
       </div>
       <div
