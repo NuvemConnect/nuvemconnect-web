@@ -14,13 +14,14 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-register',
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, RouterModule, ReactiveFormsModule],
+  providers: [AuthService],
   templateUrl: './register.component.html'
 })
 export class RegisterComponent {
   imageUrl = `sapiens.svg`;
   title = `NuvemConnect`;
   textContent = `NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.`;
-  form!: FormGroup;
+  registerForm!: FormGroup;
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
 
@@ -29,7 +30,7 @@ export class RegisterComponent {
   private fb = inject(FormBuilder);
 
   ngOnInit() {
-    this.form = this.fb.group({
+    this.registerForm = this.fb.group({
       nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -38,20 +39,20 @@ export class RegisterComponent {
   }
 
   senhaIgualConfirmacao() {
-    const senha = this.form.get('senha')?.value;
-    const confirmarSenha = this.form.get('confirmarSenha')?.value;
+    const senha = this.registerForm.get('senha')?.value;
+    const confirmarSenha = this.registerForm.get('confirmarSenha')?.value;
     return senha === confirmarSenha;
   }
 
   onSubmit() {
-    if (this.form.valid) {
+    if (this.registerForm.valid) {
       const url = this.router.serializeUrl(
         this.router.createUrlTree(['/confirm-email'], {
-          queryParams: { email: this.form.value.email }
+          queryParams: { email: this.registerForm.value.email }
         })
       );
       if (this.senhaIgualConfirmacao()) {
-        console.log(this.form.value);
+        this.authService.createAccount(this.registerForm.value);
         this.router.navigate(['/login']);
         window.open(url, '_blank');
       } else {
