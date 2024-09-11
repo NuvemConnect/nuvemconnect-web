@@ -17,7 +17,7 @@ describe('ListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ListComponent],
-            providers: [
+      providers: [
         { provide: HttpClient, useClass: MockHttpClient },
         {
           provide: ActivatedRoute,
