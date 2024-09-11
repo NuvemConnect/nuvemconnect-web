@@ -68,7 +68,7 @@ export class AuthService {
         const idToken = googleUser.getAuthResponse().id_token;
 
         // Enviar o token para o backend
-        this.http.post(`${this.apiUrl}/api/auth/google`, { idToken }).subscribe(
+        this.http.post(`${this.apiUrl}/login/google`, { idToken }).subscribe(
           (response: any) => {
             // Tratar a resposta do backend (ex: armazenar token JWT, redirecionar)
             localStorage.setItem('token', response.token);
