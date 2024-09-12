@@ -16,7 +16,6 @@ export class AuthGuard implements CanActivate {
   }
   canActivate(_next: ActivatedRouteSnapshot, _state: RouterStateSnapshot): boolean {
     if (this.isBrowser) {
-
       if (localStorage.getItem('token')) {
         return true;
       } else {
