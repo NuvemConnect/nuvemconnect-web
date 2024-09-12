@@ -4,7 +4,7 @@
   >
     <h2 class="subtitle">Bem vindo de volta!</h2>
     <p class="secondary-text text-center">Insira suas credenciais para acessar sua conta</p>
-    <form class="w-full" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form class="w-full" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="relative mb-4">
         <label for="email" class="label"> Email </label>
         <input
@@ -16,10 +16,10 @@
           class="input"
         />
         <div class="input-error">
-          @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
+          @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) {
             <span class="input-error">Campo obrigatório</span>
           }
-          @if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
+          @if (loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched) {
             <span class="input-error">Insira um e-mail válido</span>
           }
         </div>
@@ -44,10 +44,10 @@
             />
           </i>
           <div class="input-error">
-            @if (form.get('senha')?.hasError('required') && form.get('senha')?.touched) {
+            @if (loginForm.get('senha')?.hasError('required') && loginForm.get('senha')?.touched) {
               <span class="input-error">Campo obrigatório</span>
             }
-            @if (form.get('senha')?.hasError('minlength') && form.get('senha')?.touched) {
+            @if (loginForm.get('senha')?.hasError('minlength') && loginForm.get('senha')?.touched) {
               <span class="input-error">Sua senha deve conter no mínimo 8 caracteres</span>
             }
           </div>
@@ -60,7 +60,12 @@
       </div>
 
       <div class="flex justify-center items-center w-full">
-        <button [disabled]="!form.valid" (click)="login()" type="submit" class="button-primary">
+        <button
+          [disabled]="!loginForm.valid"
+          (click)="login()"
+          type="submit"
+          class="button-primary"
+        >
           Entrar
         </button>
       </div>

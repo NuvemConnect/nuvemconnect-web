@@ -30,7 +30,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
-  form!: FormGroup;
+  loginForm!: FormGroup;
   showPassword: boolean = false;
 
   private authService = inject(AuthService);
@@ -40,7 +40,7 @@ export class LoginComponent {
 
   ngOnInit() {
     this.initializeGoogleSignIn();
-    this.form = this.fb.group({
+    this.loginForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       senha: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
@@ -56,20 +56,19 @@ export class LoginComponent {
   }
 
   loginWithGoogle() {
-    this.authService.signInWithGoogle();
-    console.log(this.authService.signInWithGoogle());
+    return this.authService.signInWithGoogle();
   }
+
   login() {
-    if (this.form.valid) {
-      this.authService.login(this.form.value);
-      console.log(this.form.value);
-      this.router.navigate(['home']);
-    }
-    return false;
+    this.authService.login(this.loginForm.value);
+
+    this.router.navigate(['/home']);
+
+    this.loginForm.reset();
   }
 
   onSubmit() {
-    if (this.form.valid) {
+    if (this.loginForm.valid) {
       this.login();
     }
   }

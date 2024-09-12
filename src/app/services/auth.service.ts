@@ -40,11 +40,11 @@ export class AuthService {
 
   // Método para fazer login
   login(data: { email: string; senha: string }) {
-    return this.http.post(`${this.apiUrl}/api/auth/login`, data);
+    return this.http.post(`${this.apiUrl}/login`, data);
   }
 
   createAccount(_account: any) {
-    return this.http.post(`${this.apiUrl}/api/users`, _account);
+    return this.http.post(`${this.apiUrl}/account`, _account);
   }
 
   logout() {
@@ -61,14 +61,14 @@ export class AuthService {
   }
 
   signInWithGoogle() {
-    gapi.auth2
+    return gapi.auth2
       .getAuthInstance()
       .signIn()
       .then((googleUser: any) => {
         const idToken = googleUser.getAuthResponse().id_token;
 
         // Enviar o token para o backend
-        this.http.post(`${this.apiUrl}/api/auth/google`, { idToken }).subscribe(
+        this.http.post(`${this.apiUrl}/login/google`, { idToken }).subscribe(
           (response: any) => {
             // Tratar a resposta do backend (ex: armazenar token JWT, redirecionar)
             localStorage.setItem('token', response.token);
