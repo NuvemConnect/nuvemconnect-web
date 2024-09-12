@@ -15,15 +15,16 @@ export class AuthGuard implements CanActivate {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
   canActivate(_next: ActivatedRouteSnapshot, _state: RouterStateSnapshot): boolean {
-    //eslint-disable-line
     if (this.isBrowser) {
-      const token = localStorage.getItem('token');
-      if (token) {
+
+      if (localStorage.getItem('token')) {
         return true;
+      } else {
+        this.router.navigate(['login']);
+        return false;
       }
-      this.router.navigate(['login']);
+    } else {
       return false;
     }
-    return false; // Add this line to return a default value
   }
 }

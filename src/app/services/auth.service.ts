@@ -40,11 +40,11 @@ export class AuthService {
 
   // Método para fazer login
   login(data: { email: string; senha: string }) {
-    return this.http.post(`${this.apiUrl}/api/auth/login`, data);
+    return this.http.post(`${this.apiUrl}/login`, data);
   }
 
   createAccount(_account: any) {
-    return this.http.post(`${this.apiUrl}/api/users`, _account);
+    return this.http.post(`${this.apiUrl}/account`, _account);
   }
 
   logout() {
@@ -61,7 +61,7 @@ export class AuthService {
   }
 
   signInWithGoogle() {
-    gapi.auth2
+    return gapi.auth2
       .getAuthInstance()
       .signIn()
       .then((googleUser: any) => {
