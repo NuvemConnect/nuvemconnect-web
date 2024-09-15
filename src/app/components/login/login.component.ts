@@ -11,7 +11,6 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { inject } from '@angular/core';
-import { loadGapiInsideDOM, gapi, loadClientAuth2 } from 'gapi-script';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -39,31 +38,15 @@ export class LoginComponent {
   private http = inject(HttpClient);
 
   ngOnInit() {
-    this.initializeGoogleSignIn();
     this.loginForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       senha: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
   }
 
-  async initializeGoogleSignIn() {
-    await loadGapiInsideDOM();
-    await loadClientAuth2(
-      gapi,
-      '615624047539-etnq4l44h7sc6tps64oq1prsapvc3evi.apps.googleusercontent.com',
-      'profile email'
-    );
-  }
-
-  loginWithGoogle() {
-    return this.authService.signInWithGoogle();
-  }
-
   login() {
     this.authService.login(this.loginForm.value);
-
     this.router.navigate(['/home']);
-
     this.loginForm.reset();
   }
 

@@ -4,7 +4,6 @@ import { RegisterComponent } from './register.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { EmailService } from '../../services/email.service';
 import { AuthService } from '../../services/auth.service';
 
 class MockHttpClient {
@@ -28,7 +27,6 @@ describe('RegisterComponent', () => {
             // ou o que mais você precisar
           }
         },
-        { provide: EmailService },
         { provide: AuthService }
       ]
     }).compileComponents();

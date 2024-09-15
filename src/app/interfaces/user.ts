@@ -3,7 +3,7 @@ export interface User {
   email: string;
   senha: string;
   token?: string;
-  id?: number;
+  UUID?: number;
   createdAt?: Date;
   updatedAt?: Date;
 }

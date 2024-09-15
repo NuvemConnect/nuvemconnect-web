@@ -9,7 +9,6 @@ import {
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from '../../shared/header/header.component';
-import { EmailService } from '../../services/email.service';
 
 @Component({
   selector: 'app-new-password',
@@ -28,7 +27,6 @@ export class NewPasswordComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
-  private emailService = inject(EmailService);
 
   ngOnInit() {
     this.form = this.fb.group({

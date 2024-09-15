@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NewPasswordComponent } from './new-password.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { EmailService } from '../../services/email.service';
 import { AuthService } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -29,7 +28,6 @@ describe('NewPasswordComponent', () => {
             // ou o que mais você precisar
           }
         },
-        { provide: EmailService },
         { provide: AuthService }
       ]
     }).compileComponents();
