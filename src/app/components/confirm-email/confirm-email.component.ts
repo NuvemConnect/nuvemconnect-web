@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-confirm-email',
@@ -9,7 +10,9 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   templateUrl: './confirm-email.component.html'
 })
 export class ConfirmEmailComponent {
-  imageUrl = `sapiens.svg`;
-  title = `NuvemConnect`;
-  textContent = `NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.`;
+  private toastrService = inject(ToastrService);
+
+  ngOnInit() {
+    this.toastrService.info('Verifique seu e-mail e clique no link de confirmação.');
+  }
 }

@@ -9,6 +9,7 @@ import {
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -18,9 +19,6 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './register.component.html'
 })
 export class RegisterComponent {
-  imageUrl = `sapiens.svg`;
-  title = `NuvemConnect`;
-  textContent = `NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.`;
   registerForm!: FormGroup;
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
@@ -28,13 +26,18 @@ export class RegisterComponent {
   private router = inject(Router);
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
+  private toastrService = inject(ToastrService);
 
   ngOnInit() {
     this.registerForm = this.fb.group({
       nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      confirmarSenha: new FormControl('', [Validators.required, Validators.minLength(8)])
+      senha: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/)
+      ]),
+      confirmarSenha: new FormControl('', [Validators.required])
     });
   }
 
@@ -56,7 +59,7 @@ export class RegisterComponent {
         this.router.navigate(['/login']);
         window.open(url, '_blank');
       } else {
-        console.log('senha não confere');
+        this.toastrService.error('Senha não confere');
       }
     }
   }
