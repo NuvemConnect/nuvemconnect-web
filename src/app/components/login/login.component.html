@@ -4,7 +4,7 @@
   >
     <h2 class="subtitle">Bem vindo de volta!</h2>
     <p class="secondary-text text-center">Insira suas credenciais para acessar sua conta</p>
-    <form class="w-full" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form class="w-full" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
       <div class="relative mb-4">
         <label for="email" class="label"> Email </label>
         <input
@@ -60,14 +60,7 @@
       </div>
 
       <div class="flex justify-center items-center w-full">
-        <button
-          [disabled]="!loginForm.valid"
-          (click)="login()"
-          type="submit"
-          class="button-primary"
-        >
-          Entrar
-        </button>
+        <button [disabled]="!loginForm.valid" type="submit" class="button-primary">Entrar</button>
       </div>
     </form>
 

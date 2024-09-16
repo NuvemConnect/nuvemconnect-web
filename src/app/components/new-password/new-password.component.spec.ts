@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewPasswordComponent } from './new-password.component';
@@ -5,10 +6,22 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
+export class MockToastrService {
+  success(message: string, title?: string) {}
+  error(message: string, title?: string) {}
+  info(message: string, title?: string) {}
+  warning(message: string, title?: string) {}
+}
+
+export const toastrServiceMock = {
+  provide: ToastrService,
+  useClass: MockToastrService
+};
 class MockHttpClient {
   post() {
-    return of({ token: '12345' });
+    return of({ token: 'Senhateste1!' });
   }
 }
 
@@ -28,7 +41,8 @@ describe('NewPasswordComponent', () => {
             // ou o que mais você precisar
           }
         },
-        { provide: AuthService }
+        { provide: AuthService },
+        toastrServiceMock
       ]
     }).compileComponents();
 

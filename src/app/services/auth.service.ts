@@ -4,6 +4,9 @@ import { jwtDecode } from 'jwt-decode';
 import { inject, Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ResponseLogin } from '../interfaces/response-login';
+import { ResponseCreateAccount } from '../interfaces/response-create-account';
 
 @Injectable({
   providedIn: 'root'
@@ -45,23 +48,13 @@ export class AuthService {
   }
 
   // Método para fazer a autenticação
-  login(data: { email: string; senha: string }) {
-    // gerar código sem usar a api
-    const dataUser = {
-      email: data.email,
-      senha: data.senha
-    };
-    const token = 'Senhateste1!';
-    this.setToken(token);
-    console.log(dataUser);
-    return true;
-
-    // return this.http.post(`${this.apiUrl}/login`, data);
+  login(data: { email: string; senha: string }): Observable<ResponseLogin> {
+    return this.http.post<ResponseLogin>(`${this.apiUrl}/login`, data);
   }
 
   // Método para criar uma conta
-  createAccount(_account: any) {
-    return this.http.post(`${this.apiUrl}/account`, _account);
+  createAccount(_account: any): Observable<ResponseCreateAccount> {
+    return this.http.post<ResponseCreateAccount>(`${this.apiUrl}/account`, _account);
   }
 
   // Método para sair do modo autenticado

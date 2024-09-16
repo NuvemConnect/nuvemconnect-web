@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -36,23 +37,36 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private http = inject(HttpClient);
+  private toastrService = inject(ToastrService);
 
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
-      senha: new FormControl('', [Validators.required, Validators.minLength(8)])
+      senha: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/)
+      ])
     });
   }
 
-  login() {
+  login(authToken: string) {
+    // Call the login service method with the login form values
     this.authService.login(this.loginForm.value);
+    // Set the auth token to the local storage
+    this.authService.setToken(authToken);
+    // Navigate to the home page
     this.router.navigate(['/home']);
-    this.loginForm.reset();
+    // Show success message
+    this.toastrService.success('Login realizado com sucesso');
   }
 
-  onSubmit() {
+  onSubmit(authToken: string) {
     if (this.loginForm.valid) {
-      this.login();
+      this.login(authToken);
+      console.log(authToken);
+    } else {
+      this.toastrService.error('Formulário inválido');
     }
   }
 

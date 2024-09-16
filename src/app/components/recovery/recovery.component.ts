@@ -16,10 +16,6 @@ import { HeaderComponent } from '../../shared/header/header.component';
   templateUrl: './recovery.component.html'
 })
 export class RecoveryComponent {
-  imageUrl = `sapiens.svg`;
-  title = `NuvemConnect`;
-  textContent = `NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.`;
-
   form!: FormGroup;
   private router = inject(Router);
   private fb = inject(FormBuilder);
