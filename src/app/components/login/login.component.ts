@@ -11,7 +11,6 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -36,7 +35,6 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
   private router = inject(Router);
-  private http = inject(HttpClient);
   private toastrService = inject(ToastrService);
 
   ngOnInit() {
@@ -50,21 +48,32 @@ export class LoginComponent {
     });
   }
 
-  login(authToken: string) {
-    // Call the login service method with the login form values
-    this.authService.login(this.loginForm.value);
-    // Set the auth token to the local storage
-    this.authService.setToken(authToken);
-    // Navigate to the home page
-    this.router.navigate(['/home']);
-    // Show success message
-    this.toastrService.success('Login realizado com sucesso');
+  login() {
+    if (this.loginForm.valid) {
+      const { email, senha } = this.loginForm.value;
+      this.authService.login(email, senha).subscribe(
+        (response) => {
+          if (response.success) {
+            this.authService.setToken(response.token);
+            this.router.navigate(['/home']);
+            this.toastrService.success('Login realizado com sucesso');
+          } else {
+            this.toastrService.error('Credenciais inválidas');
+          }
+        },
+        (error) => {
+          console.error(`Erro ao fazer Login: ${error}`);
+          this.toastrService.error('Erro ao fazer Login. Tente novamente.');
+        }
+      );
+    } else {
+      this.toastrService.error('Formulário inválido');
+    }
   }
 
-  onSubmit(authToken: string) {
+  onSubmit() {
     if (this.loginForm.valid) {
-      this.login(authToken);
-      console.log(authToken);
+      this.login();
     } else {
       this.toastrService.error('Formulário inválido');
     }

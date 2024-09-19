@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ResponseLogin } from '../interfaces/response-login';
 import { ResponseCreateAccount } from '../interfaces/response-create-account';
+import { ResponseRecoveryPassword } from '../interfaces/response-recovery-password';
 
 @Injectable({
   providedIn: 'root'
@@ -48,13 +49,17 @@ export class AuthService {
   }
 
   // Método para fazer a autenticação
-  login(data: { email: string; senha: string }): Observable<ResponseLogin> {
-    return this.http.post<ResponseLogin>(`${this.apiUrl}/login`, data);
+  login(email: string, senha: string): Observable<ResponseLogin> {
+    return this.http.post<ResponseLogin>(`${this.apiUrl}/login`, { email, senha });
   }
 
   // Método para criar uma conta
-  createAccount(_account: any): Observable<ResponseCreateAccount> {
-    return this.http.post<ResponseCreateAccount>(`${this.apiUrl}/account`, _account);
+  createAccount(nome: string, email: string, senha: string): Observable<ResponseCreateAccount> {
+    return this.http.post<ResponseCreateAccount>(`${this.apiUrl}/account`, { nome, email, senha });
+  }
+
+  requestPasswordRecovery(email: string): Observable<ResponseRecoveryPassword> {
+    return this.http.post<any>(`${this.apiUrl}/reset-password`, { email });
   }
 
   // Método para sair do modo autenticado
