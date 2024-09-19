@@ -40,7 +40,7 @@ export class LoginComponent {
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
-      senha: new FormControl('', [
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/)
@@ -50,19 +50,20 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
-      const { email, senha } = this.loginForm.value;
-      this.authService.login(email, senha).subscribe(
+      const { email, password } = this.loginForm.value;
+      this.authService.login(email, password).subscribe(
         (response) => {
-          if (response.success) {
+          if (response.token) {
             this.authService.setToken(response.token);
             this.router.navigate(['/home']);
             this.toastrService.success('Login realizado com sucesso');
           } else {
+            console.log(response.token);
             this.toastrService.error('Credenciais inválidas');
           }
         },
         (error) => {
-          console.error(`Erro ao fazer Login: ${error}`);
+          console.log(`Erro ao fazer Login: ${error.message}`);
           this.toastrService.error('Erro ao fazer Login. Tente novamente.');
         }
       );

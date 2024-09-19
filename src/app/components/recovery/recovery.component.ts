@@ -36,7 +36,7 @@ export class RecoveryComponent {
 
       this.authService.requestPasswordRecovery(email).subscribe(
         (response) => {
-          if (response.success) {
+          if (response.token) {
             this.toastrService.success(
               'Um e-mail de recuperação foi enviado. Por favor, verifique seu email.'
             );
@@ -54,7 +54,7 @@ export class RecoveryComponent {
           }
         },
         (error) => {
-          console.error(`Erro ao solicitar recuperação de senha: ${error}`);
+          console.error(`Erro ao solicitar recuperação de senha: ${error.message}`);
           this.toastrService.error('Erro ao solicitar recuperação de senha. Tente novamente.');
         }
       );

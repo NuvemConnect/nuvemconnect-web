@@ -32,9 +32,9 @@ export class RegisterComponent {
   ngOnInit() {
     this.registerForm = this.fb.group(
       {
-        nome: ['', [Validators.required, Validators.minLength(3)]],
+        name: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.required, Validators.email]],
-        senha: [
+        password: [
           '',
           [
             Validators.required,
@@ -44,16 +44,16 @@ export class RegisterComponent {
             )
           ]
         ],
-        confirmarSenha: ['', [Validators.required]]
+        confirmPassword: ['', [Validators.required]]
       },
       { validators: this.senhaIgualConfirmacao }
     );
   }
 
   senhaIgualConfirmacao(control: AbstractControl): ValidationErrors | null {
-    const senha = control.get('senha');
-    const confirmarSenha = control.get('confirmarSenha');
-    if (senha && confirmarSenha && senha.value !== confirmarSenha.value) {
+    const password = control.get('password');
+    const confirmPassword = control.get('confirmPassword');
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
       return { senhasDiferentes: true };
     }
     return null;
@@ -61,10 +61,10 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const { nome, email, senha } = this.registerForm.value;
-      this.authService.createAccount(nome, email, senha).subscribe(
+      const { name, email, password, confirmPassword } = this.registerForm.value;
+      this.authService.createAccount(name, email, password, confirmPassword).subscribe(
         (response) => {
-          if (response.success) {
+          if (response.UUID) {
             this.toastrService.success('Conta criada com sucesso. Por favor, verifique seu email.');
             const url = this.router.serializeUrl(
               this.router.createUrlTree(['/confirm-email'], {
@@ -78,7 +78,7 @@ export class RegisterComponent {
           }
         },
         (error) => {
-          console.error(`Erro ao criar conta: ${error}`);
+          console.error(`Erro ao criar conta: ${error.message}`);
           this.toastrService.error('Erro ao criar conta. Tente novamente.');
         }
       );

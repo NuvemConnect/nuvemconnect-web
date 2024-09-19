@@ -28,7 +28,7 @@
         <label for="password" class="label"> Senha </label>
         <div class="relative">
           <input
-            formControlName="senha"
+            formControlName="password"
             [type]="showPassword ? 'text' : 'password'"
             id="password"
             name="password"
@@ -44,10 +44,14 @@
             />
           </i>
           <div class="input-error">
-            @if (loginForm.get('senha')?.hasError('required') && loginForm.get('senha')?.touched) {
+            @if (
+              loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched
+            ) {
               <span class="input-error">Campo obrigatório</span>
             }
-            @if (loginForm.get('senha')?.hasError('minlength') && loginForm.get('senha')?.touched) {
+            @if (
+              loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched
+            ) {
               <span class="input-error">Sua senha deve conter no mínimo 8 caracteres</span>
             }
           </div>

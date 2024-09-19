@@ -49,17 +49,31 @@ export class AuthService {
   }
 
   // Método para fazer a autenticação
-  login(email: string, senha: string): Observable<ResponseLogin> {
-    return this.http.post<ResponseLogin>(`${this.apiUrl}/login`, { email, senha });
+  login(email: string, password: string): Observable<ResponseLogin> {
+    return this.http.post<ResponseLogin>(`${this.apiUrl}/login`, { email, password });
   }
 
   // Método para criar uma conta
-  createAccount(nome: string, email: string, senha: string): Observable<ResponseCreateAccount> {
-    return this.http.post<ResponseCreateAccount>(`${this.apiUrl}/account`, { nome, email, senha });
+  createAccount(
+    name: string,
+    email: string,
+    password: string,
+    confirmPassword: string
+  ): Observable<ResponseCreateAccount> {
+    return this.http.post<ResponseCreateAccount>(`${this.apiUrl}/account`, {
+      name,
+      email,
+      password,
+      confirmPassword
+    });
   }
 
   requestPasswordRecovery(email: string): Observable<ResponseRecoveryPassword> {
     return this.http.post<any>(`${this.apiUrl}/reset-password`, { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/reset-password`, { token, newPassword });
   }
 
   // Método para sair do modo autenticado
