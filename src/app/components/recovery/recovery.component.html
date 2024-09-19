@@ -9,7 +9,7 @@
     <p class="secondary-text text-center">
       Se você esqueceu sua senha, por favor digite seu e-mail abaixo para restaurar a senha.
     </p>
-    <form class="w-full max-w-sm" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form class="w-full max-w-sm" [formGroup]="recoveryForm" (ngSubmit)="onSubmit()">
       <div class="relative mb-4">
         <label for="email" class="label"> Email </label>
         <input
@@ -23,7 +23,9 @@
       </div>
 
       <div class="flex justify-center items-center w-full">
-        <button [disabled]="!form.valid" type="submit" class="button-primary">Enviar código</button>
+        <button [disabled]="!recoveryForm.valid" type="submit" class="button-primary">
+          Enviar código
+        </button>
       </div>
     </form>
   </div>

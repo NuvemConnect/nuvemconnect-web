@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
+import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-recovery',
@@ -16,24 +18,48 @@ import { HeaderComponent } from '../../shared/header/header.component';
   templateUrl: './recovery.component.html'
 })
 export class RecoveryComponent {
-  form!: FormGroup;
+  recoveryForm!: FormGroup;
+
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private toastrService = inject(ToastrService);
+
   ngOnInit() {
-    this.form = this.fb.group({
+    this.recoveryForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email])
     });
   }
   onSubmit() {
-    if (this.form.valid) {
-      console.log(this.form.value);
-      const url = this.router.serializeUrl(
-        this.router.createUrlTree(['/confirm-email'], {
-          queryParams: { email: this.form.value.email }
-        })
+    if (this.recoveryForm.valid) {
+      const email = this.recoveryForm.get('email')?.value;
+
+      this.authService.requestPasswordRecovery(email).subscribe(
+        (response) => {
+          if (response.success) {
+            this.toastrService.success(
+              'Um e-mail de recuperação foi enviado. Por favor, verifique seu email.'
+            );
+            const url = this.router.serializeUrl(
+              this.router.createUrlTree(['/confirm-email'], {
+                queryParams: { email: email }
+              })
+            );
+            window.open(url, '_blank');
+            this.router.navigate(['/verify']);
+          } else {
+            this.toastrService.error(
+              response.message || 'Falha ao enviar e-mail de recuperação. Tente novamente.'
+            );
+          }
+        },
+        (error) => {
+          console.error(`Erro ao solicitar recuperação de senha: ${error}`);
+          this.toastrService.error('Erro ao solicitar recuperação de senha. Tente novamente.');
+        }
       );
-      this.router.navigate(['/verify']);
-      window.open(url, '_blank');
+    } else {
+      this.toastrService.error('Por favor, forneça um endereço de e-mail válido.');
     }
   }
 }

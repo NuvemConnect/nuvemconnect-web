@@ -4,7 +4,7 @@
   >
     <h2 class="subtitle">Bem vindo de volta!</h2>
     <p class="secondary-text text-center">Insira suas credenciais para acessar sua conta</p>
-    <form class="w-full" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+    <form class="w-full" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="relative mb-4">
         <label for="email" class="label"> Email </label>
         <input
