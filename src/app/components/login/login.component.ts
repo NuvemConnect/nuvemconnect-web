@@ -1,5 +1,5 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { GoogleApiService, responseApi } from '../../services/google-api.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ import { ToastrService } from 'ngx-toastr';
   providers: [AuthService],
   templateUrl: './login.component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, AfterViewInit {
+  @ViewChild('googleBtn') googleBtn!: ElementRef;
   loginForm!: FormGroup;
   showPassword: boolean = false;
 
@@ -36,8 +38,9 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private toastrService = inject(ToastrService);
+  private googleApiService = inject(GoogleApiService);
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -48,6 +51,38 @@ export class LoginComponent {
     });
   }
 
+  ngAfterViewInit(): void {
+    this.initializeGoogleSignIn();
+  }
+
+  async initializeGoogleSignIn(): Promise<void> {
+    try {
+      const google = await this.googleApiService.getGoogle();
+      google.accounts.id.initialize({
+        client_id: '234107094075-17ib6vmjrcoovogdv04som9kof47g3ju.apps.googleusercontent.com',
+        callback: this.handleCredentialResponse.bind(this)
+      });
+
+      google.accounts.id.renderButton(this.googleBtn.nativeElement, {
+        theme: 'filled_white',
+        size: 'large',
+        shape: 'pill',
+        width: 384,
+        text: 'Google'
+      });
+    } catch (error) {
+      console.error('Error initializing Google Sign-In:', error);
+    }
+  }
+
+  handleCredentialResponse(response: responseApi): void {
+    console.log('handleCredentialResponse', response);
+    const token = response.credential;
+    this.authService.setToken(token);
+    this.router.navigate(['/home']);
+    this.toastrService.success('Login realizado com sucesso ');
+  }
+
   login() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
@@ -55,8 +90,9 @@ export class LoginComponent {
         (response) => {
           if (response.token) {
             this.authService.setToken(response.token);
+            this.authService.setEmail(this.loginForm.value.email);
             this.router.navigate(['/home']);
-            this.toastrService.success('Login realizado com sucesso');
+            this.toastrService.success('Login realizado com sucesso ');
           } else {
             console.log(response.token);
             this.toastrService.error('Credenciais inválidas');
