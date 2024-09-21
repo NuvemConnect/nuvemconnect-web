@@ -1,0 +1,10 @@
+<div>
+  <h2>{{ title }}</h2>
+  @if (loading) {
+    <p>{{ messageLoading }}</p>
+  } @else if (success) {
+    <p>{{ message }}</p>
+  } @else if (error) {
+    <p>{{ errorMessage }}</p>
+  }
+</div>
