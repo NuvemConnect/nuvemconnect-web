@@ -76,10 +76,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   handleCredentialResponse(response: responseApi): void {
+    console.log('handleCredentialResponse', response);
     const token = response.credential;
     this.authService.setToken(token);
     this.router.navigate(['/home']);
-    this.toastrService.success('Login, com Google, realizado com sucesso');
+    this.toastrService.success('Login realizado com sucesso ');
   }
 
   login() {
