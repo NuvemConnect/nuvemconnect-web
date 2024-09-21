@@ -28,6 +28,17 @@ export class AuthService {
       localStorage.setItem('authToken', token);
     }
   }
+  setNome(nome: string): void {
+    if (this.isBrowser) {
+      localStorage.setItem('nome', nome);
+    }
+  }
+
+  setEmail(email: string): void {
+    if (this.isBrowser) {
+      localStorage.setItem('email', email);
+    }
+  }
 
   // Método para resgatar o token
   getToken(): string | null {
@@ -37,10 +48,25 @@ export class AuthService {
     return null;
   }
 
+  getEmail(): string | null {
+    if (this.isBrowser) {
+      return localStorage.getItem('email');
+    }
+    return null;
+  }
+
+  getNome(): string | null {
+    if (this.isBrowser) {
+      return localStorage.getItem('nome');
+    }
+    return null;
+  }
   // removeToken
   removeToken(): void {
     if (this.isBrowser) {
       localStorage.removeItem('authToken');
+      localStorage.removeItem('nome');
+      localStorage.removeItem('email');
     }
   }
 

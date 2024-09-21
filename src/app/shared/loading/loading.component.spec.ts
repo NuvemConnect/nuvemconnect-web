@@ -33,7 +33,8 @@ describe('LoadingComponent', () => {
           }
         },
         {
-          provide: ToastrService, useValue: toastrServiceSpy
+          provide: ToastrService,
+          useValue: toastrServiceSpy
         }
       ]
     }).compileComponents();
