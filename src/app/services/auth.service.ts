@@ -99,13 +99,13 @@ export class AuthService {
     name: string,
     email: string,
     password: string,
-    confirmPassword: string
+    passwordConfirmation: string
   ): Observable<ResponseCreateAccount> {
     return this.http.post<ResponseCreateAccount>(`${this.apiUrl}/account`, {
       name,
       email,
       password,
-      confirmPassword
+      passwordConfirmation
     });
   }
 

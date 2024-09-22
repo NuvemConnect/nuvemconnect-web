@@ -44,7 +44,7 @@ export class RegisterComponent {
             )
           ]
         ],
-        confirmPassword: ['', [Validators.required]]
+        passwordConfirmation: ['', [Validators.required]]
       },
       { validators: this.senhaIgualConfirmacao }
     );
@@ -52,8 +52,8 @@ export class RegisterComponent {
 
   senhaIgualConfirmacao(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
+    const passwordConfirmation = control.get('passwordConfirmation');
+    if (password && passwordConfirmation && password.value !== passwordConfirmation.value) {
       return { senhasDiferentes: true };
     }
     return null;
@@ -61,10 +61,11 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const { name, email, password, confirmPassword } = this.registerForm.value;
-      this.authService.createAccount(name, email, password, confirmPassword).subscribe(
+      const { name, email, password, passwordConfirmation } = this.registerForm.value;
+      this.authService.createAccount(name, email, password, passwordConfirmation).subscribe(
         (response) => {
-          if (response.UUID) {
+          if (response) {
+            console.log(response);
             this.toastrService.success('Conta criada com sucesso. Por favor, verifique seu email.');
             const url = this.router.serializeUrl(
               this.router.createUrlTree(['/confirm-email'], {
@@ -74,7 +75,7 @@ export class RegisterComponent {
             window.open(url, '_blank');
             this.router.navigate(['/login']);
           } else {
-            this.toastrService.error(response.message || 'Erro ao criar conta. Tente novamente.');
+            this.toastrService.error(response || 'Erro ao criar conta. Tente novamente.');
           }
         },
         (error) => {
