@@ -10,6 +10,7 @@ import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/rou
 
 import { HeaderComponent } from '../../shared/header/header.component';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-new-password',
@@ -18,17 +19,18 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './new-password.component.html'
 })
 export class NewPasswordComponent {
-  form!: FormGroup;
+  newPasswordForm!: FormGroup;
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private authService = inject(AuthService);
   private toastrService = inject(ToastrService);
 
   ngOnInit() {
-    this.form = this.fb.group({
+    this.newPasswordForm = this.fb.group({
       senha: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
@@ -39,15 +41,24 @@ export class NewPasswordComponent {
   }
 
   senhaIgualConfirmacao() {
-    const senha = this.form.get('senha')?.value;
-    const confirmarSenha = this.form.get('confirmarSenha')?.value;
+    const senha = this.newPasswordForm.get('senha')?.value;
+    const confirmarSenha = this.newPasswordForm.get('confirmarSenha')?.value;
     return senha === confirmarSenha;
   }
 
   onSubmit() {
-    if (this.form.valid) {
+    if (this.newPasswordForm.valid) {
       if (this.senhaIgualConfirmacao()) {
-        console.log(this.form.value);
+        this.authService
+          .resetPassword(
+            this.route.snapshot.queryParams['token'],
+            this.newPasswordForm.get('senha')?.value
+          )
+          .subscribe(() => {
+            this.router.navigate(['/login']);
+            this.toastrService.success('Senha alterada com sucesso');
+          });
+        this.newPasswordForm.reset();
         this.router.navigate(['/login']);
       } else {
         this.toastrService.error('Senha não confere');

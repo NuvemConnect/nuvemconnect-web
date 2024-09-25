@@ -8,11 +8,12 @@ import {
   FormBuilder
 } from '@angular/forms';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { GoogleApiService, responseApi } from '../../services/google-api.service';
+import { GoogleApiService } from '../../services/google/google-api.service';
+import { responseApi } from '../../interfaces/response-api';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   private toastrService = inject(ToastrService);
   private googleApiService = inject(GoogleApiService);
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loginForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -51,25 +52,25 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    this.initializeGoogleSignIn();
+  async ngAfterViewInit() {
+    await this.initializeGoogleSignIn();
   }
 
-  async initializeGoogleSignIn(): Promise<void> {
+  async initializeGoogleSignIn() {
     try {
       const google = await this.googleApiService.getGoogle();
-      google.accounts.id.initialize({
-        client_id: '234107094075-17ib6vmjrcoovogdv04som9kof47g3ju.apps.googleusercontent.com',
-        callback: this.handleCredentialResponse.bind(this)
-      });
-
-      google.accounts.id.renderButton(this.googleBtn.nativeElement, {
-        theme: 'filled_white',
-        size: 'large',
-        shape: 'pill',
-        width: 384,
-        align: 'center'
-      });
+      if (google !== null) {
+        google!.accounts.id.initialize({
+          client_id: '234107094075-17ib6vmjrcoovogdv04som9kof47g3ju.apps.googleusercontent.com',
+          callback: this.handleCredentialResponse.bind(this)
+        });
+        google!.accounts.id.renderButton(this.googleBtn.nativeElement, {
+          theme: 'filled_white',
+          size: 'large',
+          shape: 'pill',
+          width: 384
+        });
+      }
     } catch (error) {
       console.error('Error initializing Google Sign-In:', error);
     }
@@ -77,14 +78,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   handleCredentialResponse(response: responseApi): void {
     const token = response.credential;
-    const nome = this.googleApiService.jwtDecode(token).given_name;
+    const name = this.googleApiService.jwtDecode(token).given_name;
     const email = this.googleApiService.jwtDecode(token).email;
-    const imgProfile = this.googleApiService.jwtDecode(token).picture;
-    console.log(this.googleApiService.jwtDecode(token));
+
     this.authService.setToken(token);
-    this.authService.setNome(nome);
+    this.authService.setName(name);
     this.authService.setEmail(email);
-    this.authService.setImgProfile(imgProfile);
     this.router.navigate(['/home']);
     this.toastrService.success('Login realizado com sucesso ');
   }
@@ -95,12 +94,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this.authService.login(email, password).subscribe(
         (response) => {
           if (response.token) {
-            console.log(response);
             this.authService.setToken(response.token);
-            this.authService.setEmail(this.loginForm.value.email);
-            this.authService.setImgProfile(
-              'https://www.forestcom.com.br/wp-content/uploads/2018/09/blank-profile-picture-973460_640.png'
-            );
+            this.authService.setEmail(this.googleApiService.jwtDecode(response.token).email);
+            this.authService.setName(this.googleApiService.jwtDecode(response.token).name);
             this.router.navigate(['/home']);
             this.toastrService.success('Login realizado com sucesso ');
           } else {

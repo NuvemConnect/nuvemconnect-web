@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -65,15 +65,11 @@ export class RegisterComponent {
       this.authService.createAccount(name, email, password, passwordConfirmation).subscribe(
         (response) => {
           if (response) {
-            console.log(response);
+            console.log(response.message);
             this.toastrService.success('Conta criada com sucesso. Por favor, verifique seu email.');
-            const url = this.router.serializeUrl(
-              this.router.createUrlTree(['/confirm-email'], {
-                queryParams: { email: email }
-              })
-            );
-            window.open(url, '_blank');
-            this.router.navigate(['/login']);
+            this.router.navigate(['/confirm-email'], {
+              queryParams: { email: email }
+            });
           } else {
             this.toastrService.error(response || 'Erro ao criar conta. Tente novamente.');
           }

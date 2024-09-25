@@ -5,9 +5,9 @@ import { inject, Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ResponseLogin } from '../interfaces/response-login';
-import { ResponseCreateAccount } from '../interfaces/response-create-account';
-import { ResponseRecoveryPassword } from '../interfaces/response-recovery-password';
+import { ResponseLogin } from '../../interfaces/response-login';
+import { ResponseCreateAccount } from '../../interfaces/response-create-account';
+import { ResponseForgotPassword } from '../../interfaces/response-forgot-password';
 
 @Injectable({
   providedIn: 'root'
@@ -25,31 +25,24 @@ export class AuthService {
   // Método para atribuir o token
   setToken(token: string): void {
     if (this.isBrowser) {
-      localStorage.setItem('authToken', token);
+      localStorage.setItem('token', token);
     }
   }
-  setNome(nome: string): void {
+  setName(name: string): void {
     if (this.isBrowser) {
-      localStorage.setItem('nome', nome);
+      localStorage.setItem('name', name);
     }
   }
-
   setEmail(email: string): void {
     if (this.isBrowser) {
       localStorage.setItem('email', email);
     }
   }
 
-  setImgProfile(imgProfile: string): void {
-    if (this.isBrowser) {
-      localStorage.setItem('imgProfile', imgProfile);
-    }
-  }
-
   // Método para resgatar o token
   getToken(): string | null {
     if (this.isBrowser) {
-      return localStorage.getItem('authToken');
+      return localStorage.getItem('token');
     }
     return null;
   }
@@ -61,16 +54,9 @@ export class AuthService {
     return null;
   }
 
-  getNome(): string | null {
+  getName(): string | null {
     if (this.isBrowser) {
-      return localStorage.getItem('nome');
-    }
-    return null;
-  }
-
-  getImgProfile(): string | null {
-    if (this.isBrowser) {
-      return localStorage.getItem('imgProfile');
+      return localStorage.getItem('name');
     }
     return null;
   }
@@ -78,10 +64,7 @@ export class AuthService {
   // removeToken
   removeToken(): void {
     if (this.isBrowser) {
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('nome');
-      localStorage.removeItem('email');
-      localStorage.removeItem('imgProfile');
+      localStorage.clear();
     }
   }
 
@@ -109,12 +92,12 @@ export class AuthService {
     });
   }
 
-  requestPasswordRecovery(email: string): Observable<ResponseRecoveryPassword> {
-    return this.http.post<any>(`${this.apiUrl}/reset-password`, { email });
+  forgotPassword(email: string): Observable<ResponseForgotPassword> {
+    return this.http.post<ResponseForgotPassword>(`${this.apiUrl}/forgot-password`, { email });
   }
 
   resetPassword(token: string, newPassword: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/reset-password`, { token, newPassword });
+    return this.http.put<any>(`${this.apiUrl}/reset-password`, { token, newPassword });
   }
 
   // Método para sair do modo autenticado
@@ -126,7 +109,6 @@ export class AuthService {
   isLoggedIn(): boolean {
     if (!this.isBrowser) return false;
     const token = localStorage.getItem('token') || '';
-    console.log(`Token: ${token}`);
     return !!token && this.isValidToken(token);
   }
 
