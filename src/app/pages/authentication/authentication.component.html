@@ -1,12 +1,16 @@
-<div class="flex flex-col md:flex-row justify-between items-center mx-auto p-2 w-6/6">
+<div
+  class="flex flex-col lg:flex-row justify-center lg:justify-between items-center p-2 w-6/6 h-screen"
+>
   <div>
-    <app-header class="w-11/12 md:w-10/12" [title]="title"></app-header>
-    <header class="flex justify-center items-center gap-2 w-11/12 md:w-10/12 md:hidden">
+    <app-header class="w-11/12 lg:w-10/12" [title]="title"></app-header>
+  </div>
+  <main class="md:w-10/12 p-10 lg:shadow-none shadow-custom rounded-[0.625rem]">
+    <header
+      class="flex justify-center items-center gap-2 w-11/12 lg:w-10/12 pt-12 lg:hidden m-auto"
+    >
       <img class="h-8" src="logotipo.svg" alt="logotipo" />
       <h1 class="text-primary-950 text-2xl font-bold">{{ title }}</h1>
     </header>
-  </div>
-  <main class="w-11/12 md:w-10/12">
     <router-outlet></router-outlet>
   </main>
 </div>
