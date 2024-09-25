@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         size: 'large',
         shape: 'pill',
         width: 384,
-        text: 'Google'
+        align: 'center'
       });
     } catch (error) {
       console.error('Error initializing Google Sign-In:', error);
@@ -76,9 +76,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   handleCredentialResponse(response: responseApi): void {
-    console.log('handleCredentialResponse', response);
     const token = response.credential;
+    const nome = this.googleApiService.jwtDecode(token).given_name;
+    const email = this.googleApiService.jwtDecode(token).email;
+    const imgProfile = this.googleApiService.jwtDecode(token).picture;
+    console.log(this.googleApiService.jwtDecode(token));
     this.authService.setToken(token);
+    this.authService.setNome(nome);
+    this.authService.setEmail(email);
+    this.authService.setImgProfile(imgProfile);
     this.router.navigate(['/home']);
     this.toastrService.success('Login realizado com sucesso ');
   }
@@ -89,8 +95,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this.authService.login(email, password).subscribe(
         (response) => {
           if (response.token) {
+            console.log(response);
             this.authService.setToken(response.token);
             this.authService.setEmail(this.loginForm.value.email);
+            this.authService.setImgProfile(
+              'https://www.forestcom.com.br/wp-content/uploads/2018/09/blank-profile-picture-973460_640.png'
+            );
             this.router.navigate(['/home']);
             this.toastrService.success('Login realizado com sucesso ');
           } else {

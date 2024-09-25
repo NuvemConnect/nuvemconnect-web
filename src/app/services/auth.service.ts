@@ -40,6 +40,11 @@ export class AuthService {
     }
   }
 
+  setImgProfile(imgProfile: string): void {
+    if (this.isBrowser) {
+      localStorage.setItem('imgProfile', imgProfile);
+    }
+  }
 
   // Método para resgatar o token
   getToken(): string | null {
@@ -49,7 +54,6 @@ export class AuthService {
     return null;
   }
 
-
   getEmail(): string | null {
     if (this.isBrowser) {
       return localStorage.getItem('email');
@@ -58,17 +62,26 @@ export class AuthService {
   }
 
   getNome(): string | null {
-    if(this.isBrowser){
+    if (this.isBrowser) {
       return localStorage.getItem('nome');
     }
     return null;
   }
+
+  getImgProfile(): string | null {
+    if (this.isBrowser) {
+      return localStorage.getItem('imgProfile');
+    }
+    return null;
+  }
+
   // removeToken
   removeToken(): void {
     if (this.isBrowser) {
       localStorage.removeItem('authToken');
       localStorage.removeItem('nome');
       localStorage.removeItem('email');
+      localStorage.removeItem('imgProfile');
     }
   }
 
@@ -86,13 +99,13 @@ export class AuthService {
     name: string,
     email: string,
     password: string,
-    confirmPassword: string
+    passwordConfirmation: string
   ): Observable<ResponseCreateAccount> {
     return this.http.post<ResponseCreateAccount>(`${this.apiUrl}/account`, {
       name,
       email,
       password,
-      confirmPassword
+      passwordConfirmation
     });
   }
 
@@ -123,13 +136,6 @@ export class AuthService {
       const decodedToken = jwtDecode(token);
       if (decodedToken.exp === undefined) return true;
       const expiryTime = decodedToken.exp * 1000;
-      console.log(`
-        Decodificando o token: ${token}
-        Tempo de expiração: ${decodedToken.exp}
-        Tempo de expiração em milissegundos: ${expiryTime}
-        Token válido: ${Date.now() < expiryTime}
-        Token decodificado: ${decodedToken}
-        `);
       return Date.now() < expiryTime;
     } catch (error) {
       console.log(`Erro ao decodificar o Token: ${error}`);
