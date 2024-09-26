@@ -19,7 +19,15 @@ import { User } from '../../interfaces/user';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, RouterModule, RouterOutlet, HeaderComponent, NgFor, NgIf, ReactiveFormsModule ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    RouterOutlet,
+    HeaderComponent,
+    NgFor,
+    NgIf,
+    ReactiveFormsModule
+  ],
   providers: [AuthService],
   templateUrl: './login.component.html'
 })
