@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { ResponseLogin } from '../../interfaces/response-login';
 import { ResponseCreateAccount } from '../../interfaces/response-create-account';
 import { ResponseForgotPassword } from '../../interfaces/response-forgot-password';
+import { User } from '../../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,41 +23,19 @@ export class AuthService {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
-  // Método para atribuir o token
-  setToken(token: string): void {
+  setUser(user: User) {
     if (this.isBrowser) {
-      localStorage.setItem('token', token);
-    }
-  }
-  setName(name: string): void {
-    if (this.isBrowser) {
-      localStorage.setItem('name', name);
-    }
-  }
-  setEmail(email: string): void {
-    if (this.isBrowser) {
-      localStorage.setItem('email', email);
+      localStorage.setItem('user', JSON.stringify(user));
     }
   }
 
-  // Método para resgatar o token
-  getToken(): string | null {
+  getUser() {
     if (this.isBrowser) {
-      return localStorage.getItem('token');
-    }
-    return null;
-  }
+      const user = localStorage.getItem('user');
 
-  getEmail(): string | null {
-    if (this.isBrowser) {
-      return localStorage.getItem('email');
-    }
-    return null;
-  }
-
-  getName(): string | null {
-    if (this.isBrowser) {
-      return localStorage.getItem('name');
+      if (user) {
+        return JSON.parse(user);
+      }
     }
     return null;
   }
@@ -69,7 +48,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return this.getToken() !== null;
+    return this.getUser().token !== null;
   }
 
   // Método para fazer a autenticação

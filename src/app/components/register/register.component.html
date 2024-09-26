@@ -7,7 +7,7 @@
     </a>
     <h2 class="subtitle">Comece agora</h2>
     <p class="secondary-text">Crie sua conta</p>
-    <form class="w-full" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form class="w-full" formGroup="registerForm" (ngSubmit)="onSubmit()">
       <div class="relative mb-4">
         <label for="name" class="label"> Nome </label>
         <input

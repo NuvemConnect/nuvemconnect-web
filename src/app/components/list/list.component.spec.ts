@@ -18,28 +18,37 @@ export const toastrServiceMock = {
   provide: ToastrService,
   useClass: MockToastrService
 };
-class MockHttpClient {
-  post() {
-    return of({ token: 'Senhateste1!' });
-  }
-}
+
 describe('ListComponent', () => {
   let component: ListComponent;
   let fixture: ComponentFixture<ListComponent>;
+  let httpClientSpy: jasmine.SpyObj<HttpClient>;
+  let toastrServiceSpy: jasmine.SpyObj<ToastrService>;
 
   beforeEach(async () => {
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    toastrServiceSpy = jasmine.createSpyObj('ToastrService', [
+      'success',
+      'error',
+      'info',
+      'warning'
+    ]);
+
     await TestBed.configureTestingModule({
       imports: [ListComponent],
       providers: [
-        { provide: HttpClient, useClass: MockHttpClient },
+        { provide: HttpClient, useValue: httpClientSpy },
+        {
+          provide: ToastrService,
+          useValue: toastrServiceSpy
+        },
         {
           provide: ActivatedRoute,
           useValue: {
             snapshot: { params: of({}) }
             // ou o que mais você precisar
           }
-        },
-        toastrServiceMock
+        }
       ]
     }).compileComponents();
 

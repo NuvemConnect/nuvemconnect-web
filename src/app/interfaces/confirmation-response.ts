@@ -1,7 +1,8 @@
 export interface ConfirmationResponse {
-  message: string;
-  success: boolean;
-  token: string;
   UUID?: string;
+  name?: string;
   email?: string;
+  token: string;
+  success: boolean;
+  message: string;
 }

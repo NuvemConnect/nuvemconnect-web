@@ -15,7 +15,8 @@ import { tap, catchError, of } from 'rxjs';
 @Component({
   selector: 'app-recovery',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, RouterModule, ReactiveFormsModule],
+  imports: [RouterOutlet, HeaderComponent, RouterModule],
+  providers: [ReactiveFormsModule],
   templateUrl: './recovery.component.html'
 })
 export class RecoveryComponent {

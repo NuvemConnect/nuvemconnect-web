@@ -1,24 +1,24 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-list',
   standalone: true,
+  imports: [],
   templateUrl: './list.component.html'
 })
 export class ListComponent {
-  name: string | null = null;
-  email: string | null = null;
-  token: string | null = null;
+  user!: User | null;
 
   private authService = inject(AuthService);
   private router = inject(Router);
 
   ngOnInit(): void {
-    this.name = this.authService.getName();
-    this.email = this.authService.getEmail();
-    this.token = this.authService.getToken();
+    if (this.user !== null) {
+      this.user = this.authService.getUser();
+    }
   }
 
   logout() {

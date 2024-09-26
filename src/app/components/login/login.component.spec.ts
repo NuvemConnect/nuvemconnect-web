@@ -1,9 +1,10 @@
 /* eslint-disable */
 import { TestBed } from '@angular/core/testing';
+
 import { LoginComponent } from './login.component';
-import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
 export class MockToastrService {

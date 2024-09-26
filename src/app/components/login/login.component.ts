@@ -14,20 +14,13 @@ import { inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { GoogleApiService } from '../../services/google/google-api.service';
 import { responseApi } from '../../interfaces/response-api';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    RouterModule,
-    ReactiveFormsModule,
-    NgIf,
-    NgFor,
-    HeaderComponent
-  ],
-  providers: [AuthService],
+  imports: [CommonModule, RouterModule, RouterOutlet, HeaderComponent, NgFor, NgIf],
+  providers: [AuthService, ReactiveFormsModule],
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit, AfterViewInit {
@@ -42,6 +35,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
   private googleApiService = inject(GoogleApiService);
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  initForm() {
     this.loginForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -68,7 +65,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           theme: 'filled_white',
           size: 'large',
           shape: 'pill',
-          width: 384
+          minWidth: 384
         });
       }
     } catch (error) {
@@ -77,13 +74,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   handleCredentialResponse(response: responseApi): void {
-    const token = response.credential;
-    const name = this.googleApiService.jwtDecode(token).given_name;
-    const email = this.googleApiService.jwtDecode(token).email;
+    const token: string = response.credential;
+    const { given_name: name, email } = this.googleApiService.jwtDecode(token);
 
-    this.authService.setToken(token);
-    this.authService.setName(name);
-    this.authService.setEmail(email);
+    this.authService.setUser({ token, name, email });
     this.router.navigate(['/home']);
     this.toastrService.success('Login realizado com sucesso ');
   }
@@ -91,24 +85,24 @@ export class LoginComponent implements OnInit, AfterViewInit {
   login() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.authService.login(email, password).subscribe(
-        (response) => {
+      this.authService.login(email, password).subscribe({
+        next: (response) => {
           if (response.token) {
-            this.authService.setToken(response.token);
-            this.authService.setEmail(this.googleApiService.jwtDecode(response.token).email);
-            this.authService.setName(this.googleApiService.jwtDecode(response.token).name);
+            const userDecoded: User = this.googleApiService.jwtDecode(response.token);
+            this.authService.setUser(userDecoded);
             this.router.navigate(['/home']);
-            this.toastrService.success('Login realizado com sucesso ');
+            this.toastrService.success('Login realizado com sucesso');
           } else {
-            console.log(response.token);
             this.toastrService.error('Credenciais inválidas');
           }
         },
-        (error) => {
-          console.log(`Erro ao fazer Login: ${error.message}`);
-          this.toastrService.error('Erro ao fazer Login. Tente novamente.');
+        error: (error) => {
+          console.error('Erro ao fazer Login:', error);
+          this.toastrService.error(
+            `Erro ao fazer Login. Tente novamente. ${error.error?.message || ''}`
+          );
         }
-      );
+      });
     } else {
       this.toastrService.error('Formulário inválido');
     }

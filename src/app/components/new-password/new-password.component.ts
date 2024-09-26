@@ -15,7 +15,8 @@ import { AuthService } from '../../services/auth/auth.service';
 @Component({
   selector: 'app-new-password',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, ReactiveFormsModule, HeaderComponent],
+  imports: [RouterOutlet, RouterModule, HeaderComponent],
+  providers: [ReactiveFormsModule],
   templateUrl: './new-password.component.html'
 })
 export class NewPasswordComponent {

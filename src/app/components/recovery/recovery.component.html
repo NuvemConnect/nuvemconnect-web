@@ -9,7 +9,7 @@
     <p class="secondary-text text-center">
       Se você esqueceu sua senha, por favor digite seu e-mail abaixo para restaurar a senha.
     </p>
-    <form class="w-full max-w-sm" [formGroup]="recoveryForm" (ngSubmit)="onSubmit()">
+    <form class="w-full max-w-sm" formGroup="recoveryForm" (ngSubmit)="onSubmit()">
       <div class="relative mb-4">
         <label for="email" class="label"> Email </label>
         <input
