@@ -7,11 +7,11 @@
     </a>
     <h2 class="subtitle">Comece agora</h2>
     <p class="secondary-text">Crie sua conta</p>
-    <form class="w-full" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form class="w-full" formGroup="registerForm" (ngSubmit)="onSubmit()">
       <div class="relative mb-4">
         <label for="name" class="label"> Nome </label>
         <input
-          formControlName="nome"
+          formControlName="name"
           type="text"
           id="name"
           name="name"
@@ -35,7 +35,7 @@
         <label for="password" class="label"> Senha </label>
         <div class="relative">
           <input
-            formControlName="senha"
+            formControlName="password"
             [type]="showPassword ? 'text' : 'password'"
             id="password"
             name="password"
@@ -55,10 +55,10 @@
         <label for="confirmPassword" class="label"> Confirme sua senha </label>
         <div class="relative">
           <input
-            formControlName="confirmarSenha"
+            formControlName="passwordConfirmation"
             [type]="showConfirmPassword ? 'text' : 'password'"
-            id="confirmPassword"
-            name="confirmPassword"
+            id="passwordConfirmation"
+            name="passwordConfirmation"
             placeholder="Sua senha"
             class="input"
           />

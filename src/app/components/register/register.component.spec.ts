@@ -5,7 +5,7 @@ import { RegisterComponent } from './register.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 export class MockToastrService {

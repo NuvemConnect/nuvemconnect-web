@@ -5,9 +5,10 @@ import { inject, Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ResponseLogin } from '../interfaces/response-login';
-import { ResponseCreateAccount } from '../interfaces/response-create-account';
-import { ResponseRecoveryPassword } from '../interfaces/response-recovery-password';
+import { ResponseLogin } from '../../interfaces/response-login';
+import { ResponseCreateAccount } from '../../interfaces/response-create-account';
+import { ResponseForgotPassword } from '../../interfaces/response-forgot-password';
+import { User } from '../../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,17 +23,19 @@ export class AuthService {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
-  // Método para atribuir o token
-  setToken(token: string): void {
+  setUser(user: User) {
     if (this.isBrowser) {
-      localStorage.setItem('authToken', token);
+      localStorage.setItem('user', JSON.stringify(user));
     }
   }
 
-  // Método para resgatar o token
-  getToken(): string | null {
+  getUser() {
     if (this.isBrowser) {
-      return localStorage.getItem('authToken');
+      const user = localStorage.getItem('user');
+
+      if (user) {
+        return JSON.parse(user);
+      }
     }
     return null;
   }
@@ -40,26 +43,40 @@ export class AuthService {
   // removeToken
   removeToken(): void {
     if (this.isBrowser) {
-      localStorage.removeItem('authToken');
+      localStorage.clear();
     }
   }
 
   isAuthenticated(): boolean {
-    return this.getToken() !== null;
+    return this.getUser().token !== null;
   }
 
   // Método para fazer a autenticação
-  login(email: string, senha: string): Observable<ResponseLogin> {
-    return this.http.post<ResponseLogin>(`${this.apiUrl}/login`, { email, senha });
+  login(email: string, password: string): Observable<ResponseLogin> {
+    return this.http.post<ResponseLogin>(`${this.apiUrl}/login`, { email, password });
   }
 
   // Método para criar uma conta
-  createAccount(nome: string, email: string, senha: string): Observable<ResponseCreateAccount> {
-    return this.http.post<ResponseCreateAccount>(`${this.apiUrl}/account`, { nome, email, senha });
+  createAccount(
+    name: string,
+    email: string,
+    password: string,
+    passwordConfirmation: string
+  ): Observable<ResponseCreateAccount> {
+    return this.http.post<ResponseCreateAccount>(`${this.apiUrl}/account`, {
+      name,
+      email,
+      password,
+      passwordConfirmation
+    });
   }
 
-  requestPasswordRecovery(email: string): Observable<ResponseRecoveryPassword> {
-    return this.http.post<any>(`${this.apiUrl}/reset-password`, { email });
+  forgotPassword(email: string): Observable<ResponseForgotPassword> {
+    return this.http.post<ResponseForgotPassword>(`${this.apiUrl}/forgot-password`, { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/reset-password`, { token, newPassword });
   }
 
   // Método para sair do modo autenticado
@@ -71,7 +88,6 @@ export class AuthService {
   isLoggedIn(): boolean {
     if (!this.isBrowser) return false;
     const token = localStorage.getItem('token') || '';
-    console.log(`Token: ${token}`);
     return !!token && this.isValidToken(token);
   }
 
@@ -81,13 +97,6 @@ export class AuthService {
       const decodedToken = jwtDecode(token);
       if (decodedToken.exp === undefined) return true;
       const expiryTime = decodedToken.exp * 1000;
-      console.log(`
-        Decodificando o token: ${token}
-        Tempo de expiração: ${decodedToken.exp}
-        Tempo de expiração em milissegundos: ${expiryTime}
-        Token válido: ${Date.now() < expiryTime}
-        Token decodificado: ${decodedToken}
-        `);
       return Date.now() < expiryTime;
     } catch (error) {
       console.log(`Erro ao decodificar o Token: ${error}`);

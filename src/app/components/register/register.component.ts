@@ -9,14 +9,14 @@ import {
 } from '@angular/forms';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, RouterModule, ReactiveFormsModule],
-  providers: [AuthService],
+  imports: [RouterOutlet, HeaderComponent, RouterModule],
+  providers: [AuthService, ReactiveFormsModule],
   templateUrl: './register.component.html'
 })
 export class RegisterComponent {
@@ -32,9 +32,9 @@ export class RegisterComponent {
   ngOnInit() {
     this.registerForm = this.fb.group(
       {
-        nome: ['', [Validators.required, Validators.minLength(3)]],
+        name: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.required, Validators.email]],
-        senha: [
+        password: [
           '',
           [
             Validators.required,
@@ -44,16 +44,16 @@ export class RegisterComponent {
             )
           ]
         ],
-        confirmarSenha: ['', [Validators.required]]
+        passwordConfirmation: ['', [Validators.required]]
       },
       { validators: this.senhaIgualConfirmacao }
     );
   }
 
   senhaIgualConfirmacao(control: AbstractControl): ValidationErrors | null {
-    const senha = control.get('senha');
-    const confirmarSenha = control.get('confirmarSenha');
-    if (senha && confirmarSenha && senha.value !== confirmarSenha.value) {
+    const password = control.get('password');
+    const passwordConfirmation = control.get('passwordConfirmation');
+    if (password && passwordConfirmation && password.value !== passwordConfirmation.value) {
       return { senhasDiferentes: true };
     }
     return null;
@@ -61,24 +61,21 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const { nome, email, senha } = this.registerForm.value;
-      this.authService.createAccount(nome, email, senha).subscribe(
+      const { name, email, password, passwordConfirmation } = this.registerForm.value;
+      this.authService.createAccount(name, email, password, passwordConfirmation).subscribe(
         (response) => {
-          if (response.success) {
+          if (response) {
+            console.log(response.message);
             this.toastrService.success('Conta criada com sucesso. Por favor, verifique seu email.');
-            const url = this.router.serializeUrl(
-              this.router.createUrlTree(['/confirm-email'], {
-                queryParams: { email: email }
-              })
-            );
-            window.open(url, '_blank');
-            this.router.navigate(['/login']);
+            this.router.navigate(['/confirm-email'], {
+              queryParams: { email: email }
+            });
           } else {
-            this.toastrService.error(response.message || 'Erro ao criar conta. Tente novamente.');
+            this.toastrService.error(response || 'Erro ao criar conta. Tente novamente.');
           }
         },
         (error) => {
-          console.error(`Erro ao criar conta: ${error}`);
+          console.error(`Erro ao criar conta: ${error.message}`);
           this.toastrService.error('Erro ao criar conta. Tente novamente.');
         }
       );

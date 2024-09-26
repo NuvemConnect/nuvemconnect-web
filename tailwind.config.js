@@ -89,6 +89,13 @@ module.exports = {
         extraLargo: '1280px',
         full: '1536px'
       }
+    },
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '834px',
+      'xl': '1280px',
+      '2xl': '1536px',
     }
   },
   plugins: []

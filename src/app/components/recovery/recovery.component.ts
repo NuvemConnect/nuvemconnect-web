@@ -8,13 +8,15 @@ import {
 } from '@angular/forms';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { tap, catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-recovery',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, RouterModule, ReactiveFormsModule],
+  imports: [RouterOutlet, HeaderComponent, RouterModule],
+  providers: [ReactiveFormsModule],
   templateUrl: './recovery.component.html'
 })
 export class RecoveryComponent {
@@ -32,34 +34,22 @@ export class RecoveryComponent {
   }
   onSubmit() {
     if (this.recoveryForm.valid) {
-      const email = this.recoveryForm.get('email')?.value;
-
-      this.authService.requestPasswordRecovery(email).subscribe(
-        (response) => {
-          if (response.success) {
+      this.authService
+        .forgotPassword(this.recoveryForm.get('email')?.value)
+        .pipe(
+          tap(() => {
+            this.router.navigate(['/login']);
             this.toastrService.success(
-              'Um e-mail de recuperação foi enviado. Por favor, verifique seu email.'
+              `Um e-mail de redefição de senha foi enviado para 
+              ${this.recoveryForm.get('email')?.value}.`
             );
-            const url = this.router.serializeUrl(
-              this.router.createUrlTree(['/confirm-email'], {
-                queryParams: { email: email }
-              })
-            );
-            window.open(url, '_blank');
-            this.router.navigate(['/verify']);
-          } else {
-            this.toastrService.error(
-              response.message || 'Falha ao enviar e-mail de recuperação. Tente novamente.'
-            );
-          }
-        },
-        (error) => {
-          console.error(`Erro ao solicitar recuperação de senha: ${error}`);
-          this.toastrService.error('Erro ao solicitar recuperação de senha. Tente novamente.');
-        }
-      );
-    } else {
-      this.toastrService.error('Por favor, forneça um endereço de e-mail válido.');
+          }),
+          catchError((error) => {
+            this.toastrService.error(error.error.message || 'Erro ao redefinir senha');
+            return of(error);
+          })
+        )
+        .subscribe();
     }
   }
 }

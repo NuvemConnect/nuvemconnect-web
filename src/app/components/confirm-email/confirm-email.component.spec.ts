@@ -4,7 +4,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfirmEmailComponent } from './confirm-email.component';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
 import { toastrServiceMock } from '../list/list.component.spec';
 
 describe('ConfirmEmailComponent', () => {
