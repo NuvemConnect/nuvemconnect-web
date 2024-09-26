@@ -19,8 +19,16 @@ import { User } from '../../interfaces/user';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, RouterModule, RouterOutlet, HeaderComponent, NgFor, NgIf],
-  providers: [AuthService, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    RouterOutlet,
+    HeaderComponent,
+    NgFor,
+    NgIf,
+    ReactiveFormsModule
+  ],
+  providers: [AuthService],
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit, AfterViewInit {

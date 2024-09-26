@@ -7,8 +7,8 @@ import { inject } from '@angular/core';
 @Component({
   selector: 'app-verify',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, RouterModule],
-  providers: [ReactiveFormsModule],
+  imports: [RouterOutlet, HeaderComponent, RouterModule, ReactiveFormsModule],
+  providers: [],
   templateUrl: './verify.component.html'
 })
 export class VerifyComponent {

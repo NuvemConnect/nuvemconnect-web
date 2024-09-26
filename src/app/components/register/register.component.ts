@@ -15,8 +15,8 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, RouterModule],
-  providers: [AuthService, ReactiveFormsModule],
+  imports: [RouterOutlet, HeaderComponent, RouterModule, ReactiveFormsModule],
+  providers: [AuthService],
   templateUrl: './register.component.html'
 })
 export class RegisterComponent {

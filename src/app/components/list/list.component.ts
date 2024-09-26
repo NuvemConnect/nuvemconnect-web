@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../interfaces/user';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './list.component.html'
 })
 export class ListComponent {
