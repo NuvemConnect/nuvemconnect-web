@@ -73,7 +73,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
           theme: 'filled_white',
           size: 'large',
           shape: 'pill',
-          minWidth: 384
+          text: 'signin_with',
+          logo_alignment: 'left',
+          width: 1000
         });
       }
     } catch (error) {
