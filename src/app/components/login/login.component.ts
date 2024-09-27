@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('googleBtn') googleBtn!: ElementRef;
   loginForm!: FormGroup;
   showPassword: boolean = false;
+  title: string = "NuvemConnect";
 
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
