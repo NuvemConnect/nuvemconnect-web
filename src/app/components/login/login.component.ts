@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('googleBtn') googleBtn!: ElementRef;
   loginForm!: FormGroup;
   showPassword: boolean = false;
-  title: string = 'NuvemConnect';
+
+  title: string = "NuvemConnect";
 
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
@@ -73,10 +74,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
         google!.accounts.id.renderButton(this.googleBtn.nativeElement, {
           theme: 'filled_white',
           size: 'large',
-          shape: 'pill',
-          text: 'signin_with',
-          logo_alignment: 'left',
-          width: 1000,
+          shape: 'pill', 
+          width: 1000
+
         });
       }
     } catch (error) {
