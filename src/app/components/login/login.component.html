@@ -1,10 +1,10 @@
-<header class="flex justify-center items-center gap-2 w-11/12 lg:w-10/12 pt-12 lg:hidden m-auto">
+<header class="flex justify-center items-center gap-2 pt-12 lg:hidden m-auto">
   <img class="h-8" src="logotipo.svg" alt="logotipo" />
   <h1 class="text-primary-950 text-2xl font-bold">{{ title }}</h1>
 </header>
-<div class="flex flex-col md:flex-row w-full justify-around items-center">
+<div class="flex flex-col lg:flex-row w-full justify-around items-center">
   <div
-    class="flex flex-col relative justify-center items-center max-w-md bg-white p-8 rounded-3xl w-full min-h-[650px]"
+    class="flex flex-col relative justify-center items-center bg-white p-8 rounded-3xl w-full max-w-[532px] min-h-[650px]"
   >
     <h2 class="subtitle">Bem vindo de volta!</h2>
     <p class="secondary-text text-center">Insira suas credenciais para acessar sua conta</p>
@@ -81,9 +81,13 @@
       >
     </p>
     <div class="flex justify-around my-5 w-full">
-      <span class="inline-block h-[0.5px] w-32 rounded-3xl bg-neutral-400 mt-3 mb-6"></span>
+      <span
+        class="inline-block h-[0.5px] max-w-32 mr-2 w-full rounded-3xl bg-neutral-400 mt-3 mb-6"
+      ></span>
       <p class="text-subtexto text-slate-400 text-text">Ou</p>
-      <span class="inline-block h-[0.5px] w-32 rounded-3xl bg-neutral-400 mt-3 mb-6"></span>
+      <span
+        class="inline-block h-[0.5px] max-w-32 ml-2 w-full rounded-3xl bg-neutral-400 mt-3 mb-6"
+      ></span>
     </div>
     <div #googleBtn class="w-full"></div>
   </div>
