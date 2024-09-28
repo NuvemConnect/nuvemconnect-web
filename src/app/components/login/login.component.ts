@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('googleBtn') googleBtn!: ElementRef;
   loginForm!: FormGroup;
   showPassword: boolean = false;
+
   title: string = "NuvemConnect";
 
   private authService = inject(AuthService);
@@ -75,6 +76,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           size: 'large',
           shape: 'pill', 
           width: 1000
+
         });
       }
     } catch (error) {
