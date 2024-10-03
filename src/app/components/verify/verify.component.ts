@@ -19,10 +19,10 @@ export class VerifyComponent {
   title = 'NuvemConnect';
   textContent =
     'NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.';
-  
+
   private token: string | null = null;
   private tokenUUID: string | null = null;
-  
+
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private toastrService = inject(ToastrService);
@@ -37,7 +37,7 @@ export class VerifyComponent {
       code5: ['', [Validators.required, Validators.pattern('[A-Za-z0-9]')]],
       code6: ['', [Validators.required, Validators.pattern('[A-Za-z0-9]')]]
     });
-    this.verifyService.token$.subscribe(token => this.token=token);
+    this.verifyService.token$.subscribe((token) => (this.token = token));
   }
 
   onInputChange(event: Event, nextInputId: string): void {
@@ -70,7 +70,7 @@ export class VerifyComponent {
 
   onSubmit(): void {
     const code: string | null = Object.values(this.codeForm.value).join('');
-    
+
     if (code === this.token && this.token !== null) {
       console.log('code', code);
       console.log('token', this.token);

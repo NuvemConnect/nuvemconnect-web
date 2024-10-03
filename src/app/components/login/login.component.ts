@@ -15,7 +15,6 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from '../../interfaces/user';
 import { jwtDecode } from 'jwt-decode';
 
-
 @Component({
   selector: 'app-login',
   standalone: true,
