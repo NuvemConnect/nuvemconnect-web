@@ -11,6 +11,7 @@ import { HeaderComponent } from '../../shared/header/header.component';
 import { AuthService } from '../../services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { tap, catchError, of } from 'rxjs';
+import { VerifyService } from '../../services/verify/verify.service';
 
 @Component({
   selector: 'app-recovery',
@@ -21,11 +22,14 @@ import { tap, catchError, of } from 'rxjs';
 })
 export class RecoveryComponent {
   recoveryForm!: FormGroup;
+  token: string | null = null;
+  tokenUUID: string | null = null;
 
   private router = inject(Router);
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private toastrService = inject(ToastrService);
+  private verifyService = inject(VerifyService);
 
   ngOnInit() {
     this.recoveryForm = this.fb.group({
@@ -33,20 +37,25 @@ export class RecoveryComponent {
     });
   }
   onSubmit() {
+    const email = this.recoveryForm.get('email')?.value;
+
     if (this.recoveryForm.valid) {
       this.authService
-        .forgotPassword(this.recoveryForm.get('email')?.value)
+        .forgotPassword(email)
         .pipe(
-          tap(() => {
-            this.router.navigate(['/login']);
+          tap((response) => {
+            if (!response) {
+              this.toastrService.error('Erro ao solicitar o código. '); 
+            }
+            this.verifyService.setTokens(response.token, response.tokenUUID);
+            this.router.navigate([`/verify`]);
             this.toastrService.success(
-              `Um e-mail de redefição de senha foi enviado para 
-              ${this.recoveryForm.get('email')?.value}.`
+              `Um e-mail de redefição de senha foi enviado para ${email}.`
             );
           }),
           catchError((error) => {
-            this.toastrService.error(error.error.message || 'Erro ao redefinir senha');
-            return of(error);
+            this.toastrService.error(`Erro ao redefinir senha: ${error.error.message}, ${email}`);
+            return of(error.error.message);
           })
         )
         .subscribe();

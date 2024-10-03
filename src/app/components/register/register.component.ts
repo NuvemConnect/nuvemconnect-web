@@ -61,8 +61,8 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const { name, email, password, passwordConfirmation } = this.registerForm.value;
-      this.authService.createAccount(name, email, password, passwordConfirmation).subscribe(
+      const { name, isActive, email, password, passwordConfirmation } = this.registerForm.value;
+      this.authService.createAccount(name, isActive, email, password, passwordConfirmation).subscribe(
         (response) => {
           if (response) {
             console.log(response.message);

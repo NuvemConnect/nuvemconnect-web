@@ -9,6 +9,7 @@ import { ResponseLogin } from '../../interfaces/response-login';
 import { ResponseCreateAccount } from '../../interfaces/response-create-account';
 import { ResponseForgotPassword } from '../../interfaces/response-forgot-password';
 import { User } from '../../interfaces/user';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
   private isBrowser: boolean;
   private http = inject(HttpClient);
 
-  apiUrl = 'http://localhost:3000'; // URL da api
+  readonly apiUrl = environment.baseUrl; // https://nuvemconnectapi.seronsoftware.com
 
   constructor(@Inject(PLATFORM_ID) platformId: object) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -53,18 +54,20 @@ export class AuthService {
 
   // Método para fazer a autenticação
   login(email: string, password: string): Observable<ResponseLogin> {
-    return this.http.post<ResponseLogin>(`${this.apiUrl}/login`, { email, password });
+    return this.http.post<ResponseLogin>(`${this.apiUrl}/account/login`, { email, password });
   }
 
   // Método para criar uma conta
   createAccount(
     name: string,
+    isActive: boolean = false,
     email: string,
     password: string,
     passwordConfirmation: string
   ): Observable<ResponseCreateAccount> {
     return this.http.post<ResponseCreateAccount>(`${this.apiUrl}/account`, {
       name,
+      isActive,
       email,
       password,
       passwordConfirmation
@@ -72,11 +75,13 @@ export class AuthService {
   }
 
   forgotPassword(email: string): Observable<ResponseForgotPassword> {
-    return this.http.post<ResponseForgotPassword>(`${this.apiUrl}/forgot-password`, { email });
+    return this.http.post<ResponseForgotPassword>(`${this.apiUrl}/account/request-password-reset`, {
+      email
+    });
   }
 
   resetPassword(token: string, newPassword: string): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/reset-password`, { token, newPassword });
+    return this.http.put<any>(`${this.apiUrl}/account/reset-password`, { token, newPassword });
   }
 
   // Método para sair do modo autenticado
@@ -103,4 +108,5 @@ export class AuthService {
       return false;
     }
   }
+
 }
