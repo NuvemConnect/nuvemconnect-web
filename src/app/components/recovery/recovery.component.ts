@@ -24,6 +24,7 @@ export class RecoveryComponent {
   recoveryForm!: FormGroup;
   token: string | null = null;
   tokenUUID: string | null = null;
+  email: string | null = null;
 
   private router = inject(Router);
   private fb = inject(FormBuilder);
@@ -37,24 +38,26 @@ export class RecoveryComponent {
     });
   }
   onSubmit() {
-    const email = this.recoveryForm.get('email')?.value;
+    this.email = this.recoveryForm.get('email')?.value;
 
     if (this.recoveryForm.valid) {
       this.authService
-        .forgotPassword(email)
+        .forgotPassword(this.email!)
         .pipe(
           tap((response) => {
             if (!response) {
               this.toastrService.error('Erro ao solicitar o código. ');
-            }
-            this.verifyService.setTokens(response.token, response.tokenUUID);
+            };
+            this.verifyService.setTokens(response.token, response.tokenUUID, this.email!);
             this.router.navigate([`/verify`]);
             this.toastrService.success(
-              `Um e-mail de redefição de senha foi enviado para ${email}.`
+              `Um e-mail de redefição de senha foi enviado para ${this.email!}.`
             );
           }),
           catchError((error) => {
-            this.toastrService.error(`Erro ao redefinir senha: ${error.error.message}, ${email}`);
+            this.toastrService.error(
+              `Erro ao redefinir senha: ${error.error.message}, ${this.email!}`
+            );
             return of(error.error.message);
           })
         )

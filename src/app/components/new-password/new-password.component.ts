@@ -6,11 +6,12 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
+import {  Router, RouterModule, RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from '../../shared/header/header.component';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth/auth.service';
+import { VerifyService } from '../../services/verify/verify.service';
 
 @Component({
   selector: 'app-new-password',
@@ -23,13 +24,17 @@ export class NewPasswordComponent {
   newPasswordForm!: FormGroup;
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
+  token: string | null = null;
+  tokenUUID: string | null = null;
+  email: string | null = null;
+
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
-  private route = inject(ActivatedRoute);
   private authService = inject(AuthService);
   private toastrService = inject(ToastrService);
-
+  private verifyService = inject(VerifyService);
+  
   ngOnInit() {
     this.newPasswordForm = this.fb.group({
       senha: new FormControl('', [
@@ -39,6 +44,9 @@ export class NewPasswordComponent {
       ]),
       confirmarSenha: new FormControl('', [Validators.required])
     });
+    this.verifyService.token$.subscribe((token) => this.token = token);
+    this.verifyService.tokenUUID$.subscribe((tokenUUID) => this.tokenUUID = tokenUUID);
+    this.verifyService.email$.subscribe((email) => this.email = email);
   }
 
   senhaIgualConfirmacao() {
@@ -52,8 +60,11 @@ export class NewPasswordComponent {
       if (this.senhaIgualConfirmacao()) {
         this.authService
           .resetPassword(
-            this.route.snapshot.queryParams['token'],
-            this.newPasswordForm.get('senha')?.value
+            this.token!,
+            this.tokenUUID!,
+            this.email!,
+            this.newPasswordForm.get('senha')?.value,
+            this.newPasswordForm.get('confirmarSenha')?.value
           )
           .subscribe(() => {
             this.router.navigate(['/login']);

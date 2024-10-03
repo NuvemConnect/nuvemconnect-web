@@ -80,8 +80,8 @@ export class AuthService {
     });
   }
 
-  resetPassword(token: string, newPassword: string): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/account/reset-password`, { token, newPassword });
+  resetPassword(token: string, tokenUUID: string, email:string, password:string, passwordConfirmation: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/account/reset-password`, { token, tokenUUID, email, password, passwordConfirmation });
   }
 
   // Método para sair do modo autenticado

@@ -22,6 +22,7 @@ export class VerifyComponent {
 
   private token: string | null = null;
   private tokenUUID: string | null = null;
+  private email: string | null = null;
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
@@ -38,6 +39,8 @@ export class VerifyComponent {
       code6: ['', [Validators.required, Validators.pattern('[A-Za-z0-9]')]]
     });
     this.verifyService.token$.subscribe((token) => (this.token = token));
+    this.verifyService.tokenUUID$.subscribe((tokenUUID) => (this.tokenUUID = tokenUUID));
+    this.verifyService.email$.subscribe((email) => (this.email = email));
   }
 
   onInputChange(event: Event, nextInputId: string): void {
@@ -71,10 +74,13 @@ export class VerifyComponent {
   onSubmit(): void {
     const code: string | null = Object.values(this.codeForm.value).join('');
 
+    console.log('code', code);
+    console.log('token', this.token);
+    console.log('tokenUUID', this.tokenUUID);
+    console.log('email', this.email);
+      
     if (code === this.token && this.token !== null) {
-      console.log('code', code);
-      console.log('token', this.token);
-      console.log('tokenUUID', this.tokenUUID);
+ 
       this.router.navigate(['/new-password']);
     } else {
       this.toastrService.error('Código inválido');
