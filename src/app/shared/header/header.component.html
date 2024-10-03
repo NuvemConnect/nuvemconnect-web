@@ -1,15 +1,13 @@
-<div
-  class="bg-transparent hidden lg:block lg:background mx-auto p-5 bg-img h-[98vh] max-w-[37.75rem] min-h-[51.5rem]"
->
+<div class="bg-transparent hidden lg:block lg:background mx-auto p-5 bg-img">
   <header class="flex gap-2">
     <img class="h-8" src="logotipoWhite.svg" alt="logotipo" />
-    <h1 class="text-white text-subheading font-bold">{{ title }}</h1>
+    <h1 class="text-white-50 text-subheading font-bold">{{ title }}</h1>
   </header>
-  <div class="flex h-full">
+  <div class="flex h-screen">
     <div class="flex flex-col justify-around items-center">
-      <img [src]="imageUrl" alt="imagem menino com pastas" class="text-white max-[31.25rem]" />
-      <h2 class="text-white font-bold text-title">{{ title }}</h2>
-      <p class="text-subheading text-white text-center font-sans">{{ textContent }}</p>
+      <img [src]="imageUrl" alt="imagem menino com pastas" class="text-white" />
+      <h2 class="text-white-50 font-bold text-subtitleLarge">{{ title }}</h2>
+      <p class="text-subheading text-white-50 text-center font-sans">{{ textContent }}</p>
     </div>
   </div>
 </div>

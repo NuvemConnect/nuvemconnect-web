@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GoogleApiService } from './google-api.service';
+import { VerifyService } from './verify.service';
 
-describe('GoogleApiService', () => {
-  let service: GoogleApiService;
+describe('VerifyService', () => {
+  let service: VerifyService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(GoogleApiService);
+    service = TestBed.inject(VerifyService);
   });
 
   it('should be created', () => {

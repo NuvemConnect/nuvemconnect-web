@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { inject } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { VerifyService } from '../../services/verify/verify.service';
 
 @Component({
   selector: 'app-verify',
@@ -18,18 +20,27 @@ export class VerifyComponent {
   textContent =
     'NuvemConnect é uma solução que simplifica o gerenciamento de plataformas de armazenamento em nuvem amplamente utilizadas, como Google Drive, Mega e OneDrive.';
 
+  private token: string | null = null;
+  private tokenUUID: string | null = null;
+  private email: string | null = null;
+
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private toastrService = inject(ToastrService);
+  private verifyService = inject(VerifyService);
 
   ngOnInit() {
     this.codeForm = this.fb.group({
-      code1: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      code2: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      code3: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      code4: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      code5: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      code6: ['', [Validators.required, Validators.pattern('[0-9]')]]
+      code1: ['', [Validators.required, Validators.pattern('[A-Za-z0-9]')]],
+      code2: ['', [Validators.required, Validators.pattern('[A-Za-z0-9]')]],
+      code3: ['', [Validators.required, Validators.pattern('[A-Za-z0-9]')]],
+      code4: ['', [Validators.required, Validators.pattern('[A-Za-z0-9]')]],
+      code5: ['', [Validators.required, Validators.pattern('[A-Za-z0-9]')]],
+      code6: ['', [Validators.required, Validators.pattern('[A-Za-z0-9]')]]
     });
+    this.verifyService.token$.subscribe((token) => (this.token = token));
+    this.verifyService.tokenUUID$.subscribe((tokenUUID) => (this.tokenUUID = tokenUUID));
+    this.verifyService.email$.subscribe((email) => (this.email = email));
   }
 
   onInputChange(event: Event, nextInputId: string): void {
@@ -61,8 +72,17 @@ export class VerifyComponent {
   }
 
   onSubmit(): void {
-    const code = Object.values(this.codeForm.value).join('');
-    console.log('Código de verificação:', code);
-    this.router.navigate(['/new-password']);
+    const code: string | null = Object.values(this.codeForm.value).join('');
+
+    console.log('code', code);
+    console.log('token', this.token);
+    console.log('tokenUUID', this.tokenUUID);
+    console.log('email', this.email);
+
+    if (code === this.token && this.token !== null) {
+      this.router.navigate(['/new-password']);
+    } else {
+      this.toastrService.error('Código inválido');
+    }
   }
 }
