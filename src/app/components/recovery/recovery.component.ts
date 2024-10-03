@@ -47,7 +47,7 @@ export class RecoveryComponent {
           tap((response) => {
             if (!response) {
               this.toastrService.error('Erro ao solicitar o código. ');
-            };
+            }
             this.verifyService.setTokens(response.token, response.tokenUUID, this.email!);
             this.router.navigate([`/verify`]);
             this.toastrService.success(

@@ -78,9 +78,8 @@ export class VerifyComponent {
     console.log('token', this.token);
     console.log('tokenUUID', this.tokenUUID);
     console.log('email', this.email);
-      
+
     if (code === this.token && this.token !== null) {
- 
       this.router.navigate(['/new-password']);
     } else {
       this.toastrService.error('Código inválido');

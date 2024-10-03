@@ -8,6 +8,4 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   imports: [RouterOutlet, HeaderComponent, RouterModule],
   templateUrl: './confirm-email.component.html'
 })
-export class ConfirmEmailComponent {
-
-}
+export class ConfirmEmailComponent {}

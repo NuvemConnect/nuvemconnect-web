@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import {  Router, RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from '../../shared/header/header.component';
 import { ToastrService } from 'ngx-toastr';
@@ -28,13 +28,12 @@ export class NewPasswordComponent {
   tokenUUID: string | null = null;
   email: string | null = null;
 
-
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(AuthService);
   private toastrService = inject(ToastrService);
   private verifyService = inject(VerifyService);
-  
+
   ngOnInit() {
     this.newPasswordForm = this.fb.group({
       senha: new FormControl('', [
@@ -44,9 +43,9 @@ export class NewPasswordComponent {
       ]),
       confirmarSenha: new FormControl('', [Validators.required])
     });
-    this.verifyService.token$.subscribe((token) => this.token = token);
-    this.verifyService.tokenUUID$.subscribe((tokenUUID) => this.tokenUUID = tokenUUID);
-    this.verifyService.email$.subscribe((email) => this.email = email);
+    this.verifyService.token$.subscribe((token) => (this.token = token));
+    this.verifyService.tokenUUID$.subscribe((tokenUUID) => (this.tokenUUID = tokenUUID));
+    this.verifyService.email$.subscribe((email) => (this.email = email));
   }
 
   senhaIgualConfirmacao() {

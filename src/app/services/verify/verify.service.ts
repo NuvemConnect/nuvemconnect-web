@@ -13,7 +13,6 @@ export class VerifyService {
   tokenUUID$ = this.tokenUUIDSubject.asObservable();
   email$ = this.emailSubject.asObservable();
 
-
   setTokens(token: string, tokenUUID: string, email: string) {
     this.tokenSubject.next(token);
     this.tokenUUIDSubject.next(tokenUUID);
