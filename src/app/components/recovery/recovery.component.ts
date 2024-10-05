@@ -46,17 +46,24 @@ export class RecoveryComponent {
         .pipe(
           tap((response) => {
             if (!response) {
-              this.toastrService.error('Erro ao solicitar o código. ');
+              this.toastrService.error('Erro ao solicitar o código.', 'Erro', {
+                closeButton: true
+              });
             }
             this.verifyService.setTokens(response.token, response.tokenUUID, this.email!);
             this.router.navigate([`/verify`]);
             this.toastrService.success(
-              `Um e-mail de redefição de senha foi enviado para ${this.email!}.`
+              `Um e-mail de redefição de senha foi enviado para ${this.email!}.`,
+              'Sucesso',
+              { closeButton: true }
             );
           }),
           catchError((error) => {
             this.toastrService.error(
-              `Erro ao redefinir senha: ${error.error.message}, ${this.email!}`
+              `E-mail não localizado.
+              ${this.email!}`,
+              'Erro',
+              { closeButton: true }
             );
             return of(error.error.message);
           })

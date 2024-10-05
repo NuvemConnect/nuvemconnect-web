@@ -20,6 +20,16 @@
           placeholder="Digite seu email"
           class="input"
         />
+        <div class="input-error">
+          @if (
+            recoveryForm.get('email')?.hasError('required') && recoveryForm.get('email')?.touched
+          ) {
+            <span class="input-error">Campo obrigatório</span>
+          }
+          @if (recoveryForm.get('email')?.hasError('email') && recoveryForm.get('email')?.touched) {
+            <span class="input-error">Insira um e-mail válido</span>
+          }
+        </div>
       </div>
 
       <div class="flex justify-center items-center w-full">

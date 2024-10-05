@@ -4,12 +4,12 @@
 </header>
 <div class="flex flex-col lg:flex-row w-full justify-around items-center">
   <div
-    class="flex flex-col relative justify-center items-center bg-white p-8 rounded-3xl w-full max-w-[532px] min-h-[650px]"
+    class="flex flex-col relative justify-center items-center max-w-md bg-white p-8 rounded-3xl w-full max-w-[532px] min-h-[650px]"
   >
     <h2 class="subtitle">Bem vindo de volta!</h2>
     <p class="secondary-text text-center">Insira suas credenciais para acessar sua conta</p>
     <form class="w-full" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="relative mb-4">
+      <div class="relative">
         <label for="email" class="label"> Email </label>
         <input
           formControlName="email"
@@ -56,7 +56,10 @@
             @if (
               loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched
             ) {
-              <span class="input-error">Sua senha deve conter no mínimo 8 caracteres</span>
+              <span class="input-error max-w-sm"
+                >Deve conter no mínimo 8 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número
+                e 1 caractere especial</span
+              >
             }
           </div>
         </div>
@@ -89,6 +92,14 @@
         class="inline-block h-[0.5px] max-w-32 ml-2 w-full rounded-3xl bg-neutral-400 mt-3 mb-6"
       ></span>
     </div>
-    <div #googleBtn class="w-full"></div>
+    <div class="w-full">
+      <button
+        type="button"
+        class="flex justify-center items-center w-full button-secondary"
+        (click)="signInWithGoogle()"
+      >
+        <img src="google.svg" /> Entrar com Google
+      </button>
+    </div>
   </div>
 </div>

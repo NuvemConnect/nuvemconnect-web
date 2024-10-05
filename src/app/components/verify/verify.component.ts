@@ -74,15 +74,11 @@ export class VerifyComponent {
   onSubmit(): void {
     const code: string | null = Object.values(this.codeForm.value).join('');
 
-    console.log('code', code);
-    console.log('token', this.token);
-    console.log('tokenUUID', this.tokenUUID);
-    console.log('email', this.email);
-
     if (code === this.token && this.token !== null) {
+      this.toastrService.success('Código validado com sucesso', 'Sucesso', { closeButton: true });
       this.router.navigate(['/new-password']);
     } else {
-      this.toastrService.error('Código inválido');
+      this.toastrService.error('Código inválido', 'Erro', { closeButton: true });
     }
   }
 }

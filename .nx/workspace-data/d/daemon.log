@@ -1,0 +1,100 @@
+[NX Daemon Server] - 2024-10-03T04:11:00.983Z - Started listening on: \\.\pipe\nx\C:\Users\Lauro\AppData\Local\Temp\87cba2eeeb07ae58e4ec\d.sock
+[NX Daemon Server] - 2024-10-03T04:11:00.993Z - [WATCHER]: Unexpected workspace error Failed to convert JavaScript value `Null` into rust type `String`
+Error: Failed to convert JavaScript value `Null` into rust type `String`
+    at napi_create_error (b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:4464:25)
+    at wasm://wasm/00b3a852:wasm-function[955]:0x1d565f
+    at wasm://wasm/00b3a852:wasm-function[1053]:0x1e2a5f
+    at b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3084:64
+    at NodeEnv.callIntoModule (b:\projetos\nuvemconnect-web\node_modules\@emnapi\runtime\dist\emnapi.cjs.js:659:19)
+    at b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3083:42
+    at hashArray (eval at emnapiCreateFunction (b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3104:26), <anonymous>:3:51)
+    at hashArray (b:\projetos\nuvemconnect-web\node_modules\nx\src\hasher\file-hasher.js:8:12)
+    at lockFileHashChanged (b:\projetos\nuvemconnect-web\node_modules\nx\src\daemon\server\server.js:247:49)
+    at daemonIsOutdated (b:\projetos\nuvemconnect-web\node_modules\nx\src\daemon\server\server.js:219:14) {
+  code: 'StringExpected'
+}
+[NX Daemon Server] - 2024-10-03T04:11:01.008Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-03T04:11:01.009Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-10-03T04:11:01.012Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-03T04:11:01.014Z - [REQUEST]: Responding to the client with an error. File watcher error in the workspace 'b:\projetos\nuvemconnect-web'. Failed to convert JavaScript value `Null` into rust type `String`
+Error: Failed to convert JavaScript value `Null` into rust type `String`
+    at napi_create_error (b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:4464:25)
+    at wasm://wasm/00b3a852:wasm-function[955]:0x1d565f
+    at wasm://wasm/00b3a852:wasm-function[1053]:0x1e2a5f
+    at b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3084:64
+    at NodeEnv.callIntoModule (b:\projetos\nuvemconnect-web\node_modules\@emnapi\runtime\dist\emnapi.cjs.js:659:19)
+    at b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3083:42
+    at hashArray (eval at emnapiCreateFunction (b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3104:26), <anonymous>:3:51)
+    at hashArray (b:\projetos\nuvemconnect-web\node_modules\nx\src\hasher\file-hasher.js:8:12)
+    at lockFileHashChanged (b:\projetos\nuvemconnect-web\node_modules\nx\src\daemon\server\server.js:247:49)
+    at daemonIsOutdated (b:\projetos\nuvemconnect-web\node_modules\nx\src\daemon\server\server.js:219:14)
+[NX Daemon Server] - 2024-10-03T04:11:01.015Z - Done responding to the client null
+b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:4464
+            var error = new Error(msgValue);
+                        ^
+
+Error: Failed to convert JavaScript value `Null` into rust type `String`
+    at napi_create_error (b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:4464:25)
+    at wasm://wasm/00b3a852:wasm-function[955]:0x1d565f
+    at wasm://wasm/00b3a852:wasm-function[1053]:0x1e2a5f
+    at b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3084:64
+    at NodeEnv.callIntoModule (b:\projetos\nuvemconnect-web\node_modules\@emnapi\runtime\dist\emnapi.cjs.js:659:19)
+    at b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3083:42
+    at hashArray (eval at emnapiCreateFunction (b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3104:26), <anonymous>:3:51)
+    at hashArray (b:\projetos\nuvemconnect-web\node_modules\nx\src\hasher\file-hasher.js:8:12)
+    at lockFileHashChanged (b:\projetos\nuvemconnect-web\node_modules\nx\src\daemon\server\server.js:247:49)
+    at daemonIsOutdated (b:\projetos\nuvemconnect-web\node_modules\nx\src\daemon\server\server.js:219:14) {
+  code: 'StringExpected'
+}
+
+Node.js v20.11.1
+[NX Daemon Server] - 2024-10-04T23:53:34.773Z - Started listening on: \\.\pipe\nx\C:\Users\Lauro\AppData\Local\Temp\87cba2eeeb07ae58e4ec\d.sock
+[NX Daemon Server] - 2024-10-04T23:53:35.125Z - [WATCHER]: Unexpected workspace error Failed to convert JavaScript value `Null` into rust type `String`
+Error: Failed to convert JavaScript value `Null` into rust type `String`
+    at napi_create_error (b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:4464:25)
+    at wasm://wasm/00b3a852:wasm-function[955]:0x1d565f
+    at wasm://wasm/00b3a852:wasm-function[1053]:0x1e2a5f
+    at b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3084:64
+    at NodeEnv.callIntoModule (b:\projetos\nuvemconnect-web\node_modules\@emnapi\runtime\dist\emnapi.cjs.js:659:19)
+    at b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3083:42
+    at hashArray (eval at emnapiCreateFunction (b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3104:26), <anonymous>:3:51)
+    at hashArray (b:\projetos\nuvemconnect-web\node_modules\nx\src\hasher\file-hasher.js:8:12)
+    at lockFileHashChanged (b:\projetos\nuvemconnect-web\node_modules\nx\src\daemon\server\server.js:247:49)
+    at daemonIsOutdated (b:\projetos\nuvemconnect-web\node_modules\nx\src\daemon\server\server.js:219:14) {
+  code: 'StringExpected'
+}
+[NX Daemon Server] - 2024-10-04T23:53:35.138Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-04T23:53:35.140Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-10-04T23:53:35.146Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-10-04T23:53:35.147Z - [REQUEST]: Responding to the client with an error. File watcher error in the workspace 'b:\projetos\nuvemconnect-web'. Failed to convert JavaScript value `Null` into rust type `String`
+Error: Failed to convert JavaScript value `Null` into rust type `String`
+    at napi_create_error (b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:4464:25)
+    at wasm://wasm/00b3a852:wasm-function[955]:0x1d565f
+    at wasm://wasm/00b3a852:wasm-function[1053]:0x1e2a5f
+    at b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3084:64
+    at NodeEnv.callIntoModule (b:\projetos\nuvemconnect-web\node_modules\@emnapi\runtime\dist\emnapi.cjs.js:659:19)
+    at b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3083:42
+    at hashArray (eval at emnapiCreateFunction (b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3104:26), <anonymous>:3:51)
+    at hashArray (b:\projetos\nuvemconnect-web\node_modules\nx\src\hasher\file-hasher.js:8:12)
+    at lockFileHashChanged (b:\projetos\nuvemconnect-web\node_modules\nx\src\daemon\server\server.js:247:49)
+    at daemonIsOutdated (b:\projetos\nuvemconnect-web\node_modules\nx\src\daemon\server\server.js:219:14)
+[NX Daemon Server] - 2024-10-04T23:53:35.150Z - Done responding to the client null
+b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:4464
+            var error = new Error(msgValue);
+                        ^
+
+Error: Failed to convert JavaScript value `Null` into rust type `String`
+    at napi_create_error (b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:4464:25)
+    at wasm://wasm/00b3a852:wasm-function[955]:0x1d565f
+    at wasm://wasm/00b3a852:wasm-function[1053]:0x1e2a5f
+    at b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3084:64
+    at NodeEnv.callIntoModule (b:\projetos\nuvemconnect-web\node_modules\@emnapi\runtime\dist\emnapi.cjs.js:659:19)
+    at b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3083:42
+    at hashArray (eval at emnapiCreateFunction (b:\projetos\nuvemconnect-web\node_modules\@emnapi\core\dist\emnapi-core.cjs.js:3104:26), <anonymous>:3:51)
+    at hashArray (b:\projetos\nuvemconnect-web\node_modules\nx\src\hasher\file-hasher.js:8:12)
+    at lockFileHashChanged (b:\projetos\nuvemconnect-web\node_modules\nx\src\daemon\server\server.js:247:49)
+    at daemonIsOutdated (b:\projetos\nuvemconnect-web\node_modules\nx\src\daemon\server\server.js:219:14) {
+  code: 'StringExpected'
+}
+
+Node.js v20.11.1

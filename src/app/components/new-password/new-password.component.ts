@@ -72,7 +72,7 @@ export class NewPasswordComponent {
         this.newPasswordForm.reset();
         this.router.navigate(['/login']);
       } else {
-        this.toastrService.error('Senha não confere');
+        this.toastrService.error('Senha não confere', 'Erro', { closeButton: true });
       }
     }
   }

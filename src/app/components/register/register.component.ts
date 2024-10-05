@@ -30,24 +30,21 @@ export class RegisterComponent {
   private toastrService = inject(ToastrService);
 
   ngOnInit() {
-    this.registerForm = this.fb.group(
-      {
-        name: ['', [Validators.required, Validators.minLength(3)]],
-        email: ['', [Validators.required, Validators.email]],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(8),
-            Validators.pattern(
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/
-            )
-          ]
-        ],
-        passwordConfirmation: ['', [Validators.required]]
-      },
-      { validators: this.senhaIgualConfirmacao }
-    );
+    this.registerForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/
+          )
+        ]
+      ],
+      passwordConfirmation: ['', [Validators.required]]
+    });
   }
 
   senhaIgualConfirmacao(control: AbstractControl): ValidationErrors | null {
@@ -69,22 +66,32 @@ export class RegisterComponent {
             if (response) {
               console.log(response.message);
               this.toastrService.success(
-                'Conta criada com sucesso. Por favor, verifique seu email.'
+                'Conta criada com sucesso. Por favor, verifique seu email.',
+                'Sucesso',
+                { closeButton: true }
               );
               this.router.navigate(['/confirm-email'], {
                 queryParams: { email: email }
               });
             } else {
-              this.toastrService.error(response || 'Erro ao criar conta. Tente novamente.');
+              this.toastrService.error(
+                response || 'Erro ao criar conta. Tente novamente.',
+                'Erro',
+                { closeButton: true }
+              );
             }
           },
           (error) => {
             console.error(`Erro ao criar conta: ${error.message}`);
-            this.toastrService.error('Erro ao criar conta. Tente novamente.');
+            this.toastrService.error('Erro ao criar conta. Tente novamente.', 'Erro', {
+              closeButton: true
+            });
           }
         );
     } else {
-      this.toastrService.error('Por favor, corrija os erros no formulário.');
+      this.toastrService.error('Por favor, corrija os erros no formulário.', 'Erro', {
+        closeButton: true
+      });
     }
   }
 
