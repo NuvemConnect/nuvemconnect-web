@@ -65,20 +65,24 @@ export class LoginComponent implements OnInit {
             const userDecoded: User = jwtDecode(response.token);
             this.authService.setUser(userDecoded);
             this.router.navigate(['/home']);
-            this.toastrService.success('Login realizado com sucesso');
+            this.toastrService.success('Login realizado com sucesso', 'Sucesso', {
+              closeButton: true
+            });
           } else {
-            this.toastrService.error('Credenciais inválidas');
+            this.toastrService.error('Credenciais inválidas', 'Erro', { closeButton: true });
           }
         },
         error: (error) => {
           console.error('Erro ao fazer Login:', error.error.message);
           this.toastrService.error(
-            `Erro ao fazer Login. Tente novamente. ${error.error?.message || ''}`
+            `Erro ao fazer Login. Tente novamente. ${error.error?.message || ''}`,
+            'Erro',
+            { closeButton: true }
           );
         }
       });
     } else {
-      this.toastrService.error('Formulário inválido');
+      this.toastrService.error('Formulário inválido', 'Erro', { closeButton: true });
     }
   }
 
@@ -86,11 +90,15 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.login();
     } else {
-      this.toastrService.error('Formulário inválido');
+      this.toastrService.error('Formulário inválido', 'Erro', { closeButton: true });
     }
   }
 
   toggleVisibilityPassword() {
     this.showPassword = !this.showPassword;
+  }
+
+  signInWithGoogle() {
+    this.toastrService.success('Login com google', 'Sucesso', { closeButton: true });
   }
 }

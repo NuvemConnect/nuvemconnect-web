@@ -60,6 +60,29 @@
           class="w-10 h-10 text-center text-2xl bg-gray-200 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500"
         />
       </div>
+      <div class="input-error text-center">
+        @if (
+          (codeForm.get('code1')?.hasError('pattern') && codeForm.get('code1')?.touched) ||
+          (codeForm.get('code2')?.hasError('pattern') && codeForm.get('code2')?.touched) ||
+          (codeForm.get('code3')?.hasError('pattern') && codeForm.get('code3')?.touched) ||
+          (codeForm.get('code4')?.hasError('pattern') && codeForm.get('code4')?.touched) ||
+          (codeForm.get('code5')?.hasError('pattern') && codeForm.get('code5')?.touched) ||
+          (codeForm.get('code6')?.hasError('pattern') && codeForm.get('code6')?.touched)
+        ) {
+          <span class="input-error"> Caracteres especiais não são permitidos. </span>
+        }
+
+        @if (
+          (codeForm.get('code1')?.hasError('required') && codeForm.get('code1')?.touched) ||
+          (codeForm.get('code2')?.hasError('required') && codeForm.get('code2')?.touched) ||
+          (codeForm.get('code3')?.hasError('required') && codeForm.get('code3')?.touched) ||
+          (codeForm.get('code4')?.hasError('required') && codeForm.get('code4')?.touched) ||
+          (codeForm.get('code5')?.hasError('required') && codeForm.get('code5')?.touched) ||
+          (codeForm.get('code6')?.hasError('required') && codeForm.get('code6')?.touched)
+        ) {
+          <span class="input-error"> Campo obrigatório. </span>
+        }
+      </div>
       <div class="flex justify-center items-center w-full">
         <button [disabled]="!codeForm.valid" type="submit" class="button-primary">Verificar</button>
       </div>
