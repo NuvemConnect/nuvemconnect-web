@@ -4,7 +4,7 @@
 </header>
 <div class="flex flex-col lg:flex-row w-full justify-around items-center">
   <div
-    class="flex flex-col relative justify-center items-center max-w-md bg-white p-8 rounded-3xl w-full max-w-[532px] min-h-[650px]"
+    class="flex flex-col relative justify-center items-center bg-white p-8 rounded-3xl w-full max-w-[532px] min-h-[650px]"
   >
     <h2 class="subtitle">Bem vindo de volta!</h2>
     <p class="secondary-text text-center">Insira suas credenciais para acessar sua conta</p>
@@ -21,14 +21,14 @@
         />
         <div class="input-error">
           @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) {
-            <span class="input-error">Campo obrigatório</span>
+            <span class="">Campo obrigatório</span>
           }
           @if (loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched) {
-            <span class="input-error">Insira um e-mail válido</span>
+            <span class="">Insira um e-mail válido</span>
           }
         </div>
       </div>
-      <div class="relative mb-4">
+      <div class="relative">
         <label for="password" class="label"> Senha </label>
         <div class="relative">
           <input
@@ -51,12 +51,12 @@
             @if (
               loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched
             ) {
-              <span class="input-error">Campo obrigatório</span>
+              <span class="">Campo obrigatório</span>
             }
             @if (
               loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched
             ) {
-              <span class="input-error max-w-sm"
+              <span class=""
                 >Deve conter no mínimo 8 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número
                 e 1 caractere especial</span
               >
@@ -67,7 +67,7 @@
       <div
         class="flex items-center justify-end text-primary-400 hover:text-primary-500 hover:underline"
       >
-        <a [routerLink]="['/recovery']" class="text-text mb-2">Esqueceu sua senha?</a>
+        <a [routerLink]="['/recovery']" class="text-text">Esqueceu sua senha?</a>
       </div>
 
       <div class="flex justify-center items-center w-full">

@@ -10,7 +10,7 @@
       Se você esqueceu sua senha, por favor digite seu e-mail abaixo para restaurar a senha.
     </p>
     <form class="w-full max-w-sm" [formGroup]="recoveryForm" (ngSubmit)="onSubmit()">
-      <div class="relative mb-4">
+      <div class="relative">
         <label for="email" class="label"> Email </label>
         <input
           formControlName="email"
@@ -24,10 +24,10 @@
           @if (
             recoveryForm.get('email')?.hasError('required') && recoveryForm.get('email')?.touched
           ) {
-            <span class="input-error">Campo obrigatório</span>
+            <span class="">Campo obrigatório</span>
           }
           @if (recoveryForm.get('email')?.hasError('email') && recoveryForm.get('email')?.touched) {
-            <span class="input-error">Insira um e-mail válido</span>
+            <span class="">Insira um e-mail válido</span>
           }
         </div>
       </div>
