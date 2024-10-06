@@ -45,3 +45,4 @@ Thumbs.db
 .vercel
 
 /environments
+.nx/workspace-data/nx_files.nxt

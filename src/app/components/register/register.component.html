@@ -8,7 +8,7 @@
     <h2 class="subtitle">Comece agora</h2>
     <p class="secondary-text">Crie sua conta</p>
     <form class="w-full" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="relative mb-4">
+      <div class="relative">
         <label for="name" class="label"> Nome </label>
         <input
           formControlName="name"
@@ -22,17 +22,17 @@
           @if (
             registerForm.get('name')?.hasError('required') && registerForm.get('name')?.touched
           ) {
-            <span class="input-error">Campo obrigatório</span>
+            <span class="">Campo obrigatório</span>
           }
           @if (
             registerForm.get('name')?.hasError('minlength') && registerForm.get('name')?.touched
           ) {
-            <span class="input-error">O nome deve conter pelo menos 3 caracteres</span>
+            <span class="">O nome deve conter pelo menos 3 caracteres</span>
           }
         </div>
       </div>
 
-      <div class="relative mb-4">
+      <div class="relative">
         <label for="email" class="label"> Email </label>
         <input
           formControlName="email"
@@ -46,14 +46,14 @@
           @if (
             registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched
           ) {
-            <span class="input-error">Campo obrigatório</span>
+            <span class="">Campo obrigatório</span>
           }
           @if (registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched) {
-            <span class="input-error">Insira um e-mail válido</span>
+            <span class="">Insira um e-mail válido</span>
           }
         </div>
       </div>
-      <div class="relative mb-4">
+      <div class="relative">
         <label for="password" class="label"> Senha </label>
         <div class="relative">
           <input
@@ -76,13 +76,13 @@
               registerForm.get('password')?.hasError('required') &&
               registerForm.get('password')?.touched
             ) {
-              <span class="input-error">Campo obrigatório</span>
+              <span class="">Campo obrigatório</span>
             }
             @if (
               registerForm.get('password')?.hasError('minlength') &&
               registerForm.get('password')?.touched
             ) {
-              <span class="input-error max-w-sm"
+              <span class=""
                 >Deve conter no mínimo 8 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número
                 e 1 caractere especial</span
               >
@@ -91,7 +91,7 @@
         </div>
       </div>
 
-      <div class="relative mb-4">
+      <div class="relative">
         <label for="confirmPassword" class="label"> Confirme sua senha </label>
         <div class="relative">
           <input
@@ -114,13 +114,13 @@
               registerForm.get('passwordConfirmation')?.hasError('required') &&
               registerForm.get('passwordConfirmation')?.touched
             ) {
-              <span class="input-error">Campo obrigatório</span>
+              <span class="">Campo obrigatório</span>
             }
             @if (
               registerForm.get('passwordConfirmation')?.hasError('minlength') &&
               registerForm.get('passwordConfirmation')?.touched
             ) {
-              <span class="input-error max-w-sm"
+              <span class=""
                 >Deve conter no mínimo 8 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número
                 e 1 caractere especial</span
               >

@@ -21,7 +21,7 @@
 
   }
   .input-error {
-    @apply text-error-500 text-mini min-h-12;
+    @apply text-error-500 text-mini min-h-10;
   }
   .title {
     @apply text-primary-900 text-2xl font-bold;
