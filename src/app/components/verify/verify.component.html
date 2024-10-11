@@ -70,19 +70,28 @@
           (codeForm.get('code6')?.hasError('required') && codeForm.get('code6')?.touched)
         ) {
           <span class="input-error"> Campo obrigatório. </span>
-        }
-        @else if (
-          (codeForm.get('code1')?.hasError('pattern') && codeForm.get('code1')?.touched && codeForm.get('code1')?.dirty) ||
-          (codeForm.get('code2')?.hasError('pattern') && codeForm.get('code2')?.touched && codeForm.get('code2')?.dirty) ||
-          (codeForm.get('code3')?.hasError('pattern') && codeForm.get('code3')?.touched && codeForm.get('code3')?.dirty) ||
-          (codeForm.get('code4')?.hasError('pattern') && codeForm.get('code4')?.touched && codeForm.get('code4')?.dirty) ||
-          (codeForm.get('code5')?.hasError('pattern') && codeForm.get('code5')?.touched && codeForm.get('code5')?.dirty) ||
-          (codeForm.get('code6')?.hasError('pattern') && codeForm.get('code6')?.touched && codeForm.get('code6')?.dirty)
+        } @else if (
+          (codeForm.get('code1')?.hasError('pattern') &&
+            codeForm.get('code1')?.touched &&
+            codeForm.get('code1')?.dirty) ||
+          (codeForm.get('code2')?.hasError('pattern') &&
+            codeForm.get('code2')?.touched &&
+            codeForm.get('code2')?.dirty) ||
+          (codeForm.get('code3')?.hasError('pattern') &&
+            codeForm.get('code3')?.touched &&
+            codeForm.get('code3')?.dirty) ||
+          (codeForm.get('code4')?.hasError('pattern') &&
+            codeForm.get('code4')?.touched &&
+            codeForm.get('code4')?.dirty) ||
+          (codeForm.get('code5')?.hasError('pattern') &&
+            codeForm.get('code5')?.touched &&
+            codeForm.get('code5')?.dirty) ||
+          (codeForm.get('code6')?.hasError('pattern') &&
+            codeForm.get('code6')?.touched &&
+            codeForm.get('code6')?.dirty)
         ) {
           <span class="input-error"> Caracteres especiais não são permitidos. </span>
         }
-
-
       </div>
       <div class="flex justify-center items-center w-full">
         <button [disabled]="!codeForm.valid" type="submit" class="button-primary">Verificar</button>

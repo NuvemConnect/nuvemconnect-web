@@ -22,8 +22,9 @@
         <div class="input-error">
           @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) {
             <span class="input-error">Campo obrigatório</span>
-          }
-          @else if (loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched) {
+          } @else if (
+            loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched
+          ) {
             <span class="input-error">Insira um e-mail válido</span>
           }
         </div>
