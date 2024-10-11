@@ -26,7 +26,7 @@
           ) {
             <span class="">Campo obrigatório</span>
           }
-          @if (recoveryForm.get('email')?.hasError('email') && recoveryForm.get('email')?.touched) {
+          @else if (recoveryForm.get('email')?.hasError('email') && recoveryForm.get('email')?.touched) {
             <span class="">Insira um e-mail válido</span>
           }
         </div>

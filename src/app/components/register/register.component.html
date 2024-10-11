@@ -24,7 +24,7 @@
           ) {
             <span class="">Campo obrigatório</span>
           }
-          @if (
+          @else if (
             registerForm.get('name')?.hasError('minlength') && registerForm.get('name')?.touched
           ) {
             <span class="">O nome deve conter pelo menos 3 caracteres</span>
@@ -48,7 +48,7 @@
           ) {
             <span class="">Campo obrigatório</span>
           }
-          @if (registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched) {
+          @else if (registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched) {
             <span class="">Insira um e-mail válido</span>
           }
         </div>
@@ -78,15 +78,23 @@
             ) {
               <span class="">Campo obrigatório</span>
             }
-            @if (
+            @else if (
               registerForm.get('password')?.hasError('minlength') &&
               registerForm.get('password')?.touched
             ) {
               <span class=""
-                >Deve conter no mínimo 8 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número
-                e 1 caractere especial</span
+                >Deve conter no mínimo 8 caracteres</span
               >
             }
+            @else if (
+              registerForm.get('password')?.hasError('pattern') &&
+              registerForm.get('password')?.touched
+            ) {
+              <span class=""
+                >Deve conter 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial</span
+              >
+            }
+
           </div>
         </div>
       </div>
@@ -108,22 +116,12 @@
               (click)="toggleVisibilityConfirmPassword()"
             />
           </i>
-
-          <div class="input-error">
+                    <div class="input-error">
             @if (
               registerForm.get('passwordConfirmation')?.hasError('required') &&
               registerForm.get('passwordConfirmation')?.touched
             ) {
               <span class="">Campo obrigatório</span>
-            }
-            @if (
-              registerForm.get('passwordConfirmation')?.hasError('minlength') &&
-              registerForm.get('passwordConfirmation')?.touched
-            ) {
-              <span class=""
-                >Deve conter no mínimo 8 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número
-                e 1 caractere especial</span
-              >
             }
           </div>
         </div>

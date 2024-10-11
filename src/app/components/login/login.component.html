@@ -23,7 +23,7 @@
           @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) {
             <span class="input-error">Campo obrigatório</span>
           }
-          @if (loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched) {
+          @else if (loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched) {
             <span class="input-error">Insira um e-mail válido</span>
           }
         </div>
@@ -52,14 +52,6 @@
               loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched
             ) {
               <span class="input-error">Campo obrigatório</span>
-            }
-            @if (
-              loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched
-            ) {
-              <span class="input-error max-w-sm"
-                >Deve conter no mínimo 8 caracteres, 1 letra maiúscula, 1 letra minúscula, 1 número
-                e 1 caractere especial</span
-              >
             }
           </div>
         </div>
