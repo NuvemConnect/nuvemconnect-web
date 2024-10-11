@@ -1,22 +1,23 @@
 <div class="flex flex-col md:flex-row w-full justify-around items-center">
   <div
-    class="flex flex-col relative justify-center items-center max-w-md bg-white p-8 rounded-3xl w-full min-h-[650px]"
+    class="flex flex-col relative justify-center items-center bg-white p-8 rounded-3xl max-w-[28.25rem] min-h-[650px]"
   >
     <a [routerLink]="['']" alt="voltar" aria-label="voltar">
       <img class="button-back" src="botaoVoltar.svg" alt="voltar" srcset="" />
     </a>
-    <h2 class="text-primary-950 text-subtitle font-bold text-3xl mb-0 text-center">
+    <h2 class="subtitle text-center">
       Verifique sua conta
     </h2>
-    <p class="leading-relaxed my-2 text-neutral-400 text-subtext text-center">
+    <p class="secondary-text text-center">
       O link de ativação da conta foi enviado para o endereço de e-mail que você forneceu
     </p>
     <iframe
       src="https://lottie.host/embed/005d7feb-22ce-4430-b9e3-33c55e0a2c0b/iIUVUAlWM6.json"
+      class="my-4 max-w-[9.125rem] sm:max-w-[13.3125rem] w-full"
     ></iframe>
-    <p class="leading-relaxed my-2 text-neutral-400 text-subtext text-center">
+    <p class="tertiary-text">
       Não recebeu o e-mail?
-      <a [routerLink]="['/']" class="text-primary-400 hover:text-primary-500">envie novamente</a>
+      <a [routerLink]="['/']" class="link">envie novamente</a>
       <!-- ainda precisa ser implementado link de reenvio -->
     </p>
   </div>
