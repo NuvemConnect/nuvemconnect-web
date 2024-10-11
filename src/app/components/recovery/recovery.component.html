@@ -1,16 +1,16 @@
 <div class="flex flex-col md:flex-row w-full justify-around items-center">
   <div
-    class="flex flex-col relative justify-center items-center max-w-md bg-white p-8 rounded-3xl w-full min-h-[650px]"
+    class="flex flex-col relative justify-center items-center bg-white p-8 rounded-3xl max-w-[532px] min-h-[650px]"
   >
     <a [routerLink]="['/login']" alt="voltar" aria-label="voltar">
       <img class="button-back" src="botaoVoltar.svg" alt="" srcset="" />
     </a>
-    <h2 class="subtitle">Esqueci minha senha</h2>
+    <h2 class="subtitle text-center mb-5">Esqueci minha senha</h2>
     <p class="secondary-text text-center">
       Se você esqueceu sua senha, por favor digite seu e-mail abaixo para restaurar a senha.
     </p>
-    <form class="w-full max-w-sm" [formGroup]="recoveryForm" (ngSubmit)="onSubmit()">
-      <div class="relative">
+    <form class="w-full max-w-sm mt-4" [formGroup]="recoveryForm" (ngSubmit)="onSubmit()">
+      <div class="relative mb-6">
         <label for="email" class="label"> Email </label>
         <input
           formControlName="email"
