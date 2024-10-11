@@ -1,8 +1,10 @@
-<div class="flex flex-col lg:flex-row justify-between items-center mx-auto p-2 w-6/6">
+<div
+  class="flex flex-col lg:flex-row justify-between items-center mx-auto p-2 w-6/6 lg:min-h-screen"
+>
   <div>
     <app-header class="w-11/12 lg:w-10/12" [title]="title"></app-header>
   </div>
-  <main class="w-full rounded-[0.625rem]">
+  <main class="md:w-10/12 p-5 lg:shadow-none shadow-custom rounded-[0.625rem]">
     <router-outlet></router-outlet>
   </main>
 </div>
