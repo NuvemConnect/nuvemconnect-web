@@ -1,14 +1,14 @@
 <div class="flex flex-col md:flex-row w-full justify-around items-center">
   <div
-    class="flex flex-col relative justify-center items-center max-w-md bg-white p-8 rounded-3xl w-full min-h-[650px]"
+    class="flex flex-col relative justify-center items-center bg-white p-8 rounded-3xl max-w-[532px] min-h-[650px]"
   >
     <a [routerLink]="['/login']" alt="voltar" aria-label="voltar">
       <img class="button-back" src="botaoVoltar.svg" alt="" srcset="" />
     </a>
-    <h2 class="subtitle">Comece agora</h2>
+    <h2 class="subtitle text-center mt-7 sm:mt-4">Comece agora</h2>
     <p class="secondary-text">Crie sua conta</p>
-    <form class="w-full" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="relative">
+    <form class="w-full mt-5 sm:mt-7" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="relative mb-4">
         <label for="name" class="label"> Nome </label>
         <input
           formControlName="name"
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      <div class="relative">
+      <div class="relative mb-4">
         <label for="email" class="label"> Email </label>
         <input
           formControlName="email"
@@ -53,7 +53,7 @@
           }
         </div>
       </div>
-      <div class="relative">
+      <div class="relative mb-4">
         <label for="password" class="label"> Senha </label>
         <div class="relative">
           <input
@@ -71,7 +71,7 @@
             />
           </i>
 
-          <div class="input-error">
+          <div class="input-error max-w-[430px]">
             @if (
               registerForm.get('password')?.hasError('required') &&
               registerForm.get('password')?.touched
@@ -86,7 +86,7 @@
               registerForm.get('password')?.hasError('pattern') &&
               registerForm.get('password')?.touched
             ) {
-              <span class=""
+              <span
                 >Deve conter 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere
                 especial</span
               >
@@ -95,7 +95,7 @@
         </div>
       </div>
 
-      <div class="relative">
+      <div class="relative mb-6">
         <label for="confirmPassword" class="label"> Confirme sua senha </label>
         <div class="relative">
           <input
@@ -130,7 +130,7 @@
       </div>
     </form>
 
-    <p class="text-slate-400 mt-3 text-center text-text">
+    <p class="tertiary-text mt-7">
       Tem uma conta?
       <a [routerLink]="['/login']" class="link">Conecte-se</a>
     </p>
