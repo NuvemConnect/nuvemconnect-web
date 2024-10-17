@@ -58,7 +58,10 @@ module.exports = {
         subtitleLarge: '33px',
         title: '40px',
         titleLarge: '44px'
-      }
+      },
+      boxShadow: {
+        'custom-shadow': '0px 2px 2px 0px #00000040',
+      },
     },
     screens: {
       'sm': '360px',
