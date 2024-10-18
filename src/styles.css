@@ -10,6 +10,9 @@
   .button-secondary {
     @apply text-primary-900 bg-white-50 border-2 border-neutral-300 rounded-3xl py-2 px-8 focus:outline-none hover:border-neutral-600 hover:bg-neutral-200 font-semibold text-textLarge w-full;
   }
+  .button-tertiary {
+    @apply text-neutral-500 bg-white-50 border-2 border-neutral-100 rounded-3xl py-2 px-8 focus:outline-none hover:border-primary-400 hover:bg-primary-400 hover:text-white-50 font-semibold text-textLarge w-full;
+  }
   .button-back {
     @apply absolute top-4 left-4 p-2 bg-neutral-50 hover:bg-neutral-100 rounded-full;
   }
@@ -26,7 +29,7 @@
     @apply text-primary-900 text-2xl font-bold;
   }
   .subtitle {
-    @apply text-neutral-950 text-subtitle sm:text-title font-bold;
+    @apply text-neutral-500 text-subtitle sm:text-title font-bold;
   }
   .secondary-text {
     @apply leading-relaxed my-2 text-neutral-300 text-text sm:text-subheading font-sans;
