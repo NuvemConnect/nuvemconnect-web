@@ -3,11 +3,22 @@
     class="flex flex-col relative justify-center items-center bg-white p-8 rounded-3xl max-w-[532px] min-h-[650px]"
   >
     <a [routerLink]="['/login']" alt="voltar" aria-label="voltar">
-      <img class="button-back" src="botaoVoltar.svg" alt="" srcset="" />
+      <img
+        class="button-back"
+        src="botaoVoltar.svg"
+        alt=""
+        srcset=""
+        data-testid="img-back-link-register"
+      />
     </a>
     <h2 class="subtitle text-center mt-7 sm:mt-4">Comece agora</h2>
     <p class="secondary-text">Crie sua conta</p>
-    <form class="w-full mt-5 sm:mt-7" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form
+      class="w-full mt-5 sm:mt-7"
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
+      data-testid="container-form-register"
+    >
       <div class="relative mb-4">
         <label for="name" class="label"> Nome </label>
         <input
@@ -17,16 +28,19 @@
           name="name"
           placeholder="Seu nome"
           class="input"
+          data-testid="input-name-register"
         />
         <div class="input-error">
           @if (
             registerForm.get('name')?.hasError('required') && registerForm.get('name')?.touched
           ) {
-            <span class="">Campo obrigatório</span>
+            <span data-testid="span-required-error-register">Campo obrigatório</span>
           } @else if (
             registerForm.get('name')?.hasError('minlength') && registerForm.get('name')?.touched
           ) {
-            <span class="">O nome deve conter pelo menos 3 caracteres</span>
+            <span data-testid="span-minlength-error-register"
+              >O nome deve conter pelo menos 3 caracteres</span
+            >
           }
         </div>
       </div>
@@ -40,16 +54,17 @@
           name="email"
           placeholder="Seu email"
           class="input"
+          data-testid="input-email-register"
         />
         <div class="input-error">
           @if (
             registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched
           ) {
-            <span class="">Campo obrigatório</span>
+            <span data-testid="span-required-error-register">Campo obrigatório</span>
           } @else if (
             registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched
           ) {
-            <span class="">Insira um e-mail válido</span>
+            <span data-testid="span-required-error-register">Insira um e-mail válido</span>
           }
         </div>
       </div>
@@ -63,11 +78,13 @@
             name="password"
             placeholder="Sua senha"
             class="input"
+            data-testid="input-password-register"
           />
           <i class="mx-auto my-auto absolute top-2 right-2 cursor-pointer">
             <img
               [src]="showPassword ? 'hide.svg' : 'show.svg'"
               (click)="toggleVisibilityPassword()"
+              data-testid="img-password-toggle-register"
             />
           </i>
 
@@ -76,17 +93,19 @@
               registerForm.get('password')?.hasError('required') &&
               registerForm.get('password')?.touched
             ) {
-              <span class="">Campo obrigatório</span>
+              <span data-testid="span-required-password-error-register">Campo obrigatório</span>
             } @else if (
               registerForm.get('password')?.hasError('minlength') &&
               registerForm.get('password')?.touched
             ) {
-              <span class="">Deve conter no mínimo 8 caracteres</span>
+              <span data-testid="span-minlength-password-error-register"
+                >Deve conter no mínimo 8 caracteres</span
+              >
             } @else if (
               registerForm.get('password')?.hasError('pattern') &&
               registerForm.get('password')?.touched
             ) {
-              <span
+              <span data-testid="span-pattern-error-register" :
                 >Deve conter 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere
                 especial</span
               >
@@ -105,11 +124,13 @@
             name="passwordConfirmation"
             placeholder="Sua senha"
             class="input"
+            data-testid="input-confirm-password-new-password-register"
           />
           <i class="mx-auto my-auto absolute top-2 right-2 cursor-pointer">
             <img
               [src]="showConfirmPassword ? 'hide.svg' : 'show.svg'"
               (click)="toggleVisibilityConfirmPassword()"
+              data-testid="img-password-toggle-register"
             />
           </i>
           <div class="input-error">
@@ -117,14 +138,19 @@
               registerForm.get('passwordConfirmation')?.hasError('required') &&
               registerForm.get('passwordConfirmation')?.touched
             ) {
-              <span class="">Campo obrigatório</span>
+              <span data-testid="span-password-required-error-register">Campo obrigatório</span>
             }
           </div>
         </div>
       </div>
 
       <div class="flex justify-center items-center w-full">
-        <button [disabled]="!registerForm.valid" type="submit" class="button-primary">
+        <button
+          [disabled]="!registerForm.valid"
+          type="submit"
+          class="button-primary"
+          data-testid="button-register"
+        >
           Registrar
         </button>
       </div>
@@ -132,7 +158,9 @@
 
     <p class="tertiary-text mt-7">
       Tem uma conta?
-      <a [routerLink]="['/login']" class="link">Conecte-se</a>
+      <a [routerLink]="['/login']" class="link" data-testid="a-connect-account-register"
+        >Conecte-se</a
+      >
     </p>
   </div>
 </div>
