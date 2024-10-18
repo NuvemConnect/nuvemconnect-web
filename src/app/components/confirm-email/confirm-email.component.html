@@ -1,11 +1,20 @@
 <div class="flex flex-col md:flex-row w-full justify-around items-center">
   <div
     class="flex flex-col relative justify-center items-center bg-white p-8 rounded-3xl max-w-[28.25rem] min-h-[650px]"
+    data-testid="content-confirma-email"
   >
     <a [routerLink]="['']" alt="voltar" aria-label="voltar">
-      <img class="button-back" src="botaoVoltar.svg" alt="voltar" srcset="" />
+      <img
+        class="button-back"
+        src="botaoVoltar.svg"
+        alt="voltar"
+        srcset=""
+        data-testid="img-back-link-confirma-email"
+      />
     </a>
-    <h2 class="subtitle text-center">Verifique sua conta</h2>
+    <h2 class="subtitle text-center" data-testid="h2-subtitle-confirma-email">
+      Verifique sua conta
+    </h2>
     <p class="secondary-text text-center">
       O link de ativação da conta foi enviado para o endereço de e-mail que você forneceu
     </p>
@@ -15,7 +24,9 @@
     ></iframe>
     <p class="tertiary-text">
       Não recebeu o e-mail?
-      <a [routerLink]="['/']" class="link">envie novamente</a>
+      <a [routerLink]="['/']" class="link" data-testid="link-resend-email-confirma-email"
+        >envie novamente</a
+      >
       <!-- ainda precisa ser implementado link de reenvio -->
     </p>
   </div>
