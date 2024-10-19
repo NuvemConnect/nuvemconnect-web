@@ -11,6 +11,9 @@ yarn format || { echo "Formatação falhou. Abandonando o commit."; exit 1; }
 echo "Rodando pre-commit build!"
 yarn build || { echo "Build falhou. Abandonando o commit."; exit 1; }
 
+echo "Rodando deploy"
+yarn deploy || { echo "Deploy falhou. Abandonando o commit."; exit 1; }
+
 echo "Rodando pre-commit test!"
 yarn test || { echo "Testes falharam. Abandonando o commit."; exit 1; }
 
