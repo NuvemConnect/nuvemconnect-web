@@ -121,8 +121,7 @@ export class AuthService {
     }
   }
 
-  loginWithGoogle(){
+  loginWithGoogle() {
     return this.http.get(`${this.apiUrl}/login/google`);
   }
-
 }

@@ -104,6 +104,6 @@ export class LoginComponent implements OnInit {
         console.log(error);
         this.toastrService.error('Erro ao fazer login com google', 'Erro', { closeButton: true });
       }
-    })
+    });
   }
 }
