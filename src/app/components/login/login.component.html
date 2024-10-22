@@ -23,6 +23,11 @@
           name="email"
           placeholder="Seu email"
           class="input"
+          [class.border-red-input]="
+            (loginForm.get('email')?.hasError('required') ||
+              loginForm.get('email')?.hasError('email')) &&
+            loginForm.get('email')?.touched
+          "
           data-testid="input-email-login"
         />
         <div class="input-error">
@@ -49,6 +54,9 @@
             name="password"
             placeholder="Sua senha"
             class="input"
+            [class.border-red-input]="
+              loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched
+            "
             data-testid="input-password-login"
           />
           <i class="mx-auto my-auto absolute top-2 right-2 cursor-pointer">

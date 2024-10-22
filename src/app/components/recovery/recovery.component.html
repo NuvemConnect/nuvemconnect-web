@@ -32,6 +32,11 @@
           name="email"
           placeholder="Digite seu email"
           class="input"
+          [class.border-red-input]="
+            (recoveryForm.get('email')?.hasError('required') ||
+              recoveryForm.get('email')?.hasError('email')) &&
+            recoveryForm.get('email')?.touched
+          "
           data-testid="input-email-recovery"
         />
         <div class="input-error">
