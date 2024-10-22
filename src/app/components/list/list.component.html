@@ -3,15 +3,17 @@
     <div class="flex">
       @if (user) {
         <div class="flex flex-col justify-end">
-          <p>{{ user.name }}</p>
-          <p>{{ user.email }}</p>
+          <p data-testid="p-name-list">{{ user.name }}</p>
+          <p data-testid="p-email-list">{{ user.email }}</p>
         </div>
       } @else {
         <div class="flex flex-col justify-end">
-          <p>Usuário não autenticado</p>
+          <p data-testid="p-unauthenticated-text-list">Usuário não autenticado</p>
         </div>
       }
     </div>
-    <button class="button-primary max-w-sm" (click)="logout()">Logout</button>
+    <button class="button-primary max-w-sm" (click)="logout()" data-testid="button-submit-list">
+      Logout
+    </button>
   </div>
 </div>

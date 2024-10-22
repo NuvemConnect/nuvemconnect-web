@@ -1,15 +1,20 @@
 <header class="flex justify-center items-center gap-2 pt-12 lg:hidden m-auto">
-  <img class="h-8" src="logotipo.svg" alt="logotipo" />
-  <h1 class="text-primary-950 text-2xl font-bold">{{ title }}</h1>
+  <img class="h-[1.3125rem] sm:h-[1.6875rem]" src="logotipo.svg" alt="logotipo" />
+  <h1 class="text-2xl font-bold">{{ title }}</h1>
 </header>
 <div class="flex flex-col lg:flex-row w-full justify-around items-center">
   <div
-    class="flex flex-col relative justify-center items-center max-w-md bg-white p-8 rounded-3xl w-full min-h-[650px]"
+    class="flex flex-col relative justify-center items-center p-8 rounded-3xl max-w-[532px] min-h-[650px]"
   >
-    <h2 class="subtitle">Bem vindo de volta!</h2>
+    <h2 class="subtitle text-center" data-testid="h2-subtitle-login">Bem vindo de volta!</h2>
     <p class="secondary-text text-center">Insira suas credenciais para acessar sua conta</p>
-    <form class="w-full" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="relative">
+    <form
+      class="w-full"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      data-testid="container-form-login"
+    >
+      <div class="relative mb-4">
         <label for="email" class="label"> Email </label>
         <input
           formControlName="email"
@@ -18,14 +23,19 @@
           name="email"
           placeholder="Seu email"
           class="input"
+          data-testid="input-email-login"
         />
         <div class="input-error">
           @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) {
-            <span class="input-error">Campo obrigatório</span>
+            <span class="input-error" data-testid="email-required-error-login"
+              >Campo obrigatório</span
+            >
           } @else if (
             loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched
           ) {
-            <span class="input-error">Insira um e-mail válido</span>
+            <span class="input-error" data-testid="email-invalid-error-login"
+              >Insira um e-mail válido</span
+            >
           }
         </div>
       </div>
@@ -39,6 +49,7 @@
             name="password"
             placeholder="Sua senha"
             class="input"
+            data-testid="input-password-login"
           />
           <i class="mx-auto my-auto absolute top-2 right-2 cursor-pointer">
             <img
@@ -46,52 +57,65 @@
               alt=""
               srcset=""
               (click)="toggleVisibilityPassword()"
+              data-testid="img-password-toggle-login"
             />
           </i>
           <div class="input-error">
             @if (
               loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched
             ) {
-              <span class="input-error">Campo obrigatório</span>
+              <span class="input-error" data-testid="span-required-password-error-testid"
+                >Campo obrigatório</span
+              >
             }
           </div>
         </div>
       </div>
       <div
-        class="flex items-center justify-end text-primary-400 hover:text-primary-500 hover:underline"
+        class="flex items-center justify-end text-primary-900 hover:text-primary-700 hover:underline"
       >
-        <a [routerLink]="['/recovery']" class="text-text mb-2">Esqueceu sua senha?</a>
+        <a
+          [routerLink]="['/recovery']"
+          class="text-text sm:text-textLarge mb-8 font-sans"
+          data-testid="a-forgot-password-login"
+          >Esqueceu sua senha?</a
+        >
       </div>
 
       <div class="flex justify-center items-center w-full">
-        <button [disabled]="!loginForm.valid" type="submit" class="button-primary">Entrar</button>
+        <button
+          [disabled]="!loginForm.valid"
+          type="submit"
+          class="button-primary"
+          data-testid="button-login"
+        >
+          Entrar
+        </button>
       </div>
     </form>
 
-    <p class="secondary-text">
+    <p class="tertiary-text">
       Não tem uma conta?
-      <a
-        [routerLink]="['/register']"
-        class="text-primary-400 hover:text-primary-500 hover:underline"
+      <a [routerLink]="['/register']" class="link" data-testid="a-create-account-login"
         >Crie sua conta aqui</a
       >
     </p>
-    <div class="flex justify-around my-5 w-full">
+    <div class="flex justify-around my-4 w-full">
       <span
-        class="inline-block h-[0.5px] max-w-32 mr-2 w-full rounded-3xl bg-neutral-400 mt-3 mb-6"
+        class="inline-block h-[0.5px] max-w-32 mr-2 w-full rounded-3xl bg-neutral-100 mt-3 mb-6"
       ></span>
-      <p class="text-subtexto text-slate-400 text-text">Ou</p>
+      <p class="text-subtext sm:text-text text-slate-200 font-sans">Ou</p>
       <span
-        class="inline-block h-[0.5px] max-w-32 ml-2 w-full rounded-3xl bg-neutral-400 mt-3 mb-6"
+        class="inline-block h-[0.5px] max-w-32 ml-2 w-full rounded-3xl bg-neutral-100 mt-3 mb-6"
       ></span>
     </div>
     <div class="w-full">
       <button
         type="button"
-        class="flex justify-center items-center w-full button-secondary"
+        class="flex justify-center items-center w-full button-tertiary"
         (click)="signInWithGoogle()"
       >
-        <img src="google.svg" /> Entrar com Google
+        <img src="google.svg" data-testid="img-button-login" /> Entrar com Google
       </button>
     </div>
   </div>
