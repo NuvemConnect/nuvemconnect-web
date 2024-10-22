@@ -120,4 +120,9 @@ export class AuthService {
       return false;
     }
   }
+
+  loginWithGoogle(){
+    return this.http.get(`${this.apiUrl}/login/google`);
+  }
+
 }
