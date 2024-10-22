@@ -23,6 +23,11 @@
           name="email"
           placeholder="Seu email"
           class="input"
+          [class.border-red-input]="
+            (loginForm.get('email')?.hasError('required') ||
+              loginForm.get('email')?.hasError('email')) &&
+            loginForm.get('email')?.touched
+          "
           data-testid="input-email-login"
         />
         <div class="input-error">
@@ -49,6 +54,9 @@
             name="password"
             placeholder="Sua senha"
             class="input"
+            [class.border-red-input]="
+              loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched
+            "
             data-testid="input-password-login"
           />
           <i class="mx-auto my-auto absolute top-2 right-2 cursor-pointer">
@@ -83,14 +91,7 @@
       </div>
 
       <div class="flex justify-center items-center w-full">
-        <button
-          [disabled]="!loginForm.valid"
-          type="submit"
-          class="button-primary"
-          data-testid="button-login"
-        >
-          Entrar
-        </button>
+        <button type="submit" class="button-primary" data-testid="button-login">Entrar</button>
       </div>
     </form>
 
@@ -113,7 +114,7 @@
       <button
         type="button"
         class="flex justify-center items-center w-full button-tertiary"
-        (click)="signInWithGoogle()"
+        (click)="loginWithGoogle()"
       >
         <img src="google.svg" data-testid="img-button-login" /> Entrar com Google
       </button>

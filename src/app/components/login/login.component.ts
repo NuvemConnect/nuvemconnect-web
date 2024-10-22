@@ -94,7 +94,16 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  signInWithGoogle() {
-    this.toastrService.success('Login com google', 'Sucesso', { closeButton: true });
+  loginWithGoogle() {
+    this.authService.loginWithGoogle().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.toastrService.success('Login com google', 'Sucesso', { closeButton: true });
+      },
+      error: (error) => {
+        console.log(error);
+        this.toastrService.error('Erro ao fazer login com google', 'Erro', { closeButton: true });
+      }
+    });
   }
 }

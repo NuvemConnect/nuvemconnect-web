@@ -28,6 +28,11 @@
           name="name"
           placeholder="Seu nome"
           class="input"
+          [class.border-red-input]="
+            (registerForm.get('name')?.hasError('required') ||
+              registerForm.get('name')?.hasError('minlength')) &&
+            registerForm.get('name')?.touched
+          "
           data-testid="input-name-register"
         />
         <div class="input-error">
@@ -54,6 +59,11 @@
           name="email"
           placeholder="Seu email"
           class="input"
+          [class.border-red-input]="
+            (registerForm.get('email')?.hasError('required') ||
+              registerForm.get('email')?.hasError('email')) &&
+            registerForm.get('email')?.touched
+          "
           data-testid="input-email-register"
         />
         <div class="input-error">
@@ -78,6 +88,12 @@
             name="password"
             placeholder="Sua senha"
             class="input"
+            [class.border-red-input]="
+              (registerForm.get('password')?.hasError('required') ||
+                registerForm.get('password')?.hasError('minlength') ||
+                registerForm.get('password')?.hasError('pattern')) &&
+              registerForm.get('password')?.touched
+            "
             data-testid="input-password-register"
           />
           <i class="mx-auto my-auto absolute top-2 right-2 cursor-pointer">
@@ -124,6 +140,10 @@
             name="passwordConfirmation"
             placeholder="Sua senha"
             class="input"
+            [class.border-red-input]="
+              registerForm.get('passwordConfirmation')?.hasError('required') &&
+              registerForm.get('passwordConfirmation')?.touched
+            "
             data-testid="input-confirm-password-new-password-register"
           />
           <i class="mx-auto my-auto absolute top-2 right-2 cursor-pointer">
@@ -145,12 +165,7 @@
       </div>
 
       <div class="flex justify-center items-center w-full">
-        <button
-          [disabled]="!registerForm.valid"
-          type="submit"
-          class="button-primary"
-          data-testid="button-register"
-        >
+        <button type="submit" class="button-primary" data-testid="button-register">
           Registrar
         </button>
       </div>
