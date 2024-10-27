@@ -1,3 +1,3 @@
 export const environment = {
-  baseUrl: 'https://nuvemconnectapi.seronsoftware.com'
+  baseUrl: 'https://nuvemconnectapi.seronsoftware.com/'
 };

@@ -18,7 +18,7 @@ export class AuthService {
   private isBrowser: boolean;
   private http = inject(HttpClient);
 
-  readonly apiUrl = environment.baseUrl; // https://nuvemconnectapi.seronsoftware.com
+  readonly apiUrl = environment.baseUrl; // https://nuvemconnectapi.seronsoftware.com // http://localhost:3000
 
   constructor(@Inject(PLATFORM_ID) platformId: object) {
     this.isBrowser = isPlatformBrowser(platformId);
