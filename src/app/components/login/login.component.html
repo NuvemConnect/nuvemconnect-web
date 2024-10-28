@@ -6,10 +6,10 @@
   <div
     class="flex flex-col relative justify-center items-center p-8 rounded-3xl max-w-[532px] min-h-[650px]"
   >
-    <h2 class="subtitle text-center" data-testid="h2-subtitle-login">Bem vindo de volta!</h2>
+    <h2 class="subtitle text-center mt-7 sm:mt-4" data-testid="h2-subtitle-login">Bem vindo de volta!</h2>
     <p class="secondary-text text-center">Insira suas credenciais para acessar sua conta</p>
     <form
-      class="w-full"
+      class="w-full mt-5 sm:mt-7"
       [formGroup]="loginForm"
       (ngSubmit)="onSubmit()"
       data-testid="container-form-login"
