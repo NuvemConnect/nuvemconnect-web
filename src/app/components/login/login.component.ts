@@ -83,6 +83,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
       this.login();
     } else {
@@ -98,11 +99,14 @@ export class LoginComponent implements OnInit {
     this.authService.loginWithGoogle().subscribe({
       next: (response) => {
         console.log(response);
-        this.toastrService.success('Login com google', 'Sucesso', { closeButton: true });
       },
       error: (error) => {
-        console.log(error);
-        this.toastrService.error('Erro ao fazer login com google', 'Erro', { closeButton: true });
+        console.error('Erro ao fazer Login:', error.error.message);
+        this.toastrService.error(
+          `Erro ao fazer Login. Tente novamente. ${error.error?.message || ''}`,
+          'Erro',
+          { closeButton: true }
+        );
       }
     });
   }
