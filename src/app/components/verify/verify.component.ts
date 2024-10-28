@@ -72,6 +72,7 @@ export class VerifyComponent {
   }
 
   onSubmit(): void {
+    this.codeForm.markAllAsTouched();
     const code: string | null = Object.values(this.codeForm.value).join('');
 
     if (code === this.token && this.token !== null) {

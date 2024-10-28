@@ -57,6 +57,7 @@ export class RegisterComponent {
   }
 
   onSubmit() {
+    this.registerForm.markAllAsTouched();
     if (this.registerForm.valid) {
       const { name, isActive, email, password, passwordConfirmation } = this.registerForm.value;
       this.authService

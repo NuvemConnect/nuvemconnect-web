@@ -38,6 +38,7 @@ export class RecoveryComponent {
     });
   }
   onSubmit() {
+    this.recoveryForm.markAllAsTouched();
     this.email = this.recoveryForm.get('email')?.value;
 
     if (this.recoveryForm.valid) {

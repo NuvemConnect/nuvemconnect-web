@@ -83,6 +83,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
       this.login();
     } else {
@@ -97,7 +98,7 @@ export class LoginComponent implements OnInit {
   loginWithGoogle() {
     this.authService.loginWithGoogle().subscribe({
       next: (response) => {
-        console.log(response)
+        console.log(response);
       },
       error: (error) => {
         console.error('Erro ao fazer Login:', error.error.message);

@@ -55,6 +55,7 @@ export class NewPasswordComponent {
   }
 
   onSubmit() {
+    this.newPasswordForm.markAllAsTouched();
     if (this.newPasswordForm.valid) {
       if (this.senhaIgualConfirmacao()) {
         this.authService
