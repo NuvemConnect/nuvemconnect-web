@@ -35,7 +35,7 @@
           "
           data-testid="input-name-register"
         />
-          <div class="input-error">
+        <div class="input-error">
           @if (
             registerForm.get('name')?.hasError('required') && registerForm.get('name')?.touched
           ) {
@@ -66,7 +66,7 @@
           "
           data-testid="input-email-register"
         />
-          <div class="input-error">
+        <div class="input-error">
           @if (
             registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched
           ) {
@@ -80,7 +80,7 @@
       </div>
       <div class="relative mb-2">
         <label for="password" class="label"> Senha </label>
-        <div class="relative ">
+        <div class="relative">
           <input
             formControlName="password"
             [type]="showPassword ? 'text' : 'password'"
