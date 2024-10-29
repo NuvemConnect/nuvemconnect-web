@@ -4,19 +4,23 @@
 </header>
 <div class="flex flex-col lg:flex-row w-full justify-around items-center">
   <div
-    class="flex flex-col relative justify-center items-center p-8 rounded-3xl max-w-[532px] min-h-[650px]"
+    class="flex flex-col relative w-full justify-center items-center p-8 rounded-3xl max-w-[532px] min-h-[650px]"
   >
+
     <h2 class="subtitle text-center mt-7 sm:mt-4" data-testid="h2-subtitle-login">
       Bem vindo de volta!
     </h2>
-    <p class="secondary-text text-center">Insira suas credenciais para acessar sua conta</p>
+    <p class="secondary-text text-center">
+      Insira suas credenciais para acessar sua conta
+    </p>
+
     <form
       class="w-full mt-5 sm:mt-7"
       [formGroup]="loginForm"
       (ngSubmit)="onSubmit()"
       data-testid="container-form-login"
     >
-      <div class="relative mb-4">
+      <div class="relative mb-0">
         <label for="email" class="label"> Email </label>
         <input
           formControlName="email"
@@ -46,7 +50,7 @@
           }
         </div>
       </div>
-      <div class="relative mb-4">
+      <div class="relative mb-0">
         <label for="password" class="label"> Senha </label>
         <div class="relative">
           <input
@@ -92,16 +96,22 @@
         >
       </div>
 
-      <div class="flex justify-center items-center w-full">
-        <button type="submit" class="button-primary" data-testid="button-login">Entrar</button>
+      <div class="flex justify-center items-center w-full" data-testid="container-submit-button-login">
+        <button type="submit" class="button-primary" data-testid="button-login">
+          Entrar
+        </button>
       </div>
     </form>
 
     <p class="tertiary-text">
       Não tem uma conta?
-      <a [routerLink]="['/register']" class="link" data-testid="a-create-account-login"
-        >Crie sua conta aqui</a
-      >
+      <a 
+        [routerLink]="['/register']" 
+        class="link" 
+        data-testid="a-create-account-login"
+        >
+        Crie sua conta aqui
+      </a>
     </p>
     <div class="flex justify-around my-4 w-full">
       <span

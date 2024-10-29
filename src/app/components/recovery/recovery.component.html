@@ -1,29 +1,30 @@
-<div class="flex flex-col md:flex-row w-full justify-around items-center">
+<div class="flex flex-col lg:flex-row w-full justify-around items-center">
   <div
-    class="flex flex-col relative justify-center items-center bg-white p-8 rounded-3xl max-w-[532px] min-h-[650px]"
+    class="flex flex-col relative w-full justify-center items-center bg-white p-8 rounded-3xl max-w-[532px] min-h-[650px]"
   >
     <a [routerLink]="['/login']" alt="voltar" aria-label="voltar">
       <img
         class="button-back"
         src="botaoVoltar.svg"
-        alt=""
-        srcset=""
+        alt="voltar"
         data-testid="img-back-link-recovery"
       />
     </a>
+
     <h2 class="subtitle text-center mb-5" data-testid="h2-subtitle-recovery">
       Esqueci minha senha
     </h2>
     <p class="secondary-text text-center">
       Se você esqueceu sua senha, por favor digite seu e-mail abaixo para restaurar a senha.
     </p>
+
     <form
       class="w-full mt-5 sm:mt-7"
       [formGroup]="recoveryForm"
       (ngSubmit)="onSubmit()"
       data-testid="container-form-recovery"
     >
-      <div class="relative mb-6">
+      <div class="relative mb-0">
         <label for="email" class="label"> Email </label>
         <input
           formControlName="email"
