@@ -29,6 +29,6 @@ export class ListComponent {
     this.user = null;
     this.authService.removeToken();
     this.router.navigate(['/login']);
-    this.toastrService.warning('Logout efetuado com sucesso', 'Logout', { closeButton: true });
+    this.toastrService.warning('Logout efetuado com sucesso.', 'Logout', { closeButton: true });
   }
 }

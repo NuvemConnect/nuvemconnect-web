@@ -79,7 +79,9 @@ export class VerifyComponent {
       this.toastrService.success('Código validado com sucesso', 'Sucesso', { closeButton: true });
       this.router.navigate(['/new-password']);
     } else {
-      this.toastrService.error('Código inválido', 'Erro', { closeButton: true });
+      this.toastrService.error('Por favor, insira um código válido.', 'Erro', {
+        closeButton: true
+      });
     }
   }
 }

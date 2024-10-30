@@ -10,7 +10,6 @@ import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { AuthService } from '../../services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { tap, catchError, of } from 'rxjs';
 import { VerifyService } from '../../services/verify/verify.service';
 
 @Component({
@@ -42,34 +41,31 @@ export class RecoveryComponent {
     this.email = this.recoveryForm.get('email')?.value;
 
     if (this.recoveryForm.valid) {
-      this.authService
-        .forgotPassword(this.email!)
-        .pipe(
-          tap((response) => {
-            if (!response) {
-              this.toastrService.error('Erro ao solicitar o código.', 'Erro', {
-                closeButton: true
-              });
-            }
-            this.verifyService.setTokens(response.token, response.tokenUUID, this.email!);
-            this.router.navigate([`/verify`]);
-            this.toastrService.success(
-              `Um e-mail de redefição de senha foi enviado para ${this.email!}.`,
-              'Sucesso',
-              { closeButton: true }
-            );
-          }),
-          catchError((error) => {
-            this.toastrService.error(
-              `E-mail não localizado.
-              ${this.email!}`,
-              'Erro',
-              { closeButton: true }
-            );
-            return of(error.error.message);
-          })
-        )
-        .subscribe();
+      this.authService.forgotPassword(this.email!).subscribe({
+        next: (response) => {
+          if (!response) {
+            this.toastrService.error('Erro ao solicitar o código.', 'Erro', {
+              closeButton: true
+            });
+          }
+          this.verifyService.setTokens(response.token, response.tokenUUID, this.email!);
+          this.router.navigate([`/verify`]);
+          this.toastrService.success(
+            `Um e-mail de redefição de senha foi enviado para ${this.email!}.`,
+            'Sucesso',
+            { closeButton: true }
+          );
+        },
+
+        error: (error) => {
+          console.error('Erro ao solicitar a recuperação da senha:', error.error.message);
+          this.toastrService.error(
+            `Erro ao solicitar a recuperação da senha. Tente novamente.`,
+            'Erro',
+            { closeButton: true }
+          );
+        }
+      });
     }
   }
 }

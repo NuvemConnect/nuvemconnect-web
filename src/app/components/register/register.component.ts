@@ -62,10 +62,9 @@ export class RegisterComponent {
       const { name, isActive, email, password, passwordConfirmation } = this.registerForm.value;
       this.authService
         .createAccount(name, isActive, email, password, passwordConfirmation)
-        .subscribe(
-          (response) => {
+        .subscribe({
+          next: (response) => {
             if (response) {
-              console.log(response.message);
               this.toastrService.success(
                 'Conta criada com sucesso. Por favor, verifique seu email.',
                 'Sucesso',
@@ -75,20 +74,18 @@ export class RegisterComponent {
                 queryParams: { email: email }
               });
             } else {
-              this.toastrService.error(
-                response || 'Erro ao criar conta. Tente novamente.',
-                'Erro',
-                { closeButton: true }
-              );
+              this.toastrService.error('Erro ao criar conta. Tente novamente.', 'Erro', {
+                closeButton: true
+              });
             }
           },
-          (error) => {
-            console.error(`Erro ao criar conta: ${error.message}`);
-            this.toastrService.error('Erro ao criar conta. Tente novamente.', 'Erro', {
+          error: (error) => {
+            console.error('Erro ao criar conta:', error.error.message);
+            this.toastrService.error(error.error.message, 'Erro', {
               closeButton: true
             });
           }
-        );
+        });
     } else {
       this.toastrService.error('Por favor, corrija os erros no formulário.', 'Erro', {
         closeButton: true

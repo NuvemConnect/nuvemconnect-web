@@ -65,20 +65,20 @@ export class LoginComponent implements OnInit {
               closeButton: true
             });
           } else {
-            this.toastrService.error('Credenciais inválidas', 'Erro', { closeButton: true });
+            this.toastrService.error('Senha ou email inválidos', 'Erro', { closeButton: true });
           }
         },
         error: (error) => {
           console.error('Erro ao fazer Login:', error.error.message);
-          this.toastrService.error(
-            `Erro ao fazer Login. Tente novamente. ${error.error?.message || ''}`,
-            'Erro',
-            { closeButton: true }
-          );
+          this.toastrService.error(`Erro ao fazer Login. Tente novamente.`, 'Erro', {
+            closeButton: true
+          });
         }
       });
     } else {
-      this.toastrService.error('Formulário inválido', 'Erro', { closeButton: true });
+      this.toastrService.error('Por favor, corrija os erros no formulário.', 'Erro', {
+        closeButton: true
+      });
     }
   }
 
@@ -87,7 +87,9 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.login();
     } else {
-      this.toastrService.error('Formulário inválido', 'Erro', { closeButton: true });
+      this.toastrService.error('Por favor, corrija os erros no formulário.', 'Erro', {
+        closeButton: true
+      });
     }
   }
 
