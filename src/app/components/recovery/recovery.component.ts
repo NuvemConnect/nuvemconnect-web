@@ -66,6 +66,10 @@ export class RecoveryComponent {
           );
         }
       });
+    } else {
+      this.toastrService.error(`Por favor corrija o erro no formulário.`, 'Erro', {
+        closeButton: true
+      });
     }
   }
 }

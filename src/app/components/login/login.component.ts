@@ -103,12 +103,10 @@ export class LoginComponent implements OnInit {
         console.log(response);
       },
       error: (error) => {
-        console.error('Erro ao fazer Login:', error.error.message);
-        this.toastrService.error(
-          `Erro ao fazer Login. Tente novamente. ${error.error?.message || ''}`,
-          'Erro',
-          { closeButton: true }
-        );
+        console.error('Erro ao fazer Login:', error.error);
+        this.toastrService.error(`Erro ao fazer Login. Tente novamente.`, 'Erro', {
+          closeButton: true
+        });
       }
     });
   }
