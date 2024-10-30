@@ -68,7 +68,9 @@ export class NewPasswordComponent {
           )
           .subscribe(() => {
             this.router.navigate(['/login']);
-            this.toastrService.success('Senha alterada com sucesso.', 'Sucesso', { closeButton: true });
+            this.toastrService.success('Senha alterada com sucesso.', 'Sucesso', {
+              closeButton: true
+            });
           });
         this.newPasswordForm.reset();
         this.router.navigate(['/login']);

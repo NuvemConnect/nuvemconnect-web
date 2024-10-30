@@ -62,34 +62,30 @@ export class RegisterComponent {
       const { name, isActive, email, password, passwordConfirmation } = this.registerForm.value;
       this.authService
         .createAccount(name, isActive, email, password, passwordConfirmation)
-        .subscribe(
-          {
-            next: (response) => {
-              if (response) {
-                this.toastrService.success(
-                  'Conta criada com sucesso. Por favor, verifique seu email.',
-                  'Sucesso',
-                  { closeButton: true }
-                );
-                this.router.navigate(['/confirm-email'], {
-                  queryParams: { email: email }
-                });
-              } else {
-                this.toastrService.error(
-                  'Erro ao criar conta. Tente novamente.',
-                  'Erro',
-                  { closeButton: true }
-                );
-              }
-            },
-            error: (error) => {
-              console.error('Erro ao criar conta:', error.error.message);
-              this.toastrService.error(error.error.message, 'Erro', {
+        .subscribe({
+          next: (response) => {
+            if (response) {
+              this.toastrService.success(
+                'Conta criada com sucesso. Por favor, verifique seu email.',
+                'Sucesso',
+                { closeButton: true }
+              );
+              this.router.navigate(['/confirm-email'], {
+                queryParams: { email: email }
+              });
+            } else {
+              this.toastrService.error('Erro ao criar conta. Tente novamente.', 'Erro', {
                 closeButton: true
               });
             }
+          },
+          error: (error) => {
+            console.error('Erro ao criar conta:', error.error.message);
+            this.toastrService.error(error.error.message, 'Erro', {
+              closeButton: true
+            });
           }
-        );
+        });
     } else {
       this.toastrService.error('Por favor, corrija os erros no formulário.', 'Erro', {
         closeButton: true
