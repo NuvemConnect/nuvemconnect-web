@@ -58,6 +58,14 @@ export class RegisterComponent {
 
   onSubmit() {
     this.registerForm.markAllAsTouched();
+
+    if (this.registerForm.hasError('senhasDiferentes')) {
+      this.toastrService.error('As senhas não coincidem. Por favor, corrija.', 'Erro', {
+        closeButton: true
+      });
+      return;
+    }
+
     if (this.registerForm.valid) {
       const { name, isActive, email, password, passwordConfirmation } = this.registerForm.value;
       this.authService
@@ -81,7 +89,7 @@ export class RegisterComponent {
           },
           error: (error) => {
             console.error('Erro ao criar conta:', error.error.message);
-            this.toastrService.error(error.error.message, 'Erro', {
+            this.toastrService.error('Erro ao criar conta. Tente novamente.', 'Erro', {
               closeButton: true
             });
           }
