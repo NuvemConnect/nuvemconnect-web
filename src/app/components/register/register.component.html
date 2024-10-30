@@ -2,11 +2,7 @@
   <div
     class="flex flex-col relative w-full justify-center items-center p-8 rounded-3xl max-w-[532px] min-h-[650px]"
   >
-    <a 
-      [routerLink]="['/login']" 
-      alt="voltar" 
-      aria-label="voltar"
-    >
+    <a [routerLink]="['/login']" alt="voltar" aria-label="voltar">
       <img
         class="button-back"
         src="botaoVoltar.svg"
@@ -15,15 +11,8 @@
       />
     </a>
 
-    <h2 
-      class="subtitle text-center mb-5" 
-      data-testid="h2-subtitle-register"
-      >
-      Comece agora
-    </h2>
-    <p class="secondary-text">
-      Crie sua conta
-    </p>
+    <h2 class="subtitle text-center mb-5" data-testid="h2-subtitle-register">Comece agora</h2>
+    <p class="secondary-text">Crie sua conta</p>
 
     <form
       class="w-full mt-5 sm:mt-7"
@@ -170,18 +159,16 @@
               registerForm.get('passwordConfirmation')?.hasError('required') &&
               registerForm.get('passwordConfirmation')?.touched
             ) {
-              <span data-testid="span-password-required-error-register">
-                Campo obrigatório
-              </span>
+              <span data-testid="span-password-required-error-register"> Campo obrigatório </span>
             }
           </div>
         </div>
       </div>
 
-      <div 
-        class="flex justify-center items-center w-full" 
+      <div
+        class="flex justify-center items-center w-full"
         data-testid="container-submit-button-register"
-        >
+      >
         <button type="submit" class="button-primary" data-testid="button-register">
           Registrar
         </button>
@@ -190,11 +177,7 @@
 
     <p class="tertiary-text mt-7">
       Tem uma conta?
-      <a 
-        [routerLink]="['/login']" 
-        class="link" 
-        data-testid="a-connect-account-register"
-        >
+      <a [routerLink]="['/login']" class="link" data-testid="a-connect-account-register">
         Conecte-se
       </a>
     </p>

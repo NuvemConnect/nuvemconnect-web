@@ -68,12 +68,12 @@ export class NewPasswordComponent {
           )
           .subscribe(() => {
             this.router.navigate(['/login']);
-            this.toastrService.success('Senha alterada com sucesso');
+            this.toastrService.success('Senha alterada com sucesso.', 'Sucesso', { closeButton: true });
           });
         this.newPasswordForm.reset();
         this.router.navigate(['/login']);
       } else {
-        this.toastrService.error('Senha não confere', 'Erro', { closeButton: true });
+        this.toastrService.error('As senhas não conferem.', 'Erro', { closeButton: true });
       }
     }
   }
