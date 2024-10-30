@@ -77,6 +77,8 @@ export class NewPasswordComponent {
       } else {
         this.toastrService.error('As senhas não conferem.', 'Erro', { closeButton: true });
       }
+    } else {
+      this.toastrService.error('Por favor, corrija as senhas.', 'Erro', { closeButton: true });
     }
   }
   toggleVisibilityConfirmPassword() {
