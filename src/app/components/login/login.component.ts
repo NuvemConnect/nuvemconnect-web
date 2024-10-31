@@ -7,7 +7,7 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { HeaderComponent } from '../../shared/header/header.component';
 import { inject } from '@angular/core';
@@ -40,6 +40,40 @@ export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private toastrService = inject(ToastrService);
+  private route = inject(ActivatedRoute);
+
+  constructor() {
+    this.route.queryParams.subscribe((params) => {
+      if (params['code']) {
+        this.authService.handleGoogleCallback(params['code']).subscribe({
+          next: (response) => {
+            console.log(response.token);
+            if (response.token) {
+              try {
+                const userDecoded: User = jwtDecode(response.token);
+                this.authService.setUser(userDecoded);
+                this.router.navigate(['/home']);
+                this.toastrService.success('Login com google realizado com sucesso.', 'Sucesso', {
+                  closeButton: true
+                });
+              } catch (error) {
+                console.error('Erro ao decodificar o Token:', error);
+                this.toastrService.error('Erro ao decodificar o Token.', 'Erro', {
+                  closeButton: true
+                });
+              }
+            }
+          },
+          error: (error) => {
+            console.error('Erro ao fazer Login com Google:', error);
+            this.toastrService.error('Erro ao fazer Login com Google.', 'Erro', {
+              closeButton: true
+            });
+          }
+        });
+      }
+    });
+  }
 
   ngOnInit() {
     this.initForm();
@@ -98,16 +132,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithGoogle() {
-    this.authService.loginWithGoogle().subscribe({
-      next: (response) => {
-        console.log(response);
-      },
-      error: (error) => {
-        console.error('Erro ao fazer Login:', error.error);
-        this.toastrService.error(`Erro ao fazer Login. Tente novamente.`, 'Erro', {
-          closeButton: true
-        });
-      }
-    });
+    this.authService.loginWithGoogle();
   }
 }

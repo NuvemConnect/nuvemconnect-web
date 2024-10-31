@@ -122,6 +122,10 @@ export class AuthService {
   }
 
   loginWithGoogle() {
-    return this.http.get(`${this.apiUrl}/login/google`);
+    window.location.href = `${this.apiUrl}/login/google`;
+  }
+
+  handleGoogleCallback(accessToken: string) {
+    return this.http.get<any>(`${this.apiUrl}/auth/google/callback?code=${accessToken}`);
   }
 }
