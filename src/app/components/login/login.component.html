@@ -116,14 +116,6 @@
         class="inline-block h-[0.5px] max-w-32 ml-2 w-full rounded-3xl bg-neutral-100 mt-3 mb-6"
       ></span>
     </div>
-    <div class="w-full">
-      <button
-        type="button"
-        class="flex justify-center items-center w-full button-tertiary"
-        (click)="loginWithGoogle()"
-      >
-        <img src="google.svg" data-testid="img-button-login" /> Entrar com Google
-      </button>
-    </div>
+    <div #googleBtn class="w-full"></div>
   </div>
 </div>

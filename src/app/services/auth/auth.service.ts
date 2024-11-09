@@ -15,6 +15,8 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
+  private clientId: string = environment.googleClientId;
+  private redirectUrl: string = environment.urlCallback;
   private isBrowser: boolean;
   private http = inject(HttpClient);
 
@@ -28,6 +30,46 @@ export class AuthService {
     if (this.isBrowser) {
       localStorage.setItem('user', JSON.stringify(user));
     }
+  }
+
+  // Método para atribuir o token
+  setToken(token: string): void {
+    if (this.isBrowser) {
+      localStorage.setItem('token', token);
+    }
+  }
+  setNome(nome: string): void {
+    if (this.isBrowser) {
+      localStorage.setItem('nome', nome);
+    }
+  }
+
+  setEmail(email: string): void {
+    if (this.isBrowser) {
+      localStorage.setItem('email', email);
+    }
+  }
+
+  // Método para resgatar o token
+  getToken(): string | null {
+    if (this.isBrowser) {
+      return localStorage.getItem('authToken');
+    }
+    return null;
+  }
+
+  getEmail(): string | null {
+    if (this.isBrowser) {
+      return localStorage.getItem('email');
+    }
+    return null;
+  }
+
+  getNome(): string | null {
+    if (this.isBrowser) {
+      return localStorage.getItem('nome');
+    }
+    return null;
   }
 
   getUser() {
@@ -55,6 +97,15 @@ export class AuthService {
   // Método para fazer a autenticação
   login(email: string, password: string): Observable<ResponseLogin> {
     return this.http.post<ResponseLogin>(`${this.apiUrl}/account/login`, { email, password });
+  }
+
+  iniciarGoogleLogin() {
+    // const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${this.clientId}&redirect_uri=${this.redirectUrl}/auth-callback&response_type=code&scope=email%20profile`;
+    const authUrl =
+      'https://accounts.google.com/o/oauth2/v2/auth?client_id=671369799944-tor57f5l651r2kc4move6losih3p20cu.apps.googleusercontent.com&redirect_uri=http://localhost:4200/auth-callback&response_type=code&scope=email%20profile';
+    window.location.href = authUrl;
+
+    return [] as unknown as Observable<any>;
   }
 
   // Método para criar uma conta
@@ -119,13 +170,5 @@ export class AuthService {
       console.log(`Erro ao decodificar o Token: ${error}`);
       return false;
     }
-  }
-
-  loginWithGoogle() {
-    window.location.href = `${this.apiUrl}/login/google`;
-  }
-
-  handleGoogleCallback(accessToken: string) {
-    return this.http.get<any>(`${this.apiUrl}/auth/google/callback?code=${accessToken}`);
   }
 }
