@@ -99,15 +99,6 @@ export class AuthService {
     return this.http.post<ResponseLogin>(`${this.apiUrl}/account/login`, { email, password });
   }
 
-  iniciarGoogleLogin() {
-    // const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${this.clientId}&redirect_uri=${this.redirectUrl}/auth-callback&response_type=code&scope=email%20profile`;
-    const authUrl =
-      'https://accounts.google.com/o/oauth2/v2/auth?client_id=671369799944-tor57f5l651r2kc4move6losih3p20cu.apps.googleusercontent.com&redirect_uri=http://localhost:4200/auth-callback&response_type=code&scope=email%20profile';
-    window.location.href = authUrl;
-
-    return [] as unknown as Observable<any>;
-  }
-
   // Método para criar uma conta
   createAccount(
     name: string,
@@ -170,5 +161,9 @@ export class AuthService {
       console.log(`Erro ao decodificar o Token: ${error}`);
       return false;
     }
+  }
+
+  googleLogin(credential: string) {
+    return this.http.post<any>(`http://localhost:3000/login/google`, { code: credential });
   }
 }

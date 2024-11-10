@@ -49,7 +49,7 @@ export class LoginComponent {
     try {
       const google = await this.googleApiService.getGoogle();
       google.accounts.id.initialize({
-        client_id: '234107094075-17ib6vmjrcoovogdv04som9kof47g3ju.apps.googleusercontent.com',
+        client_id: '671369799944-tor57f5l651r2kc4move6losih3p20cu.apps.googleusercontent.com',
         callback: this.handleCredentialResponse.bind(this)
       });
       google.accounts.id.renderButton(this.googleBtn.nativeElement, {
@@ -65,13 +65,28 @@ export class LoginComponent {
   }
 
   handleCredentialResponse(response: responseApi): void {
-    console.log('handleCredentialResponse', jwtDecode(response.credential));
-    const userDecoded = jwtDecode(response.credential);
-    console.log(userDecoded);
-    const user = userDecoded as User;
-    this.authService.setUser(user);
-    this.router.navigate(['/home']);
-    this.toastrService.success('Login realizado com sucesso ');
+    const credential = response.credential;
+    this.authService.googleLogin(credential).subscribe(
+      (res) => {
+        console.log(res)
+        if (res && res.accessToken) {
+          const userDecoded = jwtDecode(res.accessToken) as User;
+          this.authService.setUser(userDecoded);
+          this.router.navigate(['/home']);
+          this.toastrService.success('Login realizado com sucesso');
+        } else {
+          this.toastrService.error('Erro na autenticação com Google', 'Erro', {
+            closeButton: true
+          });
+        }
+      },
+      (error) => {
+        console.error('Falha na autenticação do Google', error);
+        this.toastrService.error('Erro ao fazer Login. Tente novamente.', 'Erro', {
+          closeButton: true
+        });
+      }
+    );
   }
 
   initForm() {
@@ -108,17 +123,6 @@ export class LoginComponent {
       this.toastrService.error('Por favor, corrija os erros no formulário.', 'Erro', {
         closeButton: true
       });
-    }
-  }
-
-  iniciarGoogleLogin() {
-    try {
-      this.authService.iniciarGoogleLogin().subscribe((response) => {
-        console.log(response);
-      });
-      console.log('login component');
-    } catch (error) {
-      console.log(error);
     }
   }
 
