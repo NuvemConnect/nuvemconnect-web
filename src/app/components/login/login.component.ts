@@ -1,5 +1,5 @@
-import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -7,30 +7,26 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-import { HeaderComponent } from '../../shared/header/header.component';
 import { inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../../interfaces/user';
 import { jwtDecode } from 'jwt-decode';
 
+import { GoogleApiService } from '../../services/google/google-api.service';
+import { responseApi } from '../../interfaces/response-api';
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    RouterOutlet,
-    HeaderComponent,
-    NgFor,
-    NgIf,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
   providers: [AuthService],
   templateUrl: './login.component.html'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  @ViewChild('googleBtn') googleBtn!: ElementRef;
+
   loginForm!: FormGroup;
   showPassword: boolean = false;
 
@@ -40,43 +36,57 @@ export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private toastrService = inject(ToastrService);
-  private route = inject(ActivatedRoute);
-
-  constructor() {
-    this.route.queryParams.subscribe((params) => {
-      if (params['code']) {
-        this.authService.handleGoogleCallback(params['code']).subscribe({
-          next: (response) => {
-            console.log(response.token);
-            if (response.token) {
-              try {
-                const userDecoded: User = jwtDecode(response.token);
-                this.authService.setUser(userDecoded);
-                this.router.navigate(['/home']);
-                this.toastrService.success('Login com google realizado com sucesso.', 'Sucesso', {
-                  closeButton: true
-                });
-              } catch (error) {
-                console.error('Erro ao decodificar o Token:', error);
-                this.toastrService.error('Erro ao decodificar o Token.', 'Erro', {
-                  closeButton: true
-                });
-              }
-            }
-          },
-          error: (error) => {
-            console.error('Erro ao fazer Login com Google:', error);
-            this.toastrService.error('Erro ao fazer Login com Google.', 'Erro', {
-              closeButton: true
-            });
-          }
-        });
-      }
-    });
-  }
+  private googleApiService = inject(GoogleApiService);
 
   ngOnInit() {
     this.initForm();
+  }
+
+  ngAfterViewInit(): void {
+    this.initializeGoogleSignIn();
+  }
+  async initializeGoogleSignIn(): Promise<void> {
+    try {
+      const google = await this.googleApiService.getGoogle();
+      google.accounts.id.initialize({
+        client_id: '671369799944-tor57f5l651r2kc4move6losih3p20cu.apps.googleusercontent.com',
+        callback: this.handleCredentialResponse.bind(this)
+      });
+      google.accounts.id.renderButton(this.googleBtn.nativeElement, {
+        theme: 'filled_white',
+        size: 'large',
+        shape: 'pill',
+        width: 1000,
+        text: 'Google'
+      });
+    } catch (error) {
+      console.error('Error initializing Google Sign-In:', error);
+    }
+  }
+
+  handleCredentialResponse(response: responseApi): void {
+    const credential = response.credential;
+    this.authService.googleLogin(credential).subscribe(
+      (res) => {
+        console.log(res)
+        if (res && res.accessToken) {
+          const userDecoded = jwtDecode(res.accessToken) as User;
+          this.authService.setUser(userDecoded);
+          this.router.navigate(['/home']);
+          this.toastrService.success('Login realizado com sucesso');
+        } else {
+          this.toastrService.error('Erro na autenticação com Google', 'Erro', {
+            closeButton: true
+          });
+        }
+      },
+      (error) => {
+        console.error('Falha na autenticação do Google', error);
+        this.toastrService.error('Erro ao fazer Login. Tente novamente.', 'Erro', {
+          closeButton: true
+        });
+      }
+    );
   }
 
   initForm() {
@@ -129,9 +139,5 @@ export class LoginComponent implements OnInit {
 
   toggleVisibilityPassword() {
     this.showPassword = !this.showPassword;
-  }
-
-  loginWithGoogle() {
-    this.authService.loginWithGoogle();
   }
 }
