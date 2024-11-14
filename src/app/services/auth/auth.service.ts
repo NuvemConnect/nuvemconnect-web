@@ -15,6 +15,8 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
+  private clientId: string = environment.googleClientId;
+  private redirectUrl: string = environment.urlCallback;
   private isBrowser: boolean;
   private http = inject(HttpClient);
 
@@ -28,6 +30,46 @@ export class AuthService {
     if (this.isBrowser) {
       localStorage.setItem('user', JSON.stringify(user));
     }
+  }
+
+  // Método para atribuir o token
+  setToken(token: string): void {
+    if (this.isBrowser) {
+      localStorage.setItem('token', token);
+    }
+  }
+  setNome(nome: string): void {
+    if (this.isBrowser) {
+      localStorage.setItem('nome', nome);
+    }
+  }
+
+  setEmail(email: string): void {
+    if (this.isBrowser) {
+      localStorage.setItem('email', email);
+    }
+  }
+
+  // Método para resgatar o token
+  getToken(): string | null {
+    if (this.isBrowser) {
+      return localStorage.getItem('authToken');
+    }
+    return null;
+  }
+
+  getEmail(): string | null {
+    if (this.isBrowser) {
+      return localStorage.getItem('email');
+    }
+    return null;
+  }
+
+  getNome(): string | null {
+    if (this.isBrowser) {
+      return localStorage.getItem('nome');
+    }
+    return null;
   }
 
   getUser() {
@@ -121,11 +163,7 @@ export class AuthService {
     }
   }
 
-  loginWithGoogle() {
-    window.location.href = `${this.apiUrl}/login/google`;
-  }
-
-  handleGoogleCallback(accessToken: string) {
-    return this.http.get<any>(`${this.apiUrl}/auth/google/callback?code=${accessToken}`);
+  googleLogin(credential: string) {
+    return this.http.post<any>(`http://localhost:3000/login/google`, { code: credential });
   }
 }
