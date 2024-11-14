@@ -164,6 +164,6 @@ export class AuthService {
   }
 
   googleLogin(credential: string) {
-    return this.http.post<any>(`http://localhost:3000/login/google`, { code: credential });
+    return this.http.post<any>(`${environment.baseUrl}/login/google`, { code: credential });
   }
 }

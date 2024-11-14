@@ -68,7 +68,6 @@ export class LoginComponent {
     const credential = response.credential;
     this.authService.googleLogin(credential).subscribe(
       (res) => {
-        console.log(res)
         if (res && res.accessToken) {
           const userDecoded = jwtDecode(res.accessToken) as User;
           this.authService.setUser(userDecoded);
