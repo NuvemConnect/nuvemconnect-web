@@ -7,7 +7,7 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
@@ -16,6 +16,7 @@ import { jwtDecode } from 'jwt-decode';
 
 import { GoogleApiService } from '../../services/google/google-api.service';
 import { responseApi } from '../../interfaces/response-api';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -37,27 +38,36 @@ export class LoginComponent {
   private router = inject(Router);
   private toastrService = inject(ToastrService);
   private googleApiService = inject(GoogleApiService);
+  private route = inject(ActivatedRoute)
+  private clientId: string = environment.googleClientId;
 
   ngOnInit() {
     this.initForm();
+
+    this.route.queryParams.subscribe(params => {
+      if (params['emailConfirmed'] === 'true') {
+        this.showSuccessMessage();
+      }
+    });
   }
 
   ngAfterViewInit(): void {
     this.initializeGoogleSignIn();
   }
+
   async initializeGoogleSignIn(): Promise<void> {
     try {
       const google = await this.googleApiService.getGoogle();
       google.accounts.id.initialize({
-        client_id: '671369799944-tor57f5l651r2kc4move6losih3p20cu.apps.googleusercontent.com',
+        client_id: this.clientId,
         callback: this.handleCredentialResponse.bind(this)
       });
       google.accounts.id.renderButton(this.googleBtn.nativeElement, {
         theme: 'filled_white',
         size: 'large',
         shape: 'pill',
-        width: 1000,
-        text: 'Google'
+        text: 'Google',
+        logo_alignment: "center"
       });
     } catch (error) {
       console.error('Error initializing Google Sign-In:', error);
@@ -86,6 +96,18 @@ export class LoginComponent {
         });
       }
     );
+  }
+
+  showSuccessMessage() {
+    const toastrRef = this.toastrService.success('Email confirmado com sucesso!');
+
+    setTimeout(() => {
+      this.toastrService.clear(toastrRef.toastId);
+      this.router.navigate([], {
+        queryParams: { emailConfirmed: null },
+        queryParamsHandling: 'merge'
+      });
+    }, 6000); // A mensagem desaparecerá após 3 segundos
   }
 
   initForm() {
