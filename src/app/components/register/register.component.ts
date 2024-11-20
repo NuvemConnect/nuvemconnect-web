@@ -89,7 +89,7 @@ export class RegisterComponent {
           },
           error: (error) => {
             console.error('Erro ao criar conta:', error.error.message);
-            this.toastrService.error('Erro ao criar conta. Tente novamente.', 'Erro', {
+            this.toastrService.error('Este e-mail já está cadastrado.', 'Erro', {
               closeButton: true
             });
           }
