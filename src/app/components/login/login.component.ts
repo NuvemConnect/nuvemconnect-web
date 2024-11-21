@@ -38,13 +38,13 @@ export class LoginComponent {
   private router = inject(Router);
   private toastrService = inject(ToastrService);
   private googleApiService = inject(GoogleApiService);
-  private route = inject(ActivatedRoute)
+  private route = inject(ActivatedRoute);
   private clientId: string = environment.googleClientId;
 
   ngOnInit() {
     this.initForm();
 
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       if (params['emailConfirmed'] === 'true') {
         this.showSuccessMessage();
       }
@@ -67,7 +67,7 @@ export class LoginComponent {
         size: 'large',
         shape: 'pill',
         text: 'Google',
-        logo_alignment: "center"
+        logo_alignment: 'center'
       });
     } catch (error) {
       console.error('Error initializing Google Sign-In:', error);
